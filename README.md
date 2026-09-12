@@ -61,3 +61,74 @@ Tempo de resposta: O sistema deve cadastrar e carregar as respostas em até 5 se
 Portabilidade e Compatibilidade: Quando atualizado, o sistema deve estar compatível com os sistemas operacionais populares. 
 
 Transparência: O programa deve ser comportar de maneira acessível, simples e compreensível para todos os usuários.  
+
+## 4. Regras de Negócio
+(esta seção DIVIDE com a Seção 3 "Requisitos do Sistema" os mesmos 7,5% da dimensão conceitual — juntas valem 7,5%, não 7,5% cada — + 4% exclusivos desta seção na documentação. "Regras de negócio" é o termo técnico usado em modelagem de dados para as regras de funcionamento de qualquer organização, com ou sem fins lucrativos)
+
+- *Regras operacionais:* condições que a organização impõe (ex.: "um pedido só pode ser fechado se houver estoque disponível", "uma doação só pode ser registrada com identificação do doador", "um ritual só pode ser agendado se o espaço estiver disponível").
+- *Restrições organizacionais:* limitações que afetam o modelo (ex.: políticas internas, prazos, exigências legais, normas religiosas ou estatutárias) — e por que elas importam.
+
+---
+
+## 5. Dicionário de Dados Conceitual (Preliminar)
+(vale 10% — Dimensão Procedimental - Segue o modelo do arquivo 02-03g_Exemplo_Dicionario_Dados.pdf)
+
+Para cada entidade identificada, liste:
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|------------------------------|
+| nome do atributo | o que ele representa | se houver alguma regra (obrigatoriedade, valores possíveis, etc.) |
+
+Mantenha o dicionário organizado e padronizado (mesmo formato de tabela para todas as entidades).
+
+*Atenção à privacidade:* se forem usados exemplos de valores para ilustrar os atributos, esses exemplos devem ser *fictícios* — não utilize dados reais de clientes, fiéis, beneficiários, doadores ou funcionários da organização (nomes, CPFs, contatos etc.), mesmo que tenham sido observados durante a pesquisa de campo. Os exemplos devem apenas ser *coerentes com as operações reais* observadas.
+
+---
+
+## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
+(vale 7,5% na dimensão conceitual)
+
+- *Entidades reconhecidas:* liste e justifique brevemente cada uma.
+- *Atributos e classificações:* quais atributos pertencem a cada entidade.
+- *Relacionamentos pertinentes:* como as entidades se conectam.
+- *Restrições e políticas organizacionais aplicadas ao modelo.*
+
+---
+
+## 7. Diagrama Entidade-Relacionamento (DER)
+(vale 20% — é o item de maior peso da entrega)
+
+- Anexe o DER (em imagem).
+- O diagrama deve representar corretamente:
+  - Entidades
+  - Atributos
+  - Relacionamentos
+  - *Cardinalidades*
+- O modelo deve ser *consistente* e já demonstrar potencial de *escalabilidade e integração* (pensando nas próximas etapas do projeto).
+
+---
+
+## 8. Justificativa Técnica
+(vale 7,5% — sozinho, é o subcritério de maior peso dentro da Dimensão Conceitual)
+
+Explique e defenda as decisões de abstração e modelagem tomadas: por que essas entidades, esses atributos, esses relacionamentos e essas cardinalidades — e não outras alternativas possíveis?
+
+---
+
+## 9. Uso de Inteligência Artificial
+(documentação obrigatória — não é opcional se o grupo usou IA em qualquer etapa: pesquisa, escrita, organização de ideias ou revisão de texto)
+
+Se o grupo usou alguma ferramenta de IA (ChatGPT, Claude, Gemini, Perplexity etc.) em qualquer parte do trabalho, registre *para cada uso relevante*:
+
+| Item | O que registrar |
+|------|------------------|
+| *Ferramenta e etapa* | Qual IA foi usada e em qual parte do trabalho (ex.: pesquisa sobre o setor da organização, redação do README, organização dos requisitos, revisão ortográfica/gramatical). |
+| *Motivação* | Por que o grupo recorreu à IA nesse ponto específico. |
+| *Prompt(s) utilizados* | Texto exato (ou muito próximo) do que foi perguntado/pedido à IA. |
+| *Resposta recebida* | Resumo ou trecho relevante da resposta da IA. |
+| *Fontes consultadas e verificadas* | Se a IA citou fontes/dados, quais foram checadas pelo grupo e como (ex.: comparação com o que foi observado na visita de campo). |
+| *Trechos rejeitados ou corrigidos* | O que da resposta da IA foi descartado, editado ou corrigido manualmente, e por quê. |
+| *Justificativa da escolha final* | Por que o grupo manteve, adaptou ou rejeitou o que a IA sugeriu. |
+| *Reflexão crítica* | Limites, vieses ou erros identificados no uso da IA nessa etapa (ex.: informação desatualizada, alucinação, generalização incorreta sobre o tipo de organização). |
+
+Se o grupo não usou nenhuma ferramenta de IA, declare isso explicitamente nesta seção.
