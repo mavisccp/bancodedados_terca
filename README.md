@@ -97,7 +97,7 @@ Este documento apresenta o dicionário de dados referente ao Diagrama Entidade-R
 |----------|----------     |-----------------------|
 | Cliente   | Gerador      | 	1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente (1,1)             
 | Gerador   | Manutenção   |  1:N — um gerador pode ter zero ou várias manutenções (0,n); cada manutenção é feita em exatamente um gerador (1,1)             |
-| Manutenção| Técnico      | 	1:N — um gerador pode ter zero ou várias manutenções (0,n); cada manutenção é feita em exatamente um gerador (1,1)              |
+| Manutenção| Técnico      | 	N:N — uma manutenção precisa de pelo menos um técnico, podendo ter mais (1,n); um técnico pode participar de zero ou várias manutenções (0,n)             |
 | Manutenção| Serviço      | 	N:N — uma manutenção usa pelo menos um serviço, podendo usar mais (1,n); um serviço pode ser usado em zero ou várias manutenções (0,n)              |
 
 Manutenção é a entidade que concentra os dois relacionamentos N:N do modelo — com Técnico e com Serviço — por isso conta com duas tabelas associativas (Manutencao_Tecnico e Manutencao_Servico), que existem só para guardar essas ligações.
@@ -131,13 +131,13 @@ CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade +
 GERADOR = @id_gerador + id_cliente + numero_serie + marca + modelo + status + potencia
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
-|id_gerador| 	Identificador único do gerador no sistema         |  Obrigatório; chave primária, gerada automaticamente.     
-|id_cliente|  	Indica a qual cliente o gerador pertence      |  Obrigatório; chave estrangeira referenciando Cliente   |  
-|numero_serie|  	Indica a qual cliente o gerador pertence         | Obrigatório; deve ser único — não pode existir mais de um gerador com o mesmo número de série            |   	                
+|id_gerador| 	Identificador único do gerador no sistema    |  Obrigatório; chave primária, gerada automaticamente.     
+|id_cliente|  	Indica a qual cliente o gerador pertence   |  Obrigatório; chave estrangeira referenciando Cliente   |  
+|numero_serie| Número de série de fabricação do gerador  | Obrigatório; deve ser único — não pode existir mais de um gerador com o mesmo número de série            |   	                
 |marca  |  	Fabricante do gerador. Ex.: "Cummins"    |  Obrigatório        |  	                  
 |modelo   | Modelo do gerador dentro da marca        |   Obrigatório          |                     
 |status |  	Situação atual do gerador        |  Obrigatório; valores possíveis: ativo, em manutenção, inativo          |  	              
-|potencia |   	Potência do gerador em kVA       | Obrigatório; valor numérico positivo        | 	                    
+|potencia |   	Potência do gerador em kVA   | Obrigatório; valor numérico positivo        | 	                    
 
 ## MANUTENÇÃO
 MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + servico_realizado + status + valor
