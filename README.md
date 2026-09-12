@@ -119,16 +119,33 @@ CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade +
 GERADOR = @id_gerador + id_cliente + numero_serie + marca + modelo + status + potencia
 | Atributo | Tipo físico | Obrigatório| Significado e relevância|
 |----------|-----------|--------------|-------------------------|
-|          |           |              |                         |
-|          |           |              |                         |
-|          |           |              |                         |
-|          |           |              |                         |
-|          |           |              |                         |
-|          |           |              |                         |
-|          |           |              |                         |
-|          |           |              |                         |
-|          |           |              |                         |
-|          |           |              |                         |
+|id_gerador|   	INT        |   Sim (PK)           | 	Identifica um gerador de forma exclusiva dentro do sistema                        |
+|id_cliente|    INT       |     	Sim (FK)         |  	Indica a qual cliente aquele gerador pertence; liga a tabela Gerador à tabela Cliente                       |
+|numero_serie|    VARCHAR(30)       |     	Sim         |   	Número de série de fabricação do gerador, gravado pelo fabricante                      |
+|marca  | VARCHAR(50)     |    	Sim          |  	Nome do fabricante do gerador (ex.: Caterpillar, Cummins                       |
+|modelo   |  	VARCHAR(50)         |    	Sim          |  Modelo específico do gerador dentro da marca                       |
+|status | VARCHAR(20)          |      Sim        |  	Situação atual do gerador (ex.: ativo, em manutenção, inativo)                       |
+|potencia |  DECIMAL(8,2)         |        Sim      | 	Potência do gerador em kVA, indicando a capacidade de energia gerada                        |
+
+## MANUTENÇÃO
+MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + servico_realizado + status + valor
+| Atributo | Tipo físico | Obrigatório| Significado e relevância|
+|----------|-----------|--------------|-------------------------|
+| id_manutencao |    INT       |    	Sim (PK)          |    Identifica uma manutenção de forma exclusiva                  |
+| id_gerador |   	INT        |      	Sim (FK)        | 	Indica em qual gerador aquela manutenção foi realizada; liga a tabela Manutenção à tabela Gerador                        |
+| data_manutencao  |      DATE     |     	Sim         |  	Data em que a manutenção foi executada                       |
+| tipo_manutencao |     	VARCHAR(30)      |      	Sim        | 	Classifica a manutenção como preventiva ou corretiva                        |
+| servico_realizado |  VARCHAR(200)         |      	Sim        | 	Descrição do que foi efetivamente feito no atendimento (troca de peça, limpeza, ajuste etc.)                        |
+| status | VARCHAR(20)          |       	Sim       |  	Situação atual da manutenção (ex.: aberta, em andamento, concluída)                       |
+| valor | 	DECIMAL(10,2)          |      	Sim        | 	Valor total cobrado pela manutenção realizada                        |
+
+
+|  |           |              |                         |
+|  |           |              |                         |
+|  |           |              |                         |
+|  |           |              |                         |
+|  |           |              |                         |
+
 
 
 
