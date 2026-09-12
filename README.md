@@ -106,23 +106,14 @@ Notação formal: = é composto de · + conecta elementos obrigatórios · ( ) e
 CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade + estado
 | Atributo | Tipo físico | Obrigatório| Significado e relevância|
 |----------|-----------|------------------------------|------------------------------|
-| Atributo | Descrição | Regra de negócio associada |------------------------------|
-|----------|-----------|------------------------------|------------------------------|
-| Atributo | Descrição | Regra de negócio associada |------------------------------|
-|----------|-----------|------------------------------|
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-
-
-
-
-
-
-
+|id_cliente| INT | Regra de negócio associada |------------------------------|
+|nome | VARCHAR(100)|------------------------------|------------------------------|
+| cpf_cnpj| VARCHAR(14)| Regra de negócio associada |------------------------------|
+|telefone| VARCHAR(15)|------------------------------|
+| endereço | VARCHAR(150) | Regra de negócio associada |
+|email| VARCHAR(100) |------------------------------|
+| cidade | VARCHAR(50) | Regra de negócio associada |
+|estado |	VARCHAR(2)|------------------------------|
 
 
 
