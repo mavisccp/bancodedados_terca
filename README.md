@@ -66,6 +66,9 @@ Transparência: O programa deve ser comportar de maneira acessível, simples e c
 
 Regras operacionais:
 - A manutenção necessariamente precisa estar vinculada a um gerador, sendo impossível existir uma manutenção sem essa ligação.
+  
+- O gerador necessariamente tem que pertencer a um cliente.
+- Dependendo do tipo de manutenção, muda a ordem do pagamento: no caso de uma manutenção corretiva, que impede o funcionamento do gerador, pode haver a troca antes de pagar, mas apenas se o orçamento for confirmado pelo cliente e ele estiver de acordo. Já no caso de uma manutenção preventiva, que não impede o funcionamento do gerador, a manutenção é realizada após o pagamento
 
 ---
 
