@@ -132,19 +132,22 @@ MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + s
 | Atributo | Tipo físico | Obrigatório| Significado e relevância|
 |----------|-----------|--------------|-------------------------|
 | id_manutencao |    INT       |    	Sim (PK)          |    Identifica uma manutenção de forma exclusiva                  |
-| id_gerador |   	INT        |      	Sim (FK)        | 	Indica em qual gerador aquela manutenção foi realizada; liga a tabela Manutenção à tabela Gerador                        |
+| id_gerador |   	INT        |      	Sim (FK)        | 	Indica em qual gerador aquela manutenção foi realizada; liga a tabela Manutenção à tabela Gerador      |
 | data_manutencao  |      DATE     |     	Sim         |  	Data em que a manutenção foi executada                       |
-| tipo_manutencao |     	VARCHAR(30)      |      	Sim        | 	Classifica a manutenção como preventiva ou corretiva                        |
+| tipo_manutencao |     	VARCHAR(30)      |      	Sim        | 	Classifica a manutenção como preventiva ou corretiva   |
 | servico_realizado |  VARCHAR(200)         |      	Sim        | 	Descrição do que foi efetivamente feito no atendimento (troca de peça, limpeza, ajuste etc.)                        |
-| status | VARCHAR(20)          |       	Sim       |  	Situação atual da manutenção (ex.: aberta, em andamento, concluída)                       |
-| valor | 	DECIMAL(10,2)          |      	Sim        | 	Valor total cobrado pela manutenção realizada                        |
+| status | VARCHAR(20)          |       	Sim       |  	Situação atual da manutenção (ex.: aberta, em andamento, concluída |
+| valor | 	DECIMAL(10,2)          |      	Sim        | 	Valor total cobrado pela manutenção realizada  |
 
-
-|  |           |              |                         |
-|  |           |              |                         |
-|  |           |              |                         |
-|  |           |              |                         |
-|  |           |              |                         |
+## TÉCNICO
+TECNICO = @id_tecnico + nome + cpf + telefone + email
+| Atributo | Tipo físico | Obrigatório| Significado e relevância|
+|----------|-----------|--------------|-------------------------|
+| id_tecnico |  INT         |    	Sim (PK)          |   Identifica um técnico de forma exclusiva     |
+| nome |  	VARCHAR(100)         |  Sim            | Nome completo do técnico responsável pelo serviço    |
+| cpf |  VARCHAR(11)         |    Sim          | Documento CPF do técnico, armazenado como texto pelo mesmo motivo do cpf_cnpj de Cliente       |
+| telefone |  	VARCHAR(15)         |     Sim         |   Número de telefone de contato do técnico     |
+| email |  VARCHAR(100)         |    Sim          | 	Endereço de e-mail do técnico            |
 
 
 
