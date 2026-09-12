@@ -106,14 +106,14 @@ Notação formal: = é composto de · + conecta elementos obrigatórios · ( ) e
 CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade + estado
 | Atributo | Tipo físico | Obrigatório| Significado e relevância|
 |----------|-----------|------------------------------|------------------------------|
-|id_cliente| INT | Regra de negócio associada |------------------------------|
-|nome | VARCHAR(100)|------------------------------|------------------------------|
-| cpf_cnpj| VARCHAR(14)| Regra de negócio associada |------------------------------|
-|telefone| VARCHAR(15)|------------------------------|
-| endereço | VARCHAR(150) | Regra de negócio associada |
-|email| VARCHAR(100) |------------------------------|
-| cidade | VARCHAR(50) | Regra de negócio associada |
-|estado |	VARCHAR(2)|------------------------------|
+|id_cliente| INT |  Sim (PK) |Identifica um cliente de forma exclusiva dentro do sistema; usado para localizar aquele cliente específico|
+|nome | VARCHAR(100)|Sim |Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente|
+| cpf_cnpj| VARCHAR(14)|Sim |Documento de identificação (CPF ou CNPJ). Armazenado como texto porque pode começar com zero e não entra em cálculos matemáticos|
+|telefone| VARCHAR(15)|Sim| Número de telefone para contato com o cliente|
+| endereço | VARCHAR(150) |Sim |Endereço completo (rua, número, bairro) onde o cliente está localizado|
+|email| VARCHAR(100) |Sim| 	Endereço de e-mail usado para contato com o cliente|
+| cidade | VARCHAR(50) | Sim |	Cidade onde o cliente reside ou está registrado|
+|estado |	VARCHAR(2)|Sim| Sigla do estado brasileiro (ex.: SP, RJ, MG)|
 
 
 
