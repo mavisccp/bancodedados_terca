@@ -63,12 +63,31 @@ Portabilidade e Compatibilidade: Quando atualizado, o sistema deve estar compat�
 Transparência: O programa deve ser comportar de maneira acessível, simples e compreensível para todos os usuários.  
 
 ## 4. Regras de Negócio
-(esta seção DIVIDE com a Seção 3 "Requisitos do Sistema" os mesmos 7,5% da dimensão conceitual — juntas valem 7,5%, não 7,5% cada — + 4% exclusivos desta seção na documentação. "Regras de negócio" é o termo técnico usado em modelagem de dados para as regras de funcionamento de qualquer organização, com ou sem fins lucrativos)
 
-- *Regras operacionais:* condições que a organização impõe (ex.: "um pedido só pode ser fechado se houver estoque disponível", "uma doação só pode ser registrada com identificação do doador", "um ritual só pode ser agendado se o espaço estiver disponível").
-- *Restrições organizacionais:* limitações que afetam o modelo (ex.: políticas internas, prazos, exigências legais, normas religiosas ou estatutárias) — e por que elas importam.
+Regras operacionais:
+- A manutenção necessariamente precisa estar vinculada a um gerador, sendo impossível existir uma manutenção sem essa ligação.
+
+- O gerador necessariamente tem que pertencer a um cliente.
+
+- Dependendo do tipo de manutenção, muda a ordem do pagamento: no caso de uma manutenção corretiva, que impede o funcionamento do gerador, pode haver a troca antes de pagar, mas apenas se o orçamento for confirmado pelo cliente e ele estiver de acordo. Já no caso de uma manutenção preventiva, que não impede o funcionamento do gerador, a manutenção é realizada após o pagamento.
+
+- Os geradores precisam ter um cronograma de inspeção de manutenção preventiva.
+
+- O itinerário de um técnico de manutenção se limita a 7 manutenções preventivas por dia.
+
+- Uma manutenção pode envolver mais de um serviço, e o valor final cobrado é a soma dos valores desses serviços.
+
+- Algumas informações não podem se repetir, são únicas para cada gerador ou técnico, que são, respectivamente, o número de série e o CPF.
+
+Restrições organizacionais:
+- Os serviços correspondem e respeitam as normas regulamentadoras NR-10 (elétrica), NR-12 (máquinas), NR-20 (inflamáveis e combustíveis) e NR-6 (EPI), justamente por envolver riscos elétricos, uso de máquinas e manuseio de combustível.
+
+- O sistema não pode ter limite de horário para o registro, devido ao plantão de 24h de atendimento de emergência.
+  
+- Peças como bateria, óleo, filtro de ar e tanque têm prazo de troca ou limpeza, o que orienta o cronograma de inspeção preventiva.
 
 ---
+
 ## 5. Dicionário de Dados Conceitual (Preliminar)
 ## 5.1 Objetivo
 Este documento apresenta o dicionário de dados referente ao Diagrama Entidade-Relacionamento (DER) elaborado para o sistema da empresa escolhida pelo grupo. O sistema tem como finalidade controlar os clientes, os geradores de energia pertencentes a cada cliente, as manutenções realizadas nesses geradores, os técnicos responsáveis e os serviços prestados.
