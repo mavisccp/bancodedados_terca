@@ -67,25 +67,6 @@ Transparência: O programa deve ser comportar de maneira acessível, simples e c
 Regras operacionais:
 - A manutenção necessariamente precisa estar vinculada a um gerador, sendo impossível existir uma manutenção sem essa ligação.
 
-- O gerador necessariamente tem que pertencer a um cliente.
-
-- Dependendo do tipo de manutenção, muda a ordem do pagamento: no caso de uma manutenção corretiva, que impede o funcionamento do gerador, pode haver a troca antes de pagar, mas apenas se o orçamento for confirmado pelo cliente e ele estiver de acordo. Já no caso de uma manutenção preventiva, que não impede o funcionamento do gerador, a manutenção é realizada após o pagamento.
-
-- Os geradores precisam ter um cronograma de inspeção de manutenção preventiva.
-
-- O itinerário de um técnico de manutenção se limita a 7 manutenções preventivas por dia.
-
-- Uma manutenção pode envolver mais de um serviço, e o valor final cobrado é a soma dos valores desses serviços.
-
-- Algumas informações não podem se repetir, são únicas para cada gerador ou técnico, que são, respectivamente, o número de série e o CPF.
-
-Restrições organizacionais:
-- Os serviços correspondem e respeitam as normas regulamentadoras NR-10 (elétrica), NR-12 (máquinas), NR-20 (inflamáveis e combustíveis) e NR-6 (EPI), justamente por envolver riscos elétricos, uso de máquinas e manuseio de combustível.
-
-- O sistema não pode ter limite de horário para o registro, devido ao plantão de 24h de atendimento de emergência.
-  
-- Peças como bateria, óleo, filtro de ar e tanque têm prazo de troca ou limpeza, o que orienta o cronograma de inspeção preventiva.
-
 ---
 
 ## 5. Dicionário de Dados Conceitual (Preliminar)
