@@ -149,6 +149,26 @@ TECNICO = @id_tecnico + nome + cpf + telefone + email
 | telefone |  	VARCHAR(15)         |     Sim         |   Número de telefone de contato do técnico     |
 | email |  VARCHAR(100)         |    Sim          | 	Endereço de e-mail do técnico            |
 
+## SERVIÇO
+SERVICO = @id_servico + nome_servico + descricao + valor_base
+| Atributo | Tipo físico | Obrigatório| Significado e relevância|
+|----------|-----------|--------------|-------------------------|
+| id_servico   |  INT         |        Sim (PK)      | Identifica um serviço de forma exclusiva; funciona como catálogo  |
+| nome_servico         |   VARCHAR(100)        |       Sim       |	Nome do serviço oferecido (ex.: "troca de óleo", "revisão elétrica")   |
+| descricao         |  	VARCHAR(200)         |        Sim      | Explicação mais detalhada sobre o que aquele serviço inclui    |
+| valor_base         |  DECIMAL(10,2)         |   Sim           | 	Valor de referência cobrado por aquele tipo de serviço, antes de ajustes na manutenção específica     |
+
+## MANUTENCAO_TECNICO
+MANUTENCAO_TECNICO = id_manutencao + id_tecnico
+| Atributo | Tipo físico | Obrigatório| Significado e relevância|
+|----------|-----------|--------------|-------------------------|
+| id_manutencao   |    INT (FK)       |   	Sim           |  	Indica a qual manutenção esse registro se refere  |
+|  id_tecnico        |      INT (FK)     |      	Sim        |	Indica qual técnico participou daquela manutenção |
+
+
+
+
+
 
 
 
