@@ -70,20 +70,61 @@ Transparência: O programa deve ser comportar de maneira acessível, simples e c
 
 ---
 
-## 5. Dicionário de Dados Conceitual (Preliminar)
-(vale 10% — Dimensão Procedimental - Segue o modelo do arquivo 02-03g_Exemplo_Dicionario_Dados.pdf)
+## 5. Dicionário de Dados Conceitual 
+## 5.1 Objetivo
+Este documento apresenta o dicionário de dados referente ao Diagrama Entidade-Relacionamento (DER) elaborado para o sistema da empresa escolhida pelo grupo. O sistema tem como finalidade controlar os clientes, os geradores de energia pertencentes a cada cliente, as manutenções realizadas nesses geradores, os técnicos responsáveis e os serviços prestados.
 
-Para cada entidade identificada, liste:
+## 5.2 Modelo conceitual
+| Entidade |  Relaciona-se com | Cardinalidade |
+|----------|----------     |-----------------------|
+| Cliente   | Gerador      | 	1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente (1,1)             
+| Gerador   | Manutenção   |  1:N — um gerador pode ter zero ou várias manutenções (0,n); cada manutenção é feita em exatamente um gerador (1,1)             |
+| Manutenção| Técnico      | 	1:N — um gerador pode ter zero ou várias manutenções (0,n); cada manutenção é feita em exatamente um gerador (1,1)              |
+| Manutenção| Serviço      | 	N:N — uma manutenção usa pelo menos um serviço, podendo usar mais (1,n); um serviço pode ser usado em zero ou várias manutenções (0,n)              |
 
+Manutenção é a entidade que concentra os dois relacionamentos N:N do modelo — com Técnico e com Serviço — por isso conta com duas tabelas associativas (Manutencao_Tecnico e Manutencao_Servico), que existem só para guardar essas ligações.
+
+Cliente é a pessoa física ou jurídica que contrata os serviços e possui geradores cadastrados. Gerador é o equipamento de geração de energia pertencente a um cliente. Manutenção é o evento de atendimento (preventivo ou corretivo) realizado em um gerador. Técnico é o profissional responsável por executar as manutenções. Serviço é o catálogo de tipos de serviço que podem ser prestados durante uma manutenção.
+
+## 5.3 Fluxo de dados (visão de DFD)
+Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.
+
+## 5.4 Convenções do dicionário
+Notação formal: = é composto de · + conecta elementos obrigatórios · ( ) elemento opcional · @ identificador (chave primária)
+## Tipos de dado:
+|Tipo |  Significado | 
+|----------|----------|
+|INT |Número inteiro, sem casas decimais. Usado principalmente nos campos de identificação (id) de cada tabela|
+|VARCHAR(n) | Texto de tamanho variável, onde n é a quantidade máxima de caracteres aceitos. Usado para nomes, e-mails, endereços e documentos | 
+|DATE | Data no formato dia/mês/ano|
+|DECIMAL(p,e) | Número com casas decimais, onde p é o total de dígitos e e é a quantidade deles depois da vírgula. Usado para valores em dinheiro e para a potência do gerador | 
+|PK (chave primária) | Identifica cada registro de uma tabela de forma exclusiva, sem repetição é o "RG" daquele registro |
+|FK (chave estrangeira) | É o campo que guarda o valor da chave primária de outra tabela, ligando as duas | 
+
+## Dicionário de dados por entidade
+## CLIENTE 
+CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade + estado
+| Atributo | Tipo físico | Obrigatório| Significado e relevância|
+|----------|-----------|------------------------------|------------------------------|
+| Atributo | Descrição | Regra de negócio associada |------------------------------|
+|----------|-----------|------------------------------|------------------------------|
+| Atributo | Descrição | Regra de negócio associada |------------------------------|
+|----------|-----------|------------------------------|
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
-| nome do atributo | o que ele representa | se houver alguma regra (obrigatoriedade, valores possíveis, etc.) |
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|------------------------------|
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|------------------------------|
 
-Mantenha o dicionário organizado e padronizado (mesmo formato de tabela para todas as entidades).
 
-*Atenção à privacidade:* se forem usados exemplos de valores para ilustrar os atributos, esses exemplos devem ser *fictícios* — não utilize dados reais de clientes, fiéis, beneficiários, doadores ou funcionários da organização (nomes, CPFs, contatos etc.), mesmo que tenham sido observados durante a pesquisa de campo. Os exemplos devem apenas ser *coerentes com as operações reais* observadas.
 
----
+
+
+
+
+
+
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
 (vale 7,5% na dimensão conceitual)
