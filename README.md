@@ -72,6 +72,9 @@ Regras operacionais:
 - Dependendo do tipo de manutenção, muda a ordem do pagamento: no caso de uma manutenção corretiva, que impede o funcionamento do gerador, pode haver a troca antes de pagar, mas apenas se o orçamento for confirmado pelo cliente e ele estiver de acordo. Já no caso de uma manutenção preventiva, que não impede o funcionamento do gerador, a manutenção é realizada após o pagamento
 
 - Os geradores precisam ter um cronograma de inspeção de manutenção preventiva.
+
+- O itinerário de um técnico de manutenção se limita a 7 manutenções preventivas por dia.
+
 ---
 
 ## 5. Dicionário de Dados Conceitual (Preliminar)
