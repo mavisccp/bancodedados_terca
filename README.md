@@ -79,6 +79,9 @@ Regras operacionais:
 
 - Algumas informações não podem se repetir, são únicas para cada gerador ou técnico, que são, respectivamente, o número de série e o CPF.
 
+Restrições organizacionais:
+- Os serviços correspondem e respeitam as normas regulamentadoras NR-10 (elétrica), NR-12 (máquinas), NR-20 (inflamáveis e combustíveis) e NR-6 (EPI).
+
 ---
 
 ## 5. Dicionário de Dados Conceitual (Preliminar)
