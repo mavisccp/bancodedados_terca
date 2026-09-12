@@ -84,6 +84,8 @@ Restrições organizacionais:
 
 - O sistema não pode ter limite de horário para o registro, devido ao plantão de 24h de atendimento de emergência.
 
+- Peças como bateria, óleo, filtro de ar e tanque têm prazo de troca ou limpeza, o que orienta o cronograma de inspeção preventiva.
+
 ---
 
 ## 5. Dicionário de Dados Conceitual (Preliminar)
