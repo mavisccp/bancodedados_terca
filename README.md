@@ -115,6 +115,22 @@ CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade +
 | cidade | VARCHAR(50) | Sim |	Cidade onde o cliente reside ou está registrado|
 |estado |	VARCHAR(2)|Sim| Sigla do estado brasileiro (ex.: SP, RJ, MG)|
 
+## GERADOR
+GERADOR = @id_gerador + id_cliente + numero_serie + marca + modelo + status + potencia
+| Atributo | Tipo físico | Obrigatório| Significado e relevância|
+|----------|-----------|--------------|-------------------------|
+|          |           |              |                         |
+|          |           |              |                         |
+|          |           |              |                         |
+|          |           |              |                         |
+|          |           |              |                         |
+|          |           |              |                         |
+|          |           |              |                         |
+|          |           |              |                         |
+|          |           |              |                         |
+|          |           |              |                         |
+
+
 
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
