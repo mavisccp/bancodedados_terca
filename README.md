@@ -165,6 +165,15 @@ MANUTENCAO_TECNICO = id_manutencao + id_tecnico
 | id_manutencao   |    INT (FK)       |   	Sim           |  	Indica a qual manutenção esse registro se refere  |
 |  id_tecnico        |      INT (FK)     |      	Sim        |	Indica qual técnico participou daquela manutenção |
 
+## MANUTENCAO_SERVICO
+MANUTENCAO_SERVICO = id_manutencao + id_servico
+| Atributo | Tipo físico | Obrigatório| Significado e relevância|
+|----------|-----------|--------------|-------------------------|
+| id_manutencao   |   INT (FK)        |     Sim         | 	Indica a qual manutenção esse registro se refere     |
+| id_servico  | INT (FK)          |     Sim         |  	Indica qual serviço foi utilizado naquela manutenção   |
+
+
+
 
 
 
