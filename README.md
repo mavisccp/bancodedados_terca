@@ -1,6 +1,6 @@
 ## 1. Caracterização da Organização
 
-- S. A DE LIMA - Manutenção preventiva e corretiva de grupos geradores.
+- S. A DE LIMA - Manutenção preventiva e corretiva de geradores.
 - Com fins lucrativos, a empresa conta com 15 funcionários e 96 clientes fixos, somando uma média de 33 manutenções em geradores de energia por mês. 
 
 - Hoje em dia a empresa não tem um controle digital para a organização dos seus dados em geral, os dados são mantidos de maneira física, em fichas e papéis. Desde as informações dos atendimentos, até às informações dos clientes. 
