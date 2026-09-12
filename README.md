@@ -75,6 +75,8 @@ Regras operacionais:
 
 - O itinerário de um técnico de manutenção se limita a 7 manutenções preventivas por dia.
 
+- Uma manutenção pode envolver mais de um serviço, e o valor final cobrado é a soma dos valores desses serviços.
+
 ---
 
 ## 5. Dicionário de Dados Conceitual (Preliminar)
