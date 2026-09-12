@@ -69,8 +69,7 @@ Transparência: O programa deve ser comportar de maneira acessível, simples e c
 - *Restrições organizacionais:* limitações que afetam o modelo (ex.: políticas internas, prazos, exigências legais, normas religiosas ou estatutárias) — e por que elas importam.
 
 ---
-
-## 5. Dicionário de Dados Conceitual 
+## 5. Dicionário de Dados Conceitual (Preliminar)
 ## 5.1 Objetivo
 Este documento apresenta o dicionário de dados referente ao Diagrama Entidade-Relacionamento (DER) elaborado para o sistema da empresa escolhida pelo grupo. O sistema tem como finalidade controlar os clientes, os geradores de energia pertencentes a cada cliente, as manutenções realizadas nesses geradores, os técnicos responsáveis e os serviços prestados.
 
@@ -89,88 +88,82 @@ Cliente é a pessoa física ou jurídica que contrata os serviços e possui gera
 ## 5.3 Fluxo de dados (visão de DFD)
 Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.
 
-## 5.4 Convenções do dicionário
-Notação formal: = é composto de · + conecta elementos obrigatórios · ( ) elemento opcional · @ identificador (chave primária)
-## Tipos de dado:
-|Tipo |  Significado | 
-|----------|----------|
-|INT |Número inteiro, sem casas decimais. Usado principalmente nos campos de identificação (id) de cada tabela|
-|VARCHAR(n) | Texto de tamanho variável, onde n é a quantidade máxima de caracteres aceitos. Usado para nomes, e-mails, endereços e documentos | 
-|DATE | Data no formato dia/mês/ano|
-|DECIMAL(p,e) | Número com casas decimais, onde p é o total de dígitos e e é a quantidade deles depois da vírgula. Usado para valores em dinheiro e para a potência do gerador | 
-|PK (chave primária) | Identifica cada registro de uma tabela de forma exclusiva, sem repetição é o "RG" daquele registro |
-|FK (chave estrangeira) | É o campo que guarda o valor da chave primária de outra tabela, ligando as duas | 
+Tipos de dado:
+|Tipo | Significado | 
+|----------|-----------|
+|Chave primária| Identifica cada registro de uma tabela de forma exclusiva, sem repetição — é o "RG" daquele registro|
+|Chave estrangeira| É o campo que guarda o valor da chave primária de outra tabela, ligando as duas|
 
-## Dicionário de dados por entidade
+
 ## CLIENTE 
 CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade + estado
-| Atributo | Tipo físico | Obrigatório| Significado e relevância|
-|----------|-----------|------------------------------|------------------------------|
-|id_cliente| INT |  Sim (PK) |Identifica um cliente de forma exclusiva dentro do sistema; usado para localizar aquele cliente específico|
-|nome | VARCHAR(100)|Sim |Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente|
-| cpf_cnpj| VARCHAR(14)|Sim |Documento de identificação (CPF ou CNPJ). Armazenado como texto porque pode começar com zero e não entra em cálculos matemáticos|
-|telefone| VARCHAR(15)|Sim| Número de telefone para contato com o cliente|
-| endereço | VARCHAR(150) |Sim |Endereço completo (rua, número, bairro) onde o cliente está localizado|
-|email| VARCHAR(100) |Sim| 	Endereço de e-mail usado para contato com o cliente|
-| cidade | VARCHAR(50) | Sim |	Cidade onde o cliente reside ou está registrado|
-|estado |	VARCHAR(2)|Sim| Sigla do estado brasileiro (ex.: SP, RJ, MG)|
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|------------------------------|
+|id_cliente|Identificador único do cliente no sistema | Obrigatório; chave primária, gerada automaticamente|
+|nome |	Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: "Comércio Fictício LTDA"|Obrigatório|
+|cpf_cnpj          | Documento de identificação do cliente (CPF ou CNPJ)          | Obrigatório; deve ser único; dado sensível — armazenado de forma criptografada   | 
+|telefone        | Telefone de contato do cliente          |     Obrigatório      | 
+|endereco        |  Endereço completo do cliente (rua, número, bairro)         |    Obrigatório          | 
+| email         | 	E-mail de contato do cliente          |  Obrigatório            | 
+|  cidade        | Cidade onde o cliente está localizado          |    Obrigatório          | 
+|  estado    |Sigla do estado (ex.: SP)           |    Obrigatório; 2 caracteres          | 
 
 ## GERADOR
 GERADOR = @id_gerador + id_cliente + numero_serie + marca + modelo + status + potencia
-| Atributo | Tipo físico | Obrigatório| Significado e relevância|
-|----------|-----------|--------------|-------------------------|
-|id_gerador|   	INT        |   Sim (PK)           | 	Identifica um gerador de forma exclusiva dentro do sistema                        |
-|id_cliente|    INT       |     	Sim (FK)         |  	Indica a qual cliente aquele gerador pertence; liga a tabela Gerador à tabela Cliente                       |
-|numero_serie|    VARCHAR(30)       |     	Sim         |   	Número de série de fabricação do gerador, gravado pelo fabricante                      |
-|marca  | VARCHAR(50)     |    	Sim          |  	Nome do fabricante do gerador (ex.: Caterpillar, Cummins                       |
-|modelo   |  	VARCHAR(50)         |    	Sim          |  Modelo específico do gerador dentro da marca                       |
-|status | VARCHAR(20)          |      Sim        |  	Situação atual do gerador (ex.: ativo, em manutenção, inativo)                       |
-|potencia |  DECIMAL(8,2)         |        Sim      | 	Potência do gerador em kVA, indicando a capacidade de energia gerada                        |
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|------------------------------|
+|id_gerador| 	Identificador único do gerador no sistema         |  Obrigatório; chave primária, gerada automaticamente.     
+|id_cliente|  	Indica a qual cliente o gerador pertence      |  Obrigatório; chave estrangeira referenciando Cliente   |  
+|numero_serie|  	Indica a qual cliente o gerador pertence         | Obrigatório; deve ser único — não pode existir mais de um gerador com o mesmo número de série            |   	                
+|marca  |  	Fabricante do gerador. Ex.: "Cummins"    |  Obrigatório        |  	                  
+|modelo   | Modelo do gerador dentro da marca        |   Obrigatório          |                     
+|status |  	Situação atual do gerador        |  Obrigatório; valores possíveis: ativo, em manutenção, inativo          |  	              
+|potencia |   	Potência do gerador em kVA       | Obrigatório; valor numérico positivo        | 	                    
 
 ## MANUTENÇÃO
 MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + servico_realizado + status + valor
-| Atributo | Tipo físico | Obrigatório| Significado e relevância|
-|----------|-----------|--------------|-------------------------|
-| id_manutencao |    INT       |    	Sim (PK)          |    Identifica uma manutenção de forma exclusiva                  |
-| id_gerador |   	INT        |      	Sim (FK)        | 	Indica em qual gerador aquela manutenção foi realizada; liga a tabela Manutenção à tabela Gerador      |
-| data_manutencao  |      DATE     |     	Sim         |  	Data em que a manutenção foi executada                       |
-| tipo_manutencao |     	VARCHAR(30)      |      	Sim        | 	Classifica a manutenção como preventiva ou corretiva   |
-| servico_realizado |  VARCHAR(200)         |      	Sim        | 	Descrição do que foi efetivamente feito no atendimento (troca de peça, limpeza, ajuste etc.)                        |
-| status | VARCHAR(20)          |       	Sim       |  	Situação atual da manutenção (ex.: aberta, em andamento, concluída |
-| valor | 	DECIMAL(10,2)          |      	Sim        | 	Valor total cobrado pela manutenção realizada  |
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|------------------------------|
+| id_manutencao |  	Identificador único da manutenção         |  Obrigatório; chave primária, gerada automaticamente  |  
+| id_gerador |  	Indica em qual gerador a manutenção foi realizada       | Obrigatório; chave estrangeira referenciando Gerador   | 	  
+| data_manutencao  |  Data em que a manutenção foi executada       |    Obrigatório          |                     
+| tipo_manutencao | 	Classifica a manutenção quanto ao motivo do atendimento    	     |  Obrigatório; valores possíveis: preventiva, corretiva     |  
+| servico_realizado | 	Descrição do que foi feito no atendimento        |   Obrigatório         | 	                      
+| status | 	Situação atual da manutenção        |  Obrigatório; valores possíveis: aberta, em andamento, concluída   |  	
+| valor | 	Valor total cobrado pela manutenção          | Obrigatório; valor numérico positivo          | 	 
 
 ## TÉCNICO
 TECNICO = @id_tecnico + nome + cpf + telefone + email
-| Atributo | Tipo físico | Obrigatório| Significado e relevância|
-|----------|-----------|--------------|-------------------------|
-| id_tecnico |  INT         |    	Sim (PK)          |   Identifica um técnico de forma exclusiva     |
-| nome |  	VARCHAR(100)         |  Sim            | Nome completo do técnico responsável pelo serviço    |
-| cpf |  VARCHAR(11)         |    Sim          | Documento CPF do técnico, armazenado como texto pelo mesmo motivo do cpf_cnpj de Cliente       |
-| telefone |  	VARCHAR(15)         |     Sim         |   Número de telefone de contato do técnico     |
-| email |  VARCHAR(100)         |    Sim          | 	Endereço de e-mail do técnico            |
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|------------------------------|
+| id_tecnico |  Identificador único do técnico        |  Obrigatório; chave primária, gerada automaticamente  	   | 
+| nome |  Nome completo do técnico	        |    Obrigatório         |
+| cpf |  CPF do técnico        |  	Obrigatório; deve ser único — não pode existir mais de um técnico com o mesmo CPF; dado sensível — armazenado de forma criptografada           | 
+| telefone |  Telefone de contato do técnico	      |   Obrigatório       |  
+| email | 	E-mail de contato do técnico        |  Obrigatório            | 	          
 
 ## SERVIÇO
 SERVICO = @id_servico + nome_servico + descricao + valor_base
-| Atributo | Tipo físico | Obrigatório| Significado e relevância|
-|----------|-----------|--------------|-------------------------|
-| id_servico   |  INT         |        Sim (PK)      | Identifica um serviço de forma exclusiva; funciona como catálogo  |
-| nome_servico         |   VARCHAR(100)        |       Sim       |	Nome do serviço oferecido (ex.: "troca de óleo", "revisão elétrica")   |
-| descricao         |  	VARCHAR(200)         |        Sim      | Explicação mais detalhada sobre o que aquele serviço inclui    |
-| valor_base         |  DECIMAL(10,2)         |   Sim           | 	Valor de referência cobrado por aquele tipo de serviço, antes de ajustes na manutenção específica     |
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|------------------------------|
+| id_servico   | 	Identificador único do serviço no catálogo  | Obrigatório; chave primária, gerada automaticamente|  
+| nome_servico         | 	Nome do serviço oferecido. Ex.: "Troca de óleo"         |   Obrigatório       |	
+| descricao         |  		Explicação detalhada do que o serviço inclui       |  Obrigatório          | 
+| valor_base  | 	Valor de referência do serviço, antes de ajustes por manutenção.| Obrigatório; valor numérico positivo  | 
 
 ## MANUTENCAO_TECNICO
 MANUTENCAO_TECNICO = id_manutencao + id_tecnico
-| Atributo | Tipo físico | Obrigatório| Significado e relevância|
-|----------|-----------|--------------|-------------------------|
-| id_manutencao   |    INT (FK)       |   	Sim           |  	Indica a qual manutenção esse registro se refere  |
-|  id_tecnico        |      INT (FK)     |      	Sim        |	Indica qual técnico participou daquela manutenção |
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|------------------------------|
+| id_manutencao   |Referência à manutenção envolvida          |  Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela 	 |    
+|  id_tecnico        |	Referência ao técnico envolvido        |  Obrigatório; chave estrangeira referenciando Técnico; compõe a chave primária desta tabela — permite mais de um técnico por manutenção       |	
 
 ## MANUTENCAO_SERVICO
 MANUTENCAO_SERVICO = id_manutencao + id_servico
-| Atributo | Tipo físico | Obrigatório| Significado e relevância|
-|----------|-----------|--------------|-------------------------|
-| id_manutencao   |   INT (FK)        |     Sim         | 	Indica a qual manutenção esse registro se refere     |
-| id_servico  | INT (FK)          |     Sim         |  	Indica qual serviço foi utilizado naquela manutenção   |
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|------------------------------|
+| id_manutencao   | Referência à manutenção envolvida         | Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela           |    
+| id_servico  | 	Referência ao serviço envolvido         |  Obrigatório; chave estrangeira referenciando Serviço; compõe a chave primária desta tabela — permite mais de um serviço por manutenção          |  	
 
 
 
