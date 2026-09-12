@@ -1,5 +1,4 @@
 ## 1. Caracterização da Organização
-(vale 7,5% — Dimensão Conceitual)
 
 - S. A DE LIMA - Manutenção preventiva e corretiva de grupos geradores.
 - Com fins lucrativos, a empresa conta com 15 funcionários e 96 clientes fixos, somando uma média de 33 manutenções em geradores de energia por mês. 
@@ -13,7 +12,6 @@ Com um banco de dados adequado, essas informações ficaram muito mais seguras, 
 ---
 
 ## 2. Processos de Negócio
-(vale 10% — Dimensão Procedimental)
 
 - Cadastro de clientes: preservar as informações dos clientes da empresa. 
 
@@ -35,7 +33,6 @@ Com um banco de dados adequado, essas informações ficaram muito mais seguras, 
 
 
 ### 3.1 Requisitos Funcionais
-O que o sistema precisa FAZER (ex.: "o sistema deve permitir registrar uma venda").
 
 O sistema deve cadastrar clientes, geradores, manutenções, serviços e técnicos. 
 
@@ -54,7 +51,6 @@ O sistema deve permitir que mais de um técnico esteja em apenas uma manutençã
 O sistema deve permitir que o usuário cadastre, consulte e busque os históricos dos clientes.
 
 ### 3.2 Requisitos Não Funcionais
-Características de qualidade (ex.: desempenho, segurança, usabilidade, disponibilidade).
 
 Criptografia: todos os dados sensíveis devem ser criptografados, visando a segurança. 
 
