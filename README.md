@@ -95,10 +95,10 @@ Este documento apresenta o dicionário de dados referente ao Diagrama Entidade-R
 ## 5.2 Modelo conceitual
 | Entidade |  Relaciona-se com | Cardinalidade |
 |----------|----------     |-----------------------|
-| Cliente   | Gerador      | 	1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente (1,1)             
-| Gerador   | Manutenção   |  1:N — um gerador pode ter zero ou várias manutenções (0,n); cada manutenção é feita em exatamente um gerador (1,1)             |
-| Manutenção| Técnico      | 	N:N — uma manutenção precisa de pelo menos um técnico, podendo ter mais (1,n); um técnico pode participar de zero ou várias manutenções (0,n)             |
-| Manutenção| Serviço      | 	N:N — uma manutenção usa pelo menos um serviço, podendo usar mais (1,n); um serviço pode ser usado em zero ou várias manutenções (0,n)              |
+| Cliente   | Gerador      | 	1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente (1,1).             
+| Gerador   | Manutenção   |  1:N — um gerador pode ter zero ou várias manutenções (0,n); cada manutenção é feita em exatamente um gerador (1,1).             |
+| Manutenção| Técnico      | 	N:N — uma manutenção precisa de pelo menos um técnico, podendo ter mais (1,n); um técnico pode participar de zero ou várias manutenções (0,n).             |
+| Manutenção| Serviço      | 	N:N — uma manutenção usa pelo menos um serviço, podendo usar mais (1,n); um serviço pode ser usado em zero ou várias manutenções (0,n).              |
 
 Manutenção é a entidade que concentra os dois relacionamentos N:N do modelo — com Técnico e com Serviço — por isso conta com duas tabelas associativas (Manutencao_Tecnico e Manutencao_Servico), que existem só para guardar essas ligações.
 
@@ -110,79 +110,79 @@ Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculad
 Tipos de dado:
 |Tipo | Significado | 
 |----------|-----------|
-|Chave primária| Identifica cada registro de uma tabela de forma exclusiva, sem repetição — é o "RG" daquele registro|
-|Chave estrangeira| É o campo que guarda o valor da chave primária de outra tabela, ligando as duas|
+|Chave primária| Identifica cada registro de uma tabela de forma exclusiva, sem repetição — é o "RG" daquele registro.|
+|Chave estrangeira| É o campo que guarda o valor da chave primária de outra tabela, ligando as duas.|
 
 
 ## CLIENTE 
 CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade + estado
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
-|id_cliente|Identificador único do cliente no sistema | Obrigatório; chave primária, gerada automaticamente|
-|nome |	Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: "Comércio Fictício LTDA"|Obrigatório|
-|cpf_cnpj          | Documento de identificação do cliente (CPF ou CNPJ)          | Obrigatório; deve ser único; dado sensível — armazenado de forma criptografada   | 
-|telefone        | Telefone de contato do cliente          |     Obrigatório      | 
-|endereco        |  Endereço completo do cliente (rua, número, bairro)         |    Obrigatório          | 
-| email         | 	E-mail de contato do cliente          |  Obrigatório            | 
-|  cidade        | Cidade onde o cliente está localizado          |    Obrigatório          | 
-|  estado    |Sigla do estado (ex.: SP)           |    Obrigatório; 2 caracteres          | 
+|id_cliente|Identificador único do cliente no sistema. | Obrigatório; chave primária, gerada automaticamente.|
+|nome |	Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: "Comércio Fictício LTDA".|Obrigatório.|
+|cpf_cnpj          | Documento de identificação do cliente (CPF ou CNPJ).          | Obrigatório; deve ser único; dado sensível — armazenado de forma criptografada.   | 
+|telefone        | Telefone de contato do cliente.          |     Obrigatório.      | 
+|endereco        |  Endereço completo do cliente (rua, número, bairro).         |    Obrigatório.          | 
+| email         | 	E-mail de contato do cliente.          |  Obrigatório.            | 
+|  cidade        | Cidade onde o cliente está localizado.          |    Obrigatório.          | 
+|  estado    |Sigla do estado (ex.: SP).           |    Obrigatório; 2 caracteres.          | 
 
 ## GERADOR
 GERADOR = @id_gerador + id_cliente + numero_serie + marca + modelo + status + potencia
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
-|id_gerador| 	Identificador único do gerador no sistema    |  Obrigatório; chave primária, gerada automaticamente.     
-|id_cliente|  	Indica a qual cliente o gerador pertence   |  Obrigatório; chave estrangeira referenciando Cliente   |  
-|numero_serie| Número de série de fabricação do gerador  | Obrigatório; deve ser único — não pode existir mais de um gerador com o mesmo número de série            |   	                
-|marca  |  	Fabricante do gerador. Ex.: "Cummins"    |  Obrigatório        |  	                  
-|modelo   | Modelo do gerador dentro da marca        |   Obrigatório          |                     
-|status |  	Situação atual do gerador        |  Obrigatório; valores possíveis: ativo, em manutenção, inativo          |  	              
-|potencia |   	Potência do gerador em kVA   | Obrigatório; valor numérico positivo        | 	                    
+|id_gerador| 	Identificador único do gerador no sistema.    |  Obrigatório; chave primária, gerada automaticamente.     
+|id_cliente|  	Indica a qual cliente o gerador pertence.   |  Obrigatório; chave estrangeira referenciando Cliente.   |  
+|numero_serie| Número de série de fabricação do gerador.  | Obrigatório; deve ser único — não pode existir mais de um gerador com o mesmo número de série.            |   	                
+|marca  |  	Fabricante do gerador. Ex.: "Cummins".    |  Obrigatório.        |  	                  
+|modelo   | Modelo do gerador dentro da marca.        |   Obrigatório.          |                     
+|status |  	Situação atual do gerador.        |  Obrigatório; valores possíveis: ativo, em manutenção, inativo.          |  	              
+|potencia |   	Potência do gerador em kVA.   | Obrigatório; valor numérico positivo.        | 	                    
 
-## MANUTENÇÃO
+## MANUTENCAO
 MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + servico_realizado + status + valor
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
-| id_manutencao |  	Identificador único da manutenção         |  Obrigatório; chave primária, gerada automaticamente  |  
-| id_gerador |  	Indica em qual gerador a manutenção foi realizada       | Obrigatório; chave estrangeira referenciando Gerador   | 	  
-| data_manutencao  |  Data em que a manutenção foi executada       |    Obrigatório          |                     
-| tipo_manutencao | 	Classifica a manutenção quanto ao motivo do atendimento    	     |  Obrigatório; valores possíveis: preventiva, corretiva     |  
-| servico_realizado | 	Descrição do que foi feito no atendimento        |   Obrigatório         | 	                      
-| status | 	Situação atual da manutenção        |  Obrigatório; valores possíveis: aberta, em andamento, concluída   |  	
-| valor | 	Valor total cobrado pela manutenção          | Obrigatório; valor numérico positivo          | 	 
+| id_manutencao |  	Identificador único da manutenção.         |  Obrigatório; chave primária, gerada automaticamente.  |  
+| id_gerador |  	Indica em qual gerador a manutenção foi realizada.       | Obrigatório; chave estrangeira referenciando Gerador.   | 	  
+| data_manutencao  |  Data em que a manutenção foi executada.       |    Obrigatório.          |                     
+| tipo_manutencao | 	Classifica a manutenção quanto ao motivo do atendimento.    	     |  Obrigatório; valores possíveis: preventiva, corretiva.     |  
+| servico_realizado | 	Descrição do que foi feito no atendimento.        |   Obrigatório.         | 	                      
+| status | 	Situação atual da manutenção.        |  Obrigatório; valores possíveis: aberta, em andamento, concluída.   |  	
+| valor | 	Valor total cobrado pela manutenção.          | Obrigatório; valor numérico positivo.          | 	 
 
 ## TÉCNICO
 TECNICO = @id_tecnico + nome + cpf + telefone + email
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
-| id_tecnico |  Identificador único do técnico        |  Obrigatório; chave primária, gerada automaticamente  	   | 
-| nome |  Nome completo do técnico	        |    Obrigatório         |
-| cpf |  CPF do técnico        |  	Obrigatório; deve ser único — não pode existir mais de um técnico com o mesmo CPF; dado sensível — armazenado de forma criptografada           | 
-| telefone |  Telefone de contato do técnico	      |   Obrigatório       |  
-| email | 	E-mail de contato do técnico        |  Obrigatório            | 	          
+| id_tecnico |  Identificador único do técnico.        |  Obrigatório; chave primária, gerada automaticamente.  	   | 
+| nome |  Nome completo do técnico.	        |    Obrigatório.         |
+| cpf |  CPF do técnico.        |  	Obrigatório; deve ser único — não pode existir mais de um técnico com o mesmo CPF; dado sensível — armazenado de forma criptografada.           | 
+| telefone |  Telefone de contato do técnico.	      |   Obrigatório.       |  
+| email | 	E-mail de contato do técnico.        |  Obrigatório.            | 	          
 
-## SERVIÇO
+## SERVICO
 SERVICO = @id_servico + nome_servico + descricao + valor_base
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
-| id_servico   | 	Identificador único do serviço no catálogo  | Obrigatório; chave primária, gerada automaticamente|  
-| nome_servico         | 	Nome do serviço oferecido. Ex.: "Troca de óleo"         |   Obrigatório       |	
-| descricao         |  		Explicação detalhada do que o serviço inclui       |  Obrigatório          | 
-| valor_base  | 	Valor de referência do serviço, antes de ajustes por manutenção.| Obrigatório; valor numérico positivo  | 
+| id_servico   | 	Identificador único do serviço no catálogo.  | Obrigatório; chave primária, gerada automaticamente.|  
+| nome_servico         | 	Nome do serviço oferecido. Ex.: "Troca de óleo".         |   Obrigatório.       |	
+| descricao         |  		Explicação detalhada do que o serviço inclui.       |  Obrigatório.          | 
+| valor_base  | 	Valor de referência do serviço, antes de ajustes por manutenção.| Obrigatório; valor numérico positivo.  | 
 
 ## MANUTENCAO_TECNICO
 MANUTENCAO_TECNICO = id_manutencao + id_tecnico
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
-| id_manutencao   |Referência à manutenção envolvida          |  Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela 	 |    
-|  id_tecnico        |	Referência ao técnico envolvido        |  Obrigatório; chave estrangeira referenciando Técnico; compõe a chave primária desta tabela — permite mais de um técnico por manutenção       |	
+| id_manutencao   |Referência à manutenção envolvida.          |  Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela. 	 |    
+|  id_tecnico        |	Referência ao técnico envolvido.        |  Obrigatório; chave estrangeira referenciando Técnico; compõe a chave primária desta tabela — permite mais de um técnico por manutenção.       |	
 
 ## MANUTENCAO_SERVICO
 MANUTENCAO_SERVICO = id_manutencao + id_servico
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
-| id_manutencao   | Referência à manutenção envolvida         | Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela           |    
-| id_servico  | 	Referência ao serviço envolvido         |  Obrigatório; chave estrangeira referenciando Serviço; compõe a chave primária desta tabela — permite mais de um serviço por manutenção          |  	
+| id_manutencao   | Referência à manutenção envolvida.         | Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela.           |    
+| id_servico  | 	Referência ao serviço envolvido.        |  Obrigatório; chave estrangeira referenciando Serviço; compõe a chave primária desta tabela — permite mais de um serviço por manutenção.          |  	
 
 
 
@@ -229,15 +229,14 @@ Explique e defenda as decisões de abstração e modelagem tomadas: por que essa
 
 Se o grupo usou alguma ferramenta de IA (ChatGPT, Claude, Gemini, Perplexity etc.) em qualquer parte do trabalho, registre *para cada uso relevante*:
 
-| Item | O que registrar |
+| Item | Registro |
 |------|------------------|
-| *Ferramenta e etapa* | Qual IA foi usada e em qual parte do trabalho (ex.: pesquisa sobre o setor da organização, redação do README, organização dos requisitos, revisão ortográfica/gramatical). |
-| *Motivação* | Por que o grupo recorreu à IA nesse ponto específico. |
-| *Prompt(s) utilizados* | Texto exato (ou muito próximo) do que foi perguntado/pedido à IA. |
-| *Resposta recebida* | Resumo ou trecho relevante da resposta da IA. |
-| *Fontes consultadas e verificadas* | Se a IA citou fontes/dados, quais foram checadas pelo grupo e como (ex.: comparação com o que foi observado na visita de campo). |
-| *Trechos rejeitados ou corrigidos* | O que da resposta da IA foi descartado, editado ou corrigido manualmente, e por quê. |
-| *Justificativa da escolha final* | Por que o grupo manteve, adaptou ou rejeitou o que a IA sugeriu. |
-| *Reflexão crítica* | Limites, vieses ou erros identificados no uso da IA nessa etapa (ex.: informação desatualizada, alucinação, generalização incorreta sobre o tipo de organização). |
+| Ferramenta e etapa 1 |Claude- utilizada como apoio para organizar o dicionário de dados (DER) de acordo com o modelo apresentado. |
+| *Motivação* | Organizar as informações do rascunho no formato do exemplo solicitado. |
+| *Prompt(s) utilizados* | "Poderia me ajudar a revisar o arquivo".|
+| *Resposta recebida* | 	Documento reorganizado com tabelas de atributos, descrição, e regra de negócio associada. |
+| *Fontes consultadas e verificadas* | Não foram utilizadas fontes externas. As informações vieram do próprio material produzido pelo grupo, com base na visita e na pesquisa de campo realizadas na empresa.|
+| *Trechos rejeitados ou corrigidos* | 	O grupo decidiu retirar as partes de “Log de acesso” e “Conformidade com a LGPD” que apareciam no exemplo. Essas seções estavam mais relacionadas ao caso apresentado no modelo, que envolvia dados sensíveis de saúde, e não eram necessárias para o projeto da empresa escolhida. |
+| *Justificativa da escolha final* | A estrutura do exemplo foi aproveitada porque atendia ao formato solicitado, mas algumas partes foram retiradas para que o documento ficasse adequado ao contexto da empresa e às informações levantadas pelo grupo. |
+| *Reflexão crítica* | 	O exemplo ajudou bastante na organização das informações, mas foi necessário analisar o que realmente se aplicava ao projeto. Dessa forma, o grupo utilizou o modelo apenas como referência e fez as adaptações necessárias ao próprio trabalho. |
 
-Se o grupo não usou nenhuma ferramenta de IA, declare isso explicitamente nesta seção.
