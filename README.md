@@ -151,7 +151,7 @@ MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + s
 | status | 	Situação atual da manutenção.        |  Obrigatório; valores possíveis: aberta, em andamento, concluída.   |  	
 | valor | 	Valor total cobrado pela manutenção.          | Obrigatório; valor numérico positivo.          | 	 
 
-## TÉCNICO
+## TECNICO
 TECNICO = @id_tecnico + nome + cpf + telefone + email
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
@@ -183,14 +183,6 @@ MANUTENCAO_SERVICO = id_manutencao + id_servico
 |----------|-----------|------------------------------|
 | id_manutencao   | Referência à manutenção envolvida.         | Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela.           |    
 | id_servico  | 	Referência ao serviço envolvido.        |  Obrigatório; chave estrangeira referenciando Serviço; compõe a chave primária desta tabela — permite mais de um serviço por manutenção.          |  	
-
-
-
-
-
-
-
-
 
 
 
