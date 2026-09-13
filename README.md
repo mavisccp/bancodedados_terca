@@ -4,9 +4,9 @@
 - Com fins lucrativos, a empresa conta com 15 funcionários e 96 clientes fixos, somando uma média de 33 manutenções em geradores de energia por mês. 
 
 - Hoje em dia a empresa não tem um controle digital para a organização dos seus dados em geral, os dados são mantidos de maneira física, em fichas e papéis. Desde as informações dos atendimentos, até às informações dos clientes. 
-Com um banco de dados adequado, essas informações ficaram muito mais seguras, além de estarem organizadas e reservadas somente num lugar, facilitando as buscas e consultas. 
+Com um banco de dados adequado, essas informações ficarão muito mais seguras, além de estarem organizadas e reservadas somente num lugar, facilitando as buscas e consultas. 
 
-- Escolhemos essa organização por conta do caso e das dificuldades, visando que, temos a possibilidade de realmente implantar esse plano caso tudo ocorra certo. Não escolhemos uma empresa grande e nem pequena, visamos também uma empresa com um local acessível para visitas caso necessário, além de conseguirmos contato direto com o dono.
+- Escolhemos essa organização por conta do caso e das dificuldades, visando que, temos a possibilidade real de implantar esse plano caso tudo ocorra certo. Não escolhemos uma empresa grande nem pequena, visamos também uma empresa com um local acessível para visitas caso necessário, além de conseguirmos contato direto com o dono.
 
 - Endereço da empresa: https://maps.app.goo.gl/XExBHSXrFvbUNv8Y6?g_st=aw
 ---
@@ -15,9 +15,9 @@ Com um banco de dados adequado, essas informações ficaram muito mais seguras, 
 
 - Cadastro de clientes: preservar as informações dos clientes da empresa. 
 
-- Cadastro de geradores: controlar os geradores supervisionados pela empresa, para manter assertividade nas manutenções 
+- Cadastro de geradores: controlar os geradores supervisionados pela empresa, para manter assertividade nas manutenções. 
 
-- Manutenção: guardar as informações a respeito das manutenções, buscando a organização de todos os processos feitos em um cliente/gerador
+- Manutenção: guardar as informações a respeito das manutenções, buscando a organização de todos os processos feitos em um cliente/gerador.
 
 - Serviço: qual tipo de serviço será feito, incluindo valores bases. 
 
@@ -47,7 +47,7 @@ O sistema deve permitir que haja o cadastro de mais de um serviço por cliente.
 
 O sistema deve cadastrar apenas quando todos os requisitos obrigatórios estiverem preenchidos.
 
-O sistema deve permitir que mais de um técnico esteja em apenas uma manutenção. 
+O sistema deve permitir que uma manutenção tenha mais de um técnico vinculado. 
 
 O sistema deve permitir que o usuário cadastre, consulte e busque os históricos dos clientes.
 
@@ -55,13 +55,13 @@ O sistema deve permitir que o usuário cadastre, consulte e busque os histórico
 
 Criptografia: todos os dados sensíveis devem ser criptografados, visando a segurança. 
 
-Acessibilidade: o sistema deve ser adequar as normas impostas pela WCAG 2.1 nível AA.
+Acessibilidade: o sistema deve se adequar às normas impostas pela WCAG 2.1 nível AA.
 
 Tempo de resposta: O sistema deve cadastrar e carregar as respostas em até 5 segundos.
 
 Portabilidade e Compatibilidade: Quando atualizado, o sistema deve estar compatível com os sistemas operacionais populares. 
 
-Transparência: O programa deve ser comportar de maneira acessível, simples e compreensível para todos os usuários.  
+Transparência: O programa deve se comportar de maneira acessível, simples e compreensível para todos os usuários.  
 
 ## 4. Regras de Negócio
 
@@ -221,12 +221,12 @@ Explique e defenda as decisões de abstração e modelagem tomadas: por que essa
 | Item | Registro |
 |------|------------------|
 | Ferramenta e etapa 1 | Gemini Flash-, usada durante a etapa de levantamento dos Requisitos Não Funcionais (RNF) do sistema de controle de geradores e manutenções.|
-| *Motivação* | Precisavamos de ajuda para acrescentar mais alguns Requisitos Não Funcionais para compor o dicionário de dados e utilizamos a IA como um ponto de partida. O objetivo foi identificar quais categorias de RNF são mais comuns, como desempenho, segurança e disponibilidade, além de obter exemplos de como esses requisitos poderiam ser descritos. |
+| *Motivação* | Precisávamos de ajuda para acrescentar mais alguns Requisitos Não Funcionais para compor o dicionário de dados e utilizamos a IA como um ponto de partida. O objetivo foi identificar quais categorias de RNF são mais comuns, como desempenho, segurança e disponibilidade, além de obter exemplos de como esses requisitos poderiam ser descritos. |
 | *Prompt(s) utilizados* | "Cite alguns Requisitos Não Funcionais"|
 | *Resposta recebida* | A IA explicou que os Requisitos Não Funcionais estão relacionados à forma como o sistema deve funcionar, estabelecendo características, restrições e critérios de qualidade, em vez de descrever funcionalidades específicas. Em seguida, apresentou algumas categorias e exemplos. Entre elas, foram citadas Desempenho e Eficiência, com exemplos relacionados ao tempo de resposta e à capacidade de processamento do sistema, e Segurança, com exemplos como a criptografia de dados sensíveis e a utilização de autenticação de dois fatores (2FA). A resposta também mencionava uma terceira categoria, relacionada à disponibilidade, mas essa parte não chegou a ser analisada completamente	 |
 | *Fontes consultadas e verificadas* | Não foram utilizadas fontes externas. As informações vieram do próprio material produzido pelo grupo, com base na visita e na pesquisa de campo realizadas na empresa. |
 | *Trechos rejeitados ou corrigidos* | Os exemplos numéricos relacionados ao desempenho, como o tempo de resposta de até 2 segundos e o processamento de 1.000 transações por segundo, foram ajustados. Esses valores eram genéricos e não representavam a realidade da empresa estudada, que possui 96 clientes fixos e uma média de 33 manutenções por mês.	 |
-| *Justificativa da escolha final* |decidiu aproveitar as categorias sugeridas pela IA, principalmente desempenho/eficiência e segurança, pois elas são importantes para o sistema que está sendo desenvolvido. Porém, os exemplos foram adaptados de acordo com a realidade da empresa. Também foram incluídos requisitos relacionados à segurança dos dados e à autenticação. |
+| *Justificativa da escolha final* |Decidimos aproveitar as categorias sugeridas pela IA, principalmente desempenho/eficiência e segurança, pois elas são importantes para o sistema que está sendo desenvolvido. Porém, os exemplos foram adaptados de acordo com a realidade da empresa. Também foram incluídos requisitos relacionados à segurança dos dados e à autenticação. |
 | *Reflexão crítica* | O uso da IA ajudou a ter uma ideia inicial de quais Requisitos Não Funcionais poderiam ser utilizados no sistema. Porém, percebemos que nem todos os exemplos apresentados serviam para a realidade da empresa, principalmente os valores relacionados ao desempenho. Por isso, foi necessário analisar as sugestões e fazer as adaptações. Com isso, entendemos que a IA é uma boa ferramenta para ajudar no desenvolvimento do trabalho, mas não devemos aceitar tudo o que ela apresenta sem verificar. É importante usar nosso próprio conhecimento e considerar as necessidades reais da empresa.	|
 
 | Item | Registro |
@@ -237,8 +237,8 @@ Explique e defenda as decisões de abstração e modelagem tomadas: por que essa
 | *Resposta recebida* | 	Documento reorganizado com tabelas de atributos, descrição, e regra de negócio associada. |
 | *Fontes consultadas e verificadas* | Não foram utilizadas fontes externas. As informações vieram do próprio material produzido pelo grupo, com base na visita e na pesquisa de campo realizadas na empresa.|
 | *Trechos rejeitados ou corrigidos* | Decidimos retirar as partes de “Log de acesso” e “Conformidade com a LGPD” que apareciam no exemplo. Essas seções estavam mais relacionadas ao caso apresentado no modelo, que envolvia dados sensíveis de saúde, e não eram necessárias para o projeto da empresa escolhida. |
-| *Justificativa da escolha final* | A estrutura do exemplo foi aproveitada porque atendia ao formato solicitado, mas algumas partes foram retiradas para que o documento ficasse adequado ao contexto da empresa e às informações levantadas pelo grupo. |
-| *Reflexão crítica* | 	O exemplo ajudou bastante na organização das informações, mas foi necessário analisar o que realmente se aplicava ao projeto. Dessa forma, utilizanos apenas o modelo como referência e fez as adaptações necessárias ao próprio trabalho. |
+| *Justificativa da escolha final* | A estrutura do exemplo foi aproveitada porque atendia ao formato solicitado, mas algumas partes foram retiradas para que o documento ficasse adequado ao contexto da empresa e às informações levantadas. |
+| *Reflexão crítica* | 	O exemplo ajudou bastante na organização das informações, mas foi necessário analisar o que realmente se aplicava ao projeto. Dessa forma, utilizamos apenas o modelo como referência e fizemos as adaptações necessárias ao próprio trabalho. |
 
 | Item | Registro |
 |------|------------------|
