@@ -9,7 +9,7 @@
 <h1>5. Dicionario de Dados Conceitual (Preliminar)</h1>
 
 <h2>5.1 Objetivo</h2>
-<p>Este documento apresenta o dicionario de dados referente ao Diagrama Entidade-Relacionamento (DER) elaborado para o sistema da empresa escolhida pelo grupo. O sistema tem como finalidade controlar os clientes, os geradores de energia pertencentes a cada cliente, as manutencoes realizadas nesses geradores, os tecnicos responsaveis e os servicos prestados.</p>
+<p>Este documento apresenta o dicionario de dados referente ao Diagrama Entidade-Relacionamento (DER) elaborado para o sistema da empresa escolhida pelo grupo. O sistema tem como finalidade controlar os clientes, os geradores de energia pertencentes a cada cliente, as manutenções realizadas nesses geradores, os técnicos responsáveis e os servicos prestados.</p>
 
 <h2>5.2 Modelo conceitual</h2>
 <table border="1" cellpadding="5">
@@ -21,22 +21,22 @@
   <tr>
     <td>Cliente</td>
     <td>Gerador</td>
-    <td>1:N - um cliente pode ter zero ou varios geradores (0,n); cada gerador pertence a exatamente um cliente (1,1)</td>
+    <td>1:N - um cliente pode ter zero ou varios geradores (0,n); cada gerador pertence a exatamente um cliente (1,1).</td>
   </tr>
   <tr>
     <td>Gerador</td>
     <td>Manutencao</td>
-    <td>1:N - um gerador pode ter zero ou varias manutencoes (0,n); cada manutencao e feita em exatamente um gerador (1,1)</td>
+    <td>1:N - um gerador pode ter zero ou varias manutencoes (0,n); cada manutencao e feita em exatamente um gerador (1,1.)</td>
   </tr>
   <tr>
     <td>Manutencao</td>
     <td>Tecnico</td>
-    <td>N:N - uma manutencao precisa de pelo menos um tecnico, podendo ter mais (1,n); um tecnico pode participar de zero ou varias manutencoes (0,n)</td>
+    <td>N:N - uma manutenção precisa de pelo menos um tecnico, podendo ter mais (1,n); um tecnico pode participar de zero ou varias manutencoes (0,n).</td>
   </tr>
   <tr>
     <td>Manutencao</td>
     <td>Servico</td>
-    <td>N:N - uma manutencao usa pelo menos um servico, podendo usar mais (1,n); um servico pode ser usado em zero ou varias manutencoes (0,n)</td>
+    <td>N:N - uma manutençao usa pelo menos um serviço, podendo usar mais (1,n); um servico pode ser usado em zero ou varias manutencoes (0,n).</td>
   </tr>
 </table>
 
