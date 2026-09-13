@@ -139,7 +139,7 @@ GERADOR = @id_gerador + id_cliente + numero_serie + marca + modelo + status + po
 |status |  	Situação atual do gerador.        |  Obrigatório; valores possíveis: ativo, em manutenção, inativo.          |  	              
 |potencia |   	Potência do gerador em kVA.   | Obrigatório; valor numérico positivo.        | 	                    
 
-## MANUTENCAO
+## MANUTENÇÃO
 MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + servico_realizado + status + valor
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
@@ -151,7 +151,7 @@ MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + s
 | status | 	Situação atual da manutenção.        |  Obrigatório; valores possíveis: aberta, em andamento, concluída.   |  	
 | valor | 	Valor total cobrado pela manutenção.          | Obrigatório; valor numérico positivo.          | 	 
 
-## TECNICO
+## TÉCNICO
 TECNICO = @id_tecnico + nome + cpf + telefone + email
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
@@ -161,7 +161,7 @@ TECNICO = @id_tecnico + nome + cpf + telefone + email
 | telefone |  Telefone de contato do técnico.	      |   Obrigatório.       |  
 | email | 	E-mail de contato do técnico.        |  Obrigatório.            | 	          
 
-## SERVICO
+## SERVIÇO
 SERVICO = @id_servico + nome_servico + descricao + valor_base
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
@@ -170,14 +170,14 @@ SERVICO = @id_servico + nome_servico + descricao + valor_base
 | descricao         |  		Explicação detalhada do que o serviço inclui.       |  Obrigatório.          | 
 | valor_base  | 	Valor de referência do serviço, antes de ajustes por manutenção.| Obrigatório; valor numérico positivo.  | 
 
-## MANUTENCAO_TECNICO
+## MANUTENÇÃO_TÉCNICO
 MANUTENCAO_TECNICO = id_manutencao + id_tecnico
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
 | id_manutencao   |Referência à manutenção envolvida.          |  Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela. 	 |    
 |  id_tecnico        |	Referência ao técnico envolvido.        |  Obrigatório; chave estrangeira referenciando Técnico; compõe a chave primária desta tabela — permite mais de um técnico por manutenção.       |	
 
-## MANUTENCAO_SERVICO
+## MANUTENÇÃO_SERVIÇO
 MANUTENCAO_SERVICO = id_manutencao + id_servico
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
