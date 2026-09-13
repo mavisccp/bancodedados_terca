@@ -218,18 +218,46 @@ Explique e defenda as decisões de abstração e modelagem tomadas: por que essa
 ---
 
 ## 9. Uso de Inteligência Artificial
-(documentação obrigatória — não é opcional se o grupo usou IA em qualquer etapa: pesquisa, escrita, organização de ideias ou revisão de texto)
-
-Se o grupo usou alguma ferramenta de IA (ChatGPT, Claude, Gemini, Perplexity etc.) em qualquer parte do trabalho, registre *para cada uso relevante*:
+| Item | Registro |
+|------|------------------|
+| Ferramenta e etapa 1 | Gemini Flash-, usada durante a etapa de levantamento dos Requisitos Não Funcionais (RNF) do sistema de controle de geradores e manutenções.|
+| *Motivação* | Precisavamos de ajuda para acrescentar mais alguns Requisitos Não Funcionais para compor o dicionário de dados e utilizamos a IA como um ponto de partida. O objetivo foi identificar quais categorias de RNF são mais comuns, como desempenho, segurança e disponibilidade, além de obter exemplos de como esses requisitos poderiam ser descritos. |
+| *Prompt(s) utilizados* | "Cite alguns Requisitos Não Funcionais"|
+| *Resposta recebida* | A IA explicou que os Requisitos Não Funcionais estão relacionados à forma como o sistema deve funcionar, estabelecendo características, restrições e critérios de qualidade, em vez de descrever funcionalidades específicas. Em seguida, apresentou algumas categorias e exemplos. Entre elas, foram citadas Desempenho e Eficiência, com exemplos relacionados ao tempo de resposta e à capacidade de processamento do sistema, e Segurança, com exemplos como a criptografia de dados sensíveis e a utilização de autenticação de dois fatores (2FA). A resposta também mencionava uma terceira categoria, relacionada à disponibilidade, mas essa parte não chegou a ser analisada completamente	 |
+| *Fontes consultadas e verificadas* | Não foram utilizadas fontes externas. As informações vieram do próprio material produzido pelo grupo, com base na visita e na pesquisa de campo realizadas na empresa. |
+| *Trechos rejeitados ou corrigidos* | Os exemplos numéricos relacionados ao desempenho, como o tempo de resposta de até 2 segundos e o processamento de 1.000 transações por segundo, foram ajustados. Esses valores eram genéricos e não representavam a realidade da empresa estudada, que possui 96 clientes fixos e uma média de 33 manutenções por mês.	 |
+| *Justificativa da escolha final* |decidiu aproveitar as categorias sugeridas pela IA, principalmente desempenho/eficiência e segurança, pois elas são importantes para o sistema que está sendo desenvolvido. Porém, os exemplos foram adaptados de acordo com a realidade da empresa. Também foram incluídos requisitos relacionados à segurança dos dados e à autenticação. |
+| *Reflexão crítica* | O uso da IA ajudou a ter uma ideia inicial de quais Requisitos Não Funcionais poderiam ser utilizados no sistema. Porém, percebemos que nem todos os exemplos apresentados serviam para a realidade da empresa, principalmente os valores relacionados ao desempenho. Por isso, foi necessário analisar as sugestões e fazer as adaptações. Com isso, entendemos que a IA é uma boa ferramenta para ajudar no desenvolvimento do trabalho, mas não devemos aceitar tudo o que ela apresenta sem verificar. É importante usar nosso próprio conhecimento e considerar as necessidades reais da empresa.	|
 
 | Item | Registro |
 |------|------------------|
-| Ferramenta e etapa 1 |Claude- utilizada como apoio para organizar o dicionário de dados (DER) de acordo com o modelo apresentado. |
+| Ferramenta e etapa 2 |Claude-, utilizada como apoio para organizar o dicionário de dados (DER) de acordo com o modelo apresentado. |
 | *Motivação* | Organizar as informações do rascunho no formato do exemplo solicitado. |
 | *Prompt(s) utilizados* | "Poderia me ajudar a revisar o arquivo".|
 | *Resposta recebida* | 	Documento reorganizado com tabelas de atributos, descrição, e regra de negócio associada. |
 | *Fontes consultadas e verificadas* | Não foram utilizadas fontes externas. As informações vieram do próprio material produzido pelo grupo, com base na visita e na pesquisa de campo realizadas na empresa.|
-| *Trechos rejeitados ou corrigidos* | 	O grupo decidiu retirar as partes de “Log de acesso” e “Conformidade com a LGPD” que apareciam no exemplo. Essas seções estavam mais relacionadas ao caso apresentado no modelo, que envolvia dados sensíveis de saúde, e não eram necessárias para o projeto da empresa escolhida. |
+| *Trechos rejeitados ou corrigidos* | Decidimos retirar as partes de “Log de acesso” e “Conformidade com a LGPD” que apareciam no exemplo. Essas seções estavam mais relacionadas ao caso apresentado no modelo, que envolvia dados sensíveis de saúde, e não eram necessárias para o projeto da empresa escolhida. |
 | *Justificativa da escolha final* | A estrutura do exemplo foi aproveitada porque atendia ao formato solicitado, mas algumas partes foram retiradas para que o documento ficasse adequado ao contexto da empresa e às informações levantadas pelo grupo. |
-| *Reflexão crítica* | 	O exemplo ajudou bastante na organização das informações, mas foi necessário analisar o que realmente se aplicava ao projeto. Dessa forma, o grupo utilizou o modelo apenas como referência e fez as adaptações necessárias ao próprio trabalho. |
+| *Reflexão crítica* | 	O exemplo ajudou bastante na organização das informações, mas foi necessário analisar o que realmente se aplicava ao projeto. Dessa forma, utilizanos apenas o modelo como referência e fez as adaptações necessárias ao próprio trabalho. |
 
+| Item | Registro |
+|------|------------------|
+| Ferramenta e etapa 3 | |
+| *Motivação* |  |
+| *Prompt(s) utilizados* | |
+| *Resposta recebida* | 	 |
+| *Fontes consultadas e verificadas* | |
+| *Trechos rejeitados ou corrigidos* | 	 |
+| *Justificativa da escolha final* | |
+| *Reflexão crítica* | 	|
+
+| Item | Registro |
+|------|------------------|
+| Ferramenta e etapa 4 | |
+| *Motivação* |  |
+| *Prompt(s) utilizados* | |
+| *Resposta recebida* | 	 |
+| *Fontes consultadas e verificadas* | |
+| *Trechos rejeitados ou corrigidos* | 	 |
+| *Justificativa da escolha final* | |
+| *Reflexão crítica* | 	|
