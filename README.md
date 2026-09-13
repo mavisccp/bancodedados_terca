@@ -24,8 +24,9 @@ Com um banco de dados adequado, essas informações ficaram muito mais seguras, 
 - Técnico: manter um banco de dados com as informações dos técnicos da empresa. 
 
 
-- *Fluxogramas:* (Opcional) represente visualmente pelo menos os processos-chave (imagens anexadas). Deve ficar claro o fluxo de cada processo e como eles se integram entre si.
-(verificar se iremos fazer)
+<img width="569" height="867" alt="fluxogramabanco drawio" src="https://github.com/user-attachments/assets/4c413027-2f30-45d1-9d6c-9ba2a2a3e1d4" />
+
+
 
 ---
 
