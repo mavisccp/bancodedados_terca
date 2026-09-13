@@ -220,7 +220,7 @@ Explique e defenda as decisões de abstração e modelagem tomadas: por que essa
 ## 9. Uso de Inteligência Artificial
 | Item | Registro |
 |------|------------------|
-| Ferramenta e etapa 1 | Gemini Flash-, usada durante a etapa de levantamento dos Requisitos Não Funcionais (RNF) do sistema de controle de geradores e manutenções.|
+| Ferramenta e etapa 1 | Gemini Flash, usada durante a etapa de levantamento dos Requisitos Não Funcionais (RNF) do sistema de controle de geradores e manutenções.|
 | *Motivação* | Precisávamos de ajuda para acrescentar mais alguns Requisitos Não Funcionais para compor o dicionário de dados e utilizamos a IA como um ponto de partida. O objetivo foi identificar quais categorias de RNF são mais comuns, como desempenho, segurança e disponibilidade, além de obter exemplos de como esses requisitos poderiam ser descritos. |
 | *Prompt(s) utilizados* | "Cite alguns Requisitos Não Funcionais"|
 | *Resposta recebida* | A IA explicou que os Requisitos Não Funcionais estão relacionados à forma como o sistema deve funcionar, estabelecendo características, restrições e critérios de qualidade, em vez de descrever funcionalidades específicas. Em seguida, apresentou algumas categorias e exemplos. Entre elas, foram citadas Desempenho e Eficiência, com exemplos relacionados ao tempo de resposta e à capacidade de processamento do sistema, e Segurança, com exemplos como a criptografia de dados sensíveis e a utilização de autenticação de dois fatores (2FA). A resposta também mencionava uma terceira categoria, relacionada à disponibilidade, mas essa parte não chegou a ser analisada completamente	 |
@@ -231,7 +231,7 @@ Explique e defenda as decisões de abstração e modelagem tomadas: por que essa
 
 | Item | Registro |
 |------|------------------|
-| Ferramenta e etapa 2 |Claude-, utilizada como apoio para organizar o dicionário de dados (DER) de acordo com o modelo apresentado. |
+| Ferramenta e etapa 2 |Claude, utilizada como apoio para organizar o dicionário de dados (DER) de acordo com o modelo apresentado. |
 | *Motivação* | Organizar as informações do rascunho no formato do exemplo solicitado. |
 | *Prompt(s) utilizados* | "Poderia me ajudar a revisar o arquivo".|
 | *Resposta recebida* | 	Documento reorganizado com tabelas de atributos, descrição, e regra de negócio associada. |
