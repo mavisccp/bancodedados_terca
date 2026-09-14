@@ -261,7 +261,7 @@ Explique e defenda as decisões de abstração e modelagem tomadas: por que essa
 | *Resposta recebida* | Texto corrigido e mantendo concordância e as regras gramáticais. |
 | *Fontes consultadas e verificadas* | Não foram utilizadas fontes externas. As informações vieram do próprio material produzido pelo grupo, com base na visita e na pesquisa de campo realizadas na empresa. |
 | *Trechos rejeitados ou corrigidos* | Foi decidido inserir a parte "justamente por envolver riscos elétricos, uso de máquinas e manuseio de combustível.", justamente pra existir uma justificativa dessa restrições organizacionais |
-| *Justificativa da escolha final* | |
+| *Justificativa da escolha final* | A IA analisa os detalhes do texto para realizar as correções necessárias |
 | *Reflexão crítica* | 	|
 
 | Item | Registro |
