@@ -188,21 +188,17 @@ MANUTENCAO_SERVICO = id_manutencao + id_servico
 
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
-
-<img width="1181" height="482" alt="image" src="https://github.com/user-attachments/assets/82a00ece-2bfc-42b3-ba7a-bb18017dd0ec" />
+(vale 7,5% na dimensão conceitual)
+- *Entidades reconhecidas:* liste e justifique brevemente cada uma.
+- *Atributos e classificações:* quais atributos pertencem a cada entidade
+- *Relacionamentos pertinentes:* como as entidades se conectam
+- *Restrições e politicas organizacionais aplicadas ao modelo*
 
 ---
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
-(vale 20% — é o item de maior peso da entrega)
 
-- Anexe o DER (em imagem).
-- O diagrama deve representar corretamente:
-  - Entidades
-  - Atributos
-  - Relacionamentos
-  - *Cardinalidades*
-- O modelo deve ser *consistente* e já demonstrar potencial de *escalabilidade e integração* (pensando nas próximas etapas do projeto).
+<img width="1181" height="482" alt="image" src="https://github.com/user-attachments/assets/4b5cbe1b-bda3-41fd-ab38-a8990a66ae33" />
 
 ---
 
