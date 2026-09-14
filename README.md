@@ -188,11 +188,9 @@ MANUTENCAO_SERVICO = id_manutencao + id_servico
 
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
-(vale 7,5% na dimensão conceitual)
-- *Entidades reconhecidas:* liste e justifique brevemente cada uma.
-- *Atributos e classificações:* quais atributos pertencem a cada entidade
-- *Relacionamentos pertinentes:* como as entidades se conectam
-- *Restrições e politicas organizacionais aplicadas ao modelo*
+A modelagem conceitual foi elaborada a partir dos processos de negócio, requisitos funcionais e regras de negócios levantados para a empresa. O modelo busca representar as principais informações relacionadas aos clientes, seu geradores, manutenções realizadas, os técnicos envolvidos e os serviços prestados.
+
+
 
 ---
 
