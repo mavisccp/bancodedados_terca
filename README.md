@@ -256,7 +256,7 @@ Explique e defenda as decisões de abstração e modelagem tomadas: por que essa
 | Item | Registro |
 |------|------------------|
 | Ferramenta e etapa 3 | Claude, utilizada durante a elaboração da etapa das regras de negócio, para a realização de correções gramaticais do conteúdo.  |
-| *Motivação* |  |
+| *Motivação* | Correção do texto contido na etapa 4 (Regras de negócio). |
 | *Prompt(s) utilizados* | |
 | *Resposta recebida* | 	 |
 | *Fontes consultadas e verificadas* | |
