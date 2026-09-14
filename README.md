@@ -259,7 +259,7 @@ Explique e defenda as decisões de abstração e modelagem tomadas: por que essa
 | *Motivação* | Correção do texto contido na etapa 4 (Regras de negócio). |
 | *Prompt(s) utilizados* |  [Problema]: O texto pode conter erros.<br>[Condição]: Pode ter qualquer estilo.<br>[Desafio]: Corrigir sem alterar o sentido.<br>[Tarefa]: Corrija gramática, ortografia, pontuação e acentuação, mantendo o estilo original. Retorne apenas o texto corrigido. |
 | *Resposta recebida* | Texto corrigido e mantendo concordância e as regras gramáticais. |
-| *Fontes consultadas e verificadas* | |
+| *Fontes consultadas e verificadas* | Não foram utilizadas fontes externas. As informações vieram do próprio material produzido pelo grupo, com base na visita e na pesquisa de campo realizadas na empresa. |
 | *Trechos rejeitados ou corrigidos* | 	 |
 | *Justificativa da escolha final* | |
 | *Reflexão crítica* | 	|
