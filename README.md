@@ -190,6 +190,29 @@ MANUTENCAO_SERVICO = id_manutencao + id_servico
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
 A modelagem conceitual foi elaborada a partir dos processos de negócio, requisitos funcionais e regras de negócios levantados para a empresa. O modelo busca representar as principais informações relacionadas aos clientes, seu geradores, manutenções realizadas, os técnicos envolvidos e os serviços prestados.
 
+### 6.1 Entidades reconhecidas
+
+foram identificadas cinco entidades principais.
+
+#### Cliente
+
+Representa as pessoas físicas ou jurídicas que contratam os serviços da empresa. A entidade armazena  informações necessárias para a identificação e contato com o cliente.
+
+### Gerador
+
+Representa os equipamentos de geração de energia pertencentes aos clientes. A entidade permite controlar informações como número de série, marca, modelo, status e potência.
+
+### Manutenção
+
+Representa o atendimento realizado pela empresa em um determinado gerador. Cada registro de manutenção permite armazenar informações sobre a data, tipo de manutenção, status e valor do atendimento.
+
+### Técnico
+
+Representa os profissionais responsáveis pela execução das manutenções. São armazenadas informações para identificação e contato dos técnicos.
+
+### Serviço
+
+Representa os serviços oferecidos pela empresa e que podem ser utilizados durante uma manutenção, contendo informações como nome, descrição e valor-base.
 
 
 ---
