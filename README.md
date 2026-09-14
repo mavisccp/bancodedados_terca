@@ -258,7 +258,7 @@ Explique e defenda as decisões de abstração e modelagem tomadas: por que essa
 | Ferramenta e etapa 3 | Claude, utilizada durante a elaboração da etapa das regras de negócio, para a realização de correções gramaticais do conteúdo.  |
 | *Motivação* | Correção do texto contido na etapa 4 (Regras de negócio). |
 | *Prompt(s) utilizados* |  [Problema]: O texto pode conter erros.<br>[Condição]: Pode ter qualquer estilo.<br>[Desafio]: Corrigir sem alterar o sentido.<br>[Tarefa]: Corrija gramática, ortografia, pontuação e acentuação, mantendo o estilo original. Retorne apenas o texto corrigido. |
-| *Resposta recebida* | 	 |
+| *Resposta recebida* | Texto corrigido e mantendo concordância e as regras gramáticais. |
 | *Fontes consultadas e verificadas* | |
 | *Trechos rejeitados ou corrigidos* | 	 |
 | *Justificativa da escolha final* | |
