@@ -192,7 +192,7 @@ A modelagem conceitual foi elaborada a partir dos processos de negócio, requisi
 
 ### 6.1 Entidades reconhecidas
 
-foram identificadas cinco entidades principais.
+Foram identificadas cinco entidades principais.
 
 #### Cliente
 
