@@ -289,7 +289,7 @@ Os atributos permitem identificar o serviço, explicar o que será realizado e e
 
 Foram identificados quatro relacionamentos principais entre as entidades.
 
-Cliente — possui — Gerador
+# Cliente — possui — Gerador
 
 Cardinalidade: 1:N
 
@@ -299,7 +299,7 @@ CLIENTE (0,n) ─── possui ─── (1,1) GERADOR
 
 Essa relação representa a regra de negócio de que todo gerador cadastrado deve estar vinculado a um cliente.
 
-Gerador — recebe — Manutenção
+# Gerador — recebe — Manutenção
 
 Cardinalidade: 1:N
 
@@ -308,6 +308,26 @@ Um gerador pode receber zero ou várias manutenções durante sua utilização. 
 GERADOR (0,n) ─── recebe ─── (1,1) MANUTENÇÃO
 
 Essa relação permite manter o histórico de atendimentos realizados em cada equipamento.
+
+# Manutenção — realizada por — Técnico
+
+Cardinalidade: N:N
+
+Uma manutenção pode envolver um ou vários técnicos, enquanto um técnico pode participar de zero ou várias manutenções.
+
+MANUTENÇÃO (1,n) ─── realizada por ─── (0,n) TÉCNICO
+
+A cardinalidade foi definida dessa forma porque o sistema deve permitir que uma mesma manutenção tenha mais de um técnico vinculado.
+
+# Manutenção — utiliza — Serviço
+
+Cardinalidade: N:N
+
+Uma manutenção pode utilizar um ou vários serviços, enquanto um serviço pode ser utilizado em zero ou várias manutenções.
+
+MANUTENÇÃO (1,n) ─── utiliza ─── (0,n) SERVIÇO
+
+Essa relação foi definida porque uma manutenção pode envolver mais de um serviço e o valor final pode ser composto pelos serviços realizados.
 ---
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
