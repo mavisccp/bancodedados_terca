@@ -231,7 +231,8 @@ Representa os serviços oferecidos pela empresa e que podem ser utilizados duran
 Cardinalidade:
 - Cliente–Gerador (0,n)-(1,1): um cliente pode ter vários geradores, mas cada gerador tem só um dono.
 - Gerador-Manutenção (0,n)-(1,1): um gerador pode ter várias manutenções, mas cada manutenção é sobre um único gerador.
-
+- Manutenção–Técnico (1,n)-(0,n): toda manutenção precisa de pelo menos um técnico, e um técnico pode atender várias manutenções.
+  
 ---
 
 ## 9. Uso de Inteligência Artificial
