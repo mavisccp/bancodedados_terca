@@ -231,7 +231,21 @@ Cliente
 | `cidade`     | Localização           |
 | `estado`     | Localização           |
 
+O id_cliente identifica exclusivamente cada cliente. O cpf_cnpj deve ser único e obrigatório. Essas informações já estão definidas no dicionário de dados do projeto.
 
+Gerador
+
+| Atributo       | Classificação         |
+| -------------- | --------------------- |
+| `id_gerador`   | Identificador         |
+| `id_cliente`   | Referência            |
+| `numero_serie` | Identificação / único |
+| `marca`        | Descritivo            |
+| `modelo`       | Descritivo            |
+| `status`       | Classificação         |
+| `potencia`     | Quantitativo          |
+
+O numero_serie é um identificador único do equipamento, enquanto id_cliente representa sua ligação com o proprietário.
 
 ---
 
