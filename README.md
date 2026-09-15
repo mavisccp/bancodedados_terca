@@ -405,7 +405,7 @@ Cardinalidade:
 | Item | Registro |
 |------|------------------|
 | Ferramenta e etapa 4 | ChatGPT, utilizado como apoio durante a etapa de Modelagem Conceitual do sistema de controle de geradores e manutenções.|
-| *Motivação* |  |
+| *Motivação* |  Tivemos dificuldade para organizar as entidades, seus atributos e principalmente as cardinalidades dos relacionamentos entre Cliente, Gerador, Manutenção, Técnico e Serviço. Utilizamos a IA como apoio para revisar a estrutura que já havia sido definida pelo grupo e verificar se os relacionamentos estavam de acordo com os requisitos e regras de negócio levantados. |
 | *Prompt(s) utilizados* | |
 | *Resposta recebida* | 	 |
 | *Fontes consultadas e verificadas* | |
