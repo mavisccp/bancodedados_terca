@@ -214,6 +214,10 @@ Representa os profissionais responsáveis pela execução das manutenções. Sã
 
 Representa os serviços oferecidos pela empresa e que podem ser utilizados durante uma manutenção, contendo informações como nome, descrição e valor-base.
 
+### 6.2 Atributos e classificações
+
+Os atributos foram definidos de acordo com as informações necessárias para identificar e controlar cada entidade.
+
 
 ---
 
