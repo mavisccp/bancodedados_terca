@@ -273,6 +273,17 @@ Técnico
 
 O cpf é único para cada técnico, conforme a regra estabelecida para o sistema.
 
+Serviço
+
+| Atributo       | Classificação |
+| -------------- | ------------- |
+| `id_servico`   | Identificador |
+| `nome_servico` | Descritivo    |
+| `descricao`    | Descritivo    |
+| `valor_base`   | Quantitativo  |
+
+Os atributos permitem identificar o serviço, explicar o que será realizado e estabelecer seu valor de referência.
+
 ---
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
