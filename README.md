@@ -247,6 +247,32 @@ Gerador
 
 O numero_serie é um identificador único do equipamento, enquanto id_cliente representa sua ligação com o proprietário.
 
+Manutenção
+
+| Atributo            | Classificação |
+| ------------------- | ------------- |
+| `id_manutencao`     | Identificador |
+| `id_gerador`        | Referência    |
+| `data_manutencao`   | Temporal      |
+| `tipo_manutencao`   | Classificação |
+| `servico_realizado` | Descritivo    |
+| `status`            | Classificação |
+| `valor`             | Quantitativo  |
+
+A entidade registra o atendimento realizado em um gerador e permite diferenciar manutenções preventivas e corretivas.
+
+Técnico
+
+| Atributo     | Classificação         |
+| ------------ | --------------------- |
+| `id_tecnico` | Identificador         |
+| `nome`       | Descritivo            |
+| `cpf`        | Identificação / único |
+| `telefone`   | Contato               |
+| `email`      | Contato               |
+
+O cpf é único para cada técnico, conforme a regra estabelecida para o sistema.
+
 ---
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
