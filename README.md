@@ -74,8 +74,6 @@ Regras operacionais:
 
 - Os geradores precisam ter um cronograma de inspeção de manutenção preventiva.
 
-- O itinerário de um técnico de manutenção se limita a 7 manutenções preventivas por dia.
-
 - Uma manutenção pode envolver mais de um serviço, e o valor final cobrado é a soma dos valores desses serviços.
 
 - Algumas informações não podem se repetir, são únicas para cada gerador ou técnico, que são, respectivamente, o número de série e o CPF.
