@@ -235,7 +235,7 @@ Cardinalidade:
   
 - Manutenção–Técnico (1,n)-(0,n): toda manutenção precisa de pelo menos um técnico, e um técnico pode atender várias manutenções.
   
-- Manutenção–Serviço (0,n)-(0,n):uma manutenção pode ser aberta antes de se definir os serviços e pode incluir vários serviços diferentes; um serviço pode estar cadastrado sem nunca ter sido usado, ou ter sido aplicado em várias manutenções.  
+- Manutenção–Serviço (1,n)-(0,n): toda manutenção precisa de ao menos um serviço definido no momento do registro; um serviço pode estar cadastrado no catálogo sem nunca ter sido utilizado, ou ter sido aplicado em várias manutenções.
   
 ---
 
