@@ -66,7 +66,9 @@ Transparência: O programa deve se comportar de maneira acessível, simples e co
 ## 4. Regras de Negócio
 
 Regras operacionais:
-- Toda manutenção deve ter, no mínimo, um serviço vinculado no momento do seu registro; uma manutenção pode envolver mais de um serviço, e o valor final cobrado é a soma dos valores desses serviços
+- Toda manutenção deve ter, no mínimo, um serviço vinculado no momento do seu registro; uma manutenção pode envolver mais de um serviço, e o valor final cobrado é a soma dos valores desses serviços.
+
+- Toda manutenção deve ter, no mínimo, um técnico vinculado no momento do seu registro; uma manutenção pode envolver mais de um técnico.
 
 - O gerador necessariamente tem que pertencer a um cliente.
 
@@ -74,9 +76,7 @@ Regras operacionais:
 
 - Os geradores precisam ter um cronograma de inspeção de manutenção preventiva.
 
-- Uma manutenção pode envolver mais de um serviço, e o valor final cobrado é a soma dos valores desses serviços.
-
-- Algumas informações não podem se repetir, são únicas para cada gerador ou técnico, que são, respectivamente, o número de série e o CPF.
+- Algumas informações não podem se repetir: são únicas para cada cliente, gerador ou técnico — respectivamente, o CPF/CNPJ, o número de série e o CPF.
 
 Restrições organizacionais:
 - Os serviços correspondem e respeitam as normas regulamentadoras NR-10 (elétrica), NR-12 (máquinas), NR-20 (inflamáveis e combustíveis) e NR-6 (EPI), justamente por envolver riscos elétricos, uso de máquinas e manuseio de combustível.
