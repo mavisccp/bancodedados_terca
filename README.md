@@ -66,7 +66,7 @@ Transparência: O programa deve se comportar de maneira acessível, simples e co
 ## 4. Regras de Negócio
 
 Regras operacionais:
-- A manutenção necessariamente precisa estar vinculada a um gerador, sendo impossível existir uma manutenção sem essa ligação.
+- Toda manutenção deve ter, no mínimo, um serviço vinculado no momento do seu registro; uma manutenção pode envolver mais de um serviço, e o valor final cobrado é a soma dos valores desses serviços
 
 - O gerador necessariamente tem que pertencer a um cliente.
 
