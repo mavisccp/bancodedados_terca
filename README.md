@@ -328,6 +328,24 @@ Uma manutenção pode utilizar um ou vários serviços, enquanto um serviço pod
 MANUTENÇÃO (1,n) ─── utiliza ─── (0,n) SERVIÇO
 
 Essa relação foi definida porque uma manutenção pode envolver mais de um serviço e o valor final pode ser composto pelos serviços realizados.
+
+### 6.4 Restrições e políticas organizacionais
+
+O modelo conceitual considera as principais regras de negócio identificadas durante o levantamento da empresa.
+
+Todo gerador deve estar vinculado a um cliente.
+Toda manutenção deve estar vinculada a um gerador.
+O número de série do gerador deve ser único.
+O CPF do técnico deve ser único.
+Uma manutenção deve possuir pelo menos um técnico.
+Uma manutenção deve possuir pelo menos um serviço.
+Uma manutenção pode possuir vários técnicos.
+Uma manutenção pode possuir vários serviços.
+O sistema deve manter o histórico das manutenções realizadas nos geradores.
+O tipo de manutenção pode ser preventiva ou corretiva.
+Os geradores devem possuir um cronograma de inspeção preventiva.
+O atendimento não deve possuir limitação de horário devido ao plantão de 24 horas da empresa.
+
 ---
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
