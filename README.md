@@ -218,6 +218,20 @@ Representa os serviços oferecidos pela empresa e que podem ser utilizados duran
 
 Os atributos foram definidos de acordo com as informações necessárias para identificar e controlar cada entidade.
 
+Cliente
+
+| Atributo     | Classificação         |
+| ------------ | --------------------- |
+| `id_cliente` | Identificador         |
+| `nome`       | Descritivo            |
+| `cpf_cnpj`   | Identificação / único |
+| `telefone`   | Contato               |
+| `endereco`   | Localização           |
+| `email`      | Contato               |
+| `cidade`     | Localização           |
+| `estado`     | Localização           |
+
+
 
 ---
 
