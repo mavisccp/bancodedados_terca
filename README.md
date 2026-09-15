@@ -404,7 +404,7 @@ Cardinalidade:
 
 | Item | Registro |
 |------|------------------|
-| Ferramenta e etapa 4 | |
+| Ferramenta e etapa 4 | ChatGPT, utilizado como apoio durante a etapa de Modelagem Conceitual do sistema de controle de geradores e manutenções.|
 | *Motivação* |  |
 | *Prompt(s) utilizados* | |
 | *Resposta recebida* | 	 |
