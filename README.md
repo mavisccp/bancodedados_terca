@@ -224,9 +224,7 @@ Representa os serviços oferecidos pela empresa e que podem ser utilizados duran
 ---
 
 ## 8. Justificativa Técnica
-(vale 7,5% — sozinho, é o subcritério de maior peso dentro da Dimensão Conceitual)
-
-Explique e defenda as decisões de abstração e modelagem tomadas: por que essas entidades, esses atributos, esses relacionamentos e essas cardinalidades — e não outras alternativas possíveis?
+- Entidades: Separamos Cliente, Gerador, Manutenção, Técnico e Serviço porque cada uma tem ciclo de vida próprio — um cliente existe sem gerador, um gerador passa por várias manutenções, um técnico atende várias manutenções, e um serviço é um catálogo reutilizável.Se juntasse manutenção e gerador ficaria duplicando dados a cada manutenção.
 
 ---
 
