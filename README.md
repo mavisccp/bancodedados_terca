@@ -284,6 +284,30 @@ Serviço
 
 Os atributos permitem identificar o serviço, explicar o que será realizado e estabelecer seu valor de referência.
 
+
+### 6.3 Relacionamentos pertinentes
+
+Foram identificados quatro relacionamentos principais entre as entidades.
+
+Cliente — possui — Gerador
+
+Cardinalidade: 1:N
+
+Um cliente pode possuir zero ou vários geradores, enquanto cada gerador pertence obrigatoriamente a um único cliente.
+
+CLIENTE (0,n) ─── possui ─── (1,1) GERADOR
+
+Essa relação representa a regra de negócio de que todo gerador cadastrado deve estar vinculado a um cliente.
+
+Gerador — recebe — Manutenção
+
+Cardinalidade: 1:N
+
+Um gerador pode receber zero ou várias manutenções durante sua utilização. Cada manutenção, entretanto, deve estar obrigatoriamente relacionada a um único gerador.
+
+GERADOR (0,n) ─── recebe ─── (1,1) MANUTENÇÃO
+
+Essa relação permite manter o histórico de atendimentos realizados em cada equipamento.
 ---
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
