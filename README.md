@@ -56,11 +56,11 @@ O sistema deve permitir que o usuário cadastre, consulte e busque os histórico
 Criptografia: todos os dados sensíveis devem ser criptografados, visando a segurança: CPF, endereço, 
 valores; Considerar a criptografia desses itens em todos os atributos que coincidirem com as nomenclaturas citadas.
 
-Acessibilidade: o sistema deve se adequar às normas impostas pela WCAG 2.1 nível AA.
+Acessibilidade: o sistema deve se adequar às normas impostas pela WCAG 2.1 nível AA, em todas as páginas.
 
-Tempo de resposta: O sistema deve cadastrar e carregar as respostas em até 5 segundos.
+Tempo de resposta: O sistema deve cadastrar e carregar as respostas em até 5 segundos em todos os dispositivos de acesso.
 
-Portabilidade e Compatibilidade: Quando atualizado, o sistema deve estar compatível com os sistemas operacionais populares. 
+Portabilidade e Compatibilidade: Quando atualizado, o sistema deve estar compatível com os sistemas operacionais populares, desde sua instalação até as suas atualizações.
 
 Transparência: O programa deve se comportar de maneira acessível, simples e compreensível para todos os usuários.  
 
