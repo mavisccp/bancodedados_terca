@@ -35,7 +35,7 @@ Com um banco de dados adequado, essas informações ficarão muito mais seguras,
 
 ### 3.1 Requisitos Funcionais
 
-O sistema deve cadastrar clientes, geradores, manutenções, serviços e técnicos. 
+O sistema deve cadastrar clientes incluindo as informações: nome, CPF/CNPJ, telefone, endereço,e-mail, cidade e estado. Geradores: manutenções, serviços e técnicos. 
 
 O sistema deve permitir o registro de apenas um gerador por número de série.
 
