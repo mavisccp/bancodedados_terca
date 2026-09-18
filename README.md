@@ -41,19 +41,20 @@ O sistema deve permitir o registro de apenas um gerador por número de série, i
 
 O sistema deve permitir cadastrar mais de um gerador por cliente, dependendo do porte e necessidade.
 
-O sistema deve permitir que exista apenas um técnico por CPF.
+O sistema deve permitir que exista apenas um técnico por CPF,sendo digitado apenas com números, tendo o mínimo e máximo de 11 dígitos.
 
 O sistema deve permitir que haja o cadastro de mais de um serviço por cliente. 
 
-O sistema deve cadastrar apenas quando todos os requisitos obrigatórios estiverem preenchidos.
+O sistema deve cadastrar apenas quando todos os requisitos obrigatórios estiverem preenchidos (os citados na primeira parte dos requisitos funcionais)
 
-O sistema deve permitir que uma manutenção tenha mais de um técnico vinculado. 
+O sistema deve permitir que uma manutenção tenha mais de um técnico vinculado, a manutenção precisa ser digitada somente em números, pois se trata de código único.
 
 O sistema deve permitir que o usuário cadastre, consulte e busque os históricos dos clientes.
 
 ### 3.2 Requisitos Não Funcionais
 
-Criptografia: todos os dados sensíveis devem ser criptografados, visando a segurança. 
+Criptografia: todos os dados sensíveis devem ser criptografados, visando a segurança: CPF, endereço, 
+valores; Considerar a criptografia desses itens em todos os atributos que coincidirem com as nomenclaturas citadas.
 
 Acessibilidade: o sistema deve se adequar às normas impostas pela WCAG 2.1 nível AA.
 
