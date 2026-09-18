@@ -47,7 +47,7 @@ O sistema deve permitir que haja o cadastro de mais de um serviço por cliente.
 
 O sistema deve cadastrar apenas quando todos os requisitos obrigatórios estiverem preenchidos (estes que foram citados no primeiro requisito funcional)
 
-O sistema deve permitir que uma manutenção tenha mais de um técnico vinculado, a manutenção precisa ser digitada somente em números, pois se trata de código único.
+O sistema deve permitir que uma manutenção tenha mais de um técnico vinculado, a manutenção precisa ser digitada somente em números, pois trata-se de código único e exclusivo.
 
 O sistema deve permitir que o usuário cadastre, consulte e busque os históricos dos clientes.
 
