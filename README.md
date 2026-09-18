@@ -45,7 +45,7 @@ O sistema deve permitir que exista apenas um técnico por CPF, sendo digitado ap
 
 O sistema deve permitir que haja o cadastro de mais de um serviço por cliente. 
 
-O sistema deve cadastrar apenas quando todos os requisitos obrigatórios estiverem preenchidos (os citados na primeira parte dos requisitos funcionais)
+O sistema deve cadastrar apenas quando todos os requisitos obrigatórios estiverem preenchidos (estes que foram citados no primeiro requisito funcional)
 
 O sistema deve permitir que uma manutenção tenha mais de um técnico vinculado, a manutenção precisa ser digitada somente em números, pois se trata de código único.
 
