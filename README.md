@@ -41,7 +41,7 @@ O sistema deve permitir o registro de apenas um gerador por número de série, i
 
 O sistema deve permitir cadastrar mais de um gerador por cliente, dependendo do porte e necessidade.
 
-O sistema deve permitir que exista apenas um técnico por CPF,sendo digitado apenas com números, tendo tamanho exato de 11 dígitos.
+O sistema deve permitir que exista apenas um técnico por CPF, sendo digitado apenas com números e tendo tamanho exato de 11 dígitos.
 
 O sistema deve permitir que haja o cadastro de mais de um serviço por cliente. 
 
