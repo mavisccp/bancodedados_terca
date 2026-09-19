@@ -22,7 +22,13 @@ Cadastro de clientes:
 - Regras: todos os campos são obrigatórios; o CPF/CNPJ não pode se repetir; CPF/CNPJ e endereço são armazenados de forma criptografada.
 - Resultado: cliente disponível para vincular geradores e consultar o histórico.
 
-- Cadastro de geradores: controlar os geradores supervisionados pela empresa, para manter assertividade nas manutenções. 
+Cadastro de geradores: 
+- Objetivo: controlar os geradores supervisionados pela empresa, mantendo a assertividade nas manutenções.
+- Quando ocorre: quando o cliente possui um gerador ainda não registrado.
+- Dados registrados: número de série, marca, modelo, status (ativo, em manutenção ou inativo) e potência em kVA.
+- Regras: todo gerador pertence a um cliente; o número de série é único (aceita letras e números); um cliente pode ter mais de um gerador, conforme o porte e a necessidade.
+- Resultado: equipamento identificado e pronto para receber manutenções. Cada gerador tem um cronograma de inspeção preventiva, orientado pelos prazos de troca ou limpeza de peças como bateria, óleo, filtro de ar e tanque.
+
 
 - Manutenção: guardar as informações a respeito das manutenções, buscando a organização de todos os processos feitos em um cliente/gerador.
 
