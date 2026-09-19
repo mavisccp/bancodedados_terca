@@ -38,35 +38,35 @@ Com um banco de dados adequado, essas informações ficarão muito mais seguras,
 
 ### 3.1 Requisitos Funcionais
 
-O sistema deve cadastrar dados incluindo as informações: nome, CPF/CNPJ, telefone, endereço,e-mail, cidade e estado. Gerador: número de série, marca, modelo, status e potência. Manutenções: data da manutenção, tipo de manutenção, serviço realizado, status e valor. Serviços: nome do serviço,descrição,e valor base. Técnicos: nome, cpf, telefone e email.
+- O sistema deve cadastrar dados incluindo as informações: nome, CPF/CNPJ, telefone, endereço,e-mail, cidade e estado. Gerador: número de série, marca, modelo, status e potência. Manutenções: data da manutenção, tipo de manutenção, serviço realizado, status e valor. Serviços: nome do serviço,descrição,e valor base. Técnicos: nome, cpf, telefone e email.
 
-O sistema deve permitir o registro de apenas um gerador por número de série, permitindo a inclusão letras e números.
+- O sistema deve permitir o registro de apenas um gerador por número de série, permitindo a inclusão letras e números.
 
-O sistema deve permitir cadastrar mais de um gerador por cliente, dependendo do porte e necessidade.
+- O sistema deve permitir cadastrar mais de um gerador por cliente, dependendo do porte e necessidade.
 
-O sistema deve permitir que exista apenas um técnico por CPF, sendo digitado apenas com números e tendo tamanho exato de 11 dígitos.
+- O sistema deve permitir que exista apenas um técnico por CPF, sendo digitado apenas com números e tendo tamanho exato de 11 dígitos.
 
-O sistema deve permitir que haja o cadastro de mais de um serviço por cliente, de forma ilimitada
+- O sistema deve permitir que haja o cadastro de mais de um serviço por cliente, de forma ilimitada
 
-O sistema deve cadastrar apenas quando todos os requisitos obrigatórios estiverem preenchidos (estes que foram citados no primeiro requisito funcional)
+- O sistema deve cadastrar apenas quando todos os requisitos obrigatórios estiverem preenchidos (estes que foram citados no primeiro requisito funcional)
 
-O sistema deve permitir que uma manutenção tenha mais de um técnico vinculado, a manutenção precisa ser digitada somente em números, pois trata-se de código único e exclusivo.
+- O sistema deve permitir que uma manutenção tenha mais de um técnico vinculado, a manutenção precisa ser digitada somente em números, pois trata-se de código único e exclusivo.
 
-O sistema deve permitir que o usuário cadastre, consulte e busque os históricos dos clientes.
+- O sistema deve permitir que o usuário cadastre, consulte e busque os históricos dos clientes.
 
-O sistema deve dar a opção de guardar os RASCUNHOS dos cadastros incompletos, para que o usuario consiga retornar depois para finaliza-lo.
+- O sistema deve dar a opção de guardar os RASCUNHOS dos cadastros incompletos, para que o usuario consiga retornar depois para finaliza-lo.
 
 ### 3.2 Requisitos Não Funcionais
 
-Criptografia: todos os dados sensíveis: CPF, endereço, valores; devem ser criptografados, visando a segurança e intgegridade dos usuários. Considerar a criptografia desses itens em todos os atributos que coincidirem com as nomenclaturas citadas.
+- Criptografia: todos os dados sensíveis: CPF, endereço, valores; devem ser criptografados, visando a segurança e intgegridade dos usuários. Considerar a criptografia desses itens em todos os atributos que coincidirem com as nomenclaturas citadas.
 
-Acessibilidade: o sistema deve se adequar às normas impostas pela WCAG 2.1 nível AA, em todas as páginas.
+- Acessibilidade: o sistema deve se adequar às normas impostas pela WCAG 2.1 nível AA, em todas as páginas.
 
-Tempo de resposta: O sistema deve cadastrar e carregar as respostas em até 5 segundos em todos os dispositivos de acesso.
+- Tempo de resposta: O sistema deve cadastrar e carregar as respostas em até 5 segundos em todos os dispositivos de acesso.
 
-Portabilidade e Compatibilidade: O sistema deve estar compatível com os sistemas operacionais populares, desde sua instalação até as suas atualizações.
+- Portabilidade e Compatibilidade: O sistema deve estar compatível com os sistemas operacionais populares, desde sua instalação até as suas atualizações.
 
-Transparência: O programa deve se comportar de maneira acessível, simples e compreensível para todos os usuários.  
+- Transparência: O programa deve se comportar de maneira acessível, simples e compreensível para todos os usuários.  
 
 ## 4. Regras de Negócio
 
