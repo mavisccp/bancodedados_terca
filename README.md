@@ -52,6 +52,8 @@ O sistema deve permitir que uma manutenção tenha mais de um técnico vinculado
 
 O sistema deve permitir que o usuário cadastre, consulte e busque os históricos dos clientes.
 
+O sistema deve dar a opção de guardar os RASCUNHOS dos cadastros incompletos, para que o usuario consiga retornar depois para finaliza-lo.
+
 ### 3.2 Requisitos Não Funcionais
 
 Criptografia: todos os dados sensíveis: CPF, endereço, valores; devem ser criptografados, visando a segurança e intgegridade dos usuários. Considerar a criptografia desses itens em todos os atributos que coincidirem com as nomenclaturas citadas.
