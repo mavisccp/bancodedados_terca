@@ -37,7 +37,11 @@ Manutenção:
 - Resultado: histórico completo do gerador e do cliente, que pode ser consultado a qualquer momento.
 
 
-- Serviço: qual tipo de serviço será feito, incluindo valores bases. 
+Serviço: 
+- Objetivo: definir o tipo de serviço que será feito, incluindo os valores base.
+- Dados registrados: nome, descrição e valor base.
+- Regras: não há limite de serviços cadastrados por cliente; um serviço pode ser usado em várias manutenções; o valor base é armazenado de forma criptografada; os serviços seguem as normas NR-10, NR-12, NR-20 e NR-6.
+- Resultado: catálogo que alimenta o cálculo do valor de cada manutenção.
 
 - Técnico: manter um banco de dados com as informações dos técnicos da empresa. 
 
