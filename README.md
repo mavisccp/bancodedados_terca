@@ -29,8 +29,13 @@ Cadastro de geradores:
 - Regras: todo gerador pertence a um cliente; o número de série é único (aceita letras e números); um cliente pode ter mais de um gerador, conforme o porte e a necessidade.
 - Resultado: equipamento identificado e pronto para receber manutenções. Cada gerador tem um cronograma de inspeção preventiva, orientado pelos prazos de troca ou limpeza de peças como bateria, óleo, filtro de ar e tanque.
 
+Manutenção:
+- Objetivo: guardar as informações de cada atendimento, organizando todos os processos feitos em um cliente/gerador.
+- Quando ocorre: a cada solicitação de atendimento, preventivo ou corretivo.
+- Dados registrados: código da manutenção, data, tipo (preventiva ou corretiva), serviço realizado, status (aberta, em andamento ou concluída) e valor.
+- Regras: o código é único e exclusivo, digitado somente com números; a manutenção é vinculada a exatamente um gerador; exige ao menos um técnico e ao menos um serviço, podendo ter vários de cada; o valor é a soma dos serviços e é armazenado de forma criptografada.
+- Resultado: histórico completo do gerador e do cliente, que pode ser consultado a qualquer momento.
 
-- Manutenção: guardar as informações a respeito das manutenções, buscando a organização de todos os processos feitos em um cliente/gerador.
 
 - Serviço: qual tipo de serviço será feito, incluindo valores bases. 
 
