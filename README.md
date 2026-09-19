@@ -6,7 +6,8 @@
 - Hoje em dia a empresa não tem um controle digital para a organização dos seus dados em geral, os dados são mantidos de maneira física, em fichas e papéis. Desde as informações dos atendimentos, até às informações dos clientes. 
 Com um banco de dados adequado, essas informações ficarão muito mais seguras, além de estarem organizadas e reservadas somente num lugar, facilitando as buscas e consultas. 
 
-- Escolhemos essa organização por conta do caso e das dificuldades, visando que, temos a possibilidade real de implantar esse plano caso tudo ocorra certo. Não escolhemos uma empresa grande nem pequena, visamos também uma empresa com um local acessível para visitas caso necessário, além de conseguirmos contato direto com o dono.
+- A organização foi escolhida de acordo com as dificuldades relatadas, pois a partir disso, encontramos diversas possibilidades reais de implantar o plano de renovação de fluxos de armazenamento de dados. Além de que a escolha também partiu do fácil acesso ao local e contato com o dono de forma direta.
+
 
 - Endereço da empresa: https://maps.app.goo.gl/XExBHSXrFvbUNv8Y6?g_st=aw
 ---
