@@ -15,8 +15,12 @@ Com um banco de dados adequado, essas informações ficarão muito mais seguras,
 ---
 
 ## 2. Processos de Negócio
-
-- Cadastro de clientes: preservar as informações dos clientes da empresa. 
+Cadastro de clientes:
+- Objetivo: preservar as informações dos clientes da empresa e permitir cadastrar, consultar e buscar o histórico de cada um.
+- Quando ocorre: no primeiro atendimento de um cliente novo.
+- Dados registrados: nome (ou razão social), CPF/CNPJ, telefone, endereço, e-mail, cidade e estado.
+- Regras: todos os campos são obrigatórios; o CPF/CNPJ não pode se repetir; CPF/CNPJ e endereço são armazenados de forma criptografada.
+- Resultado: cliente disponível para vincular geradores e consultar o histórico.
 
 - Cadastro de geradores: controlar os geradores supervisionados pela empresa, para manter assertividade nas manutenções. 
 
