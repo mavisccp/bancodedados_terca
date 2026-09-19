@@ -378,7 +378,7 @@ O atendimento não deve possuir limitação de horário devido ao plantão de 24
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
 
-<img width="2048" height="920" alt="image" src="DER.png" />
+<img width="2048" height="920" alt="image" src="DER-1.png" />
 
 ---
 
