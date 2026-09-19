@@ -22,12 +22,14 @@ Cadastro de clientes:
 - Regras: todos os campos são obrigatórios; o CPF/CNPJ não pode se repetir; CPF/CNPJ e endereço são armazenados de forma criptografada.
 - Resultado: cliente disponível para vincular geradores e consultar o histórico.
 
+
 Cadastro de geradores: 
 - Objetivo: controlar os geradores supervisionados pela empresa, mantendo a assertividade nas manutenções.
 - Quando ocorre: quando o cliente possui um gerador ainda não registrado.
 - Dados registrados: número de série, marca, modelo, status (ativo, em manutenção ou inativo) e potência em kVA.
 - Regras: todo gerador pertence a um cliente; o número de série é único (aceita letras e números); um cliente pode ter mais de um gerador, conforme o porte e a necessidade.
 - Resultado: equipamento identificado e pronto para receber manutenções. Cada gerador tem um cronograma de inspeção preventiva, orientado pelos prazos de troca ou limpeza de peças como bateria, óleo, filtro de ar e tanque.
+
 
 Manutenção:
 - Objetivo: guardar as informações de cada atendimento, organizando todos os processos feitos em um cliente/gerador.
@@ -43,8 +45,12 @@ Serviço:
 - Regras: não há limite de serviços cadastrados por cliente; um serviço pode ser usado em várias manutenções; o valor base é armazenado de forma criptografada; os serviços seguem as normas NR-10, NR-12, NR-20 e NR-6.
 - Resultado: catálogo que alimenta o cálculo do valor de cada manutenção.
 
-- Técnico: manter um banco de dados com as informações dos técnicos da empresa. 
 
+Técnico:
+- Objetivo: manter um banco de dados com as informações dos técnicos da empresa.
+- Dados registrados: nome, CPF, telefone e e-mail.
+- Regras: CPF único, digitado somente com números e com exatamente 11 dígitos; o CPF é armazenado de forma criptografada.
+- Resultado: técnicos disponíveis para alocação nas manutenções.
 
 <img width="569" height="867" alt="fluxogramabanco drawio" src="https://github.com/user-attachments/assets/4c413027-2f30-45d1-9d6c-9ba2a2a3e1d4" />
 
