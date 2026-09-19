@@ -53,8 +53,7 @@ O sistema deve permitir que o usuário cadastre, consulte e busque os histórico
 
 ### 3.2 Requisitos Não Funcionais
 
-Criptografia: todos os dados sensíveis devem ser criptografados, visando a segurança: CPF, endereço, 
-valores; Considerar a criptografia desses itens em todos os atributos que coincidirem com as nomenclaturas citadas.
+Criptografia: todos os dados sensíveis: CPF, endereço, valores; devem ser criptografados, visando a segurança e intgegridade dos usuários.  Considerar a criptografia desses itens em todos os atributos que coincidirem com as nomenclaturas citadas.
 
 Acessibilidade: o sistema deve se adequar às normas impostas pela WCAG 2.1 nível AA, em todas as páginas.
 
