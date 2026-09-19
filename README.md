@@ -4,7 +4,7 @@
 - Com fins lucrativos, a empresa conta com 15 funcionários e 96 clientes fixos, somando uma média de 33 manutenções em geradores de energia por mês. 
 
 - Nos dias atuais, a empresa não tem um controle digital para a organização dos seus dados em geral: os dados são mantidos de maneira física, em fichas e papéis. Desde as informações dos atendimentos, até às informações dos clientes. 
-Com um banco de dados adequado, essas informações ficarão muito mais seguras, além de estarem organizadas e reservadas somente num lugar, facilitando as buscas e consultas. 
+Com um banco de dados adequado, essas informações ficarão muito mais seguras, além de estarem organizadas e reservadas somente num lugar, facilitando as buscas, consultas e alterações.
 
 - A organização foi escolhida de acordo com as dificuldades relatadas, pois a partir disso, encontramos diversas possibilidades reais de implantar o plano de renovação de fluxos de armazenamento de dados. Além de que a escolha também partiu do fácil acesso ao local e contato com o dono de forma direta.
 
