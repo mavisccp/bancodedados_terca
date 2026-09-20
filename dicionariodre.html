@@ -75,41 +75,49 @@
   </tr>
   <tr>
     <td>id_cliente</td>
+    <td>INT</td>
     <td>Identificador único do cliente no sistema.</td>
     <td>Obrigatório; chave primária, gerada automaticamente.</td>
   </tr>
   <tr>
     <td>nome</td>
+    <td>VARCHAR(100)</td>
     <td>Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: "Comércio Fictício LTDA".</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>cpf_cnpj</td>
+    <td>VARCHAR(255)</td>
     <td>Documento de identificação do cliente (CPF ou CNPJ).</td>
     <td>Obrigatório; deve ser único; dado sensível — armazenado de forma criptografada.</td>
   </tr>
   <tr>
     <td>telefone</td>
+    <td>VARCHAR(20)</td>
     <td>Telefone de contato do cliente.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>endereco</td>
+    <td>VARCHAR(150)</td>
     <td>Endereço completo do cliente (rua, número, bairro).</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>email</td>
+    <td>VARCHAR(100)</td>
     <td>E-mail de contato do cliente.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>cidade</td>
+    <td>VARCHAR(60)</td>
     <td>Cidade onde o cliente está localizado.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>estado</td>
+    <td>CHAR(2)</td>
     <td>Sigla do estado (ex.: SP).</td>
     <td>Obrigatório; 2 caracteres.</td>
   </tr>
