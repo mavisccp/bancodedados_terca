@@ -137,24 +137,23 @@ ser prestados durante uma manutenção.
 Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.
 
 Tipos de dado:
-|Tipo | Significado | 
-|----------|-----------|
-|Chave primária (PK)| Identifica cada registro de uma tabela de forma exclusiva, sem repetição — é o "RG" daquele registro.|
-|Chave estrangeira (FK)| É o campo que guarda o valor da chave primária de outra tabela, ligando as duas.|
-|ID_        |             |
-|NM_        |             |
-|DS_        |             |
-|CD_        |             |
-|TP_        |             |
-|QT_        |             |
-|INTEGER    |             |
-|DECIMAL    |             |
-|CHAR       |             |
-|VARCHAR    |             |
-|TEXT       |             |
-|DATE       |             |
-|ENUM       |             |
-
+|Tipo | Significado | Exemplo no documento |
+|----------|-----------|-----------|
+|ID_        |Identificador            | ID_CLIENTE, ID_GERADOR. |
+|NM_        | Nome       | NM_CLIENTE, NM_MARCA.              |
+|DS_        |  Descrição           | DS_ENDERECO, DS_EMAIL.                   |
+|CD_        |    Código         | CD_ESTADO.                    |
+|TP_        |   Tipo          | TP_STATUS, TP_MANUTENCAO.     |
+|QT_        |   Quantidade          |  QT_POTENCIA, QT_VALOR.|
+|INTEGER    |  Número inteiro, sem casas decimais   | Número inteiro, sem casas decimais.     |
+|DECIMAL    | Número com casas decimais, usado para valores em dinheiro ou medidas   |  Decimal(10,2) guarda até 10 dígitos no total, sendo 2 deles depois da vírgula.    |
+|CHAR       | Texto de tamanho fixo            |   Char(2) sempre guarda exatamente 2 caracteres, como a sigla de um estado ("SP"). |
+|VARCHAR    |Texto de tamanho variável, até um limite máximo  |  Varchar(120) guarda até 120 caracteres usado em nomes, e-mails, telefones.|
+|TEXT       |Texto livre e longo, sem um limite fixo de tamanho   | Usado em descrições mais extensas. |
+|DATE       | Guarda uma data           |  Dia,mês e ano. |
+|ENUM       | Só aceita um valor de uma lista fixa, definida de antemão| Enum(‘ativo’,‘em_manutencao’,‘inativo’) só permite essas três opções, nenhuma outra. |
+|PK    |Chave primária | O campo que identifica aquele registro de forma única dentro da tabela não pode existir dois registros com o mesmo valor nesse campo.|
+|FK    | Chave estrangeira  |  Um campo que “empresta” o ID de outra tabela, para ligar as duas. É assim que, um gerador fica sabendo a qual cliente ele pertence.|
 
 
 |Símbolo    |Significado  |
