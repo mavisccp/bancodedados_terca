@@ -204,24 +204,18 @@ QT_VALOR |decimal(10,2)| Sim |Valor total cobrado, soma dos serviços vinculados
 TECNICO = @ID_TECNICO + NM_TECNICO + ID_CPF + DS_TELEFONE + DS_EMAIL
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
-ID_TECNICO integer Sim (PK) Identificador único do técnico; gerado automaticamente.
-NM_TECNICO varchar(120) Sim Nome completo do técnico.
-ID_CPF char(11) Sim (único) CPF do técnico, digitado somente com números, exatamente
-11 dígitos; dado sensível — armazenado de forma
-criptografada.
-DS_TELEFONE varchar(20) Sim Telefone de contato do técnico.
-DS_EMAIL varchar(120) Sim E-mail de contato do técnico.
-	          
+ID_TECNICO| integer| Sim (PK)| Identificador único do técnico; gerado automaticamente.|
+NM_TECNICO| varchar(120)| Sim| Nome completo do técnico.|
+ID_CPF |char(11)| Sim (único) |CPF do técnico, digitado somente com números, exatamente 11 dígitos; dado sensível  armazenado de forma criptografada.|
+DS_TELEFONE| varchar(20)| Sim | Telefone de contato do técnico.|
+DS_EMAIL| varchar(120)|Sim| E-mail de contato do técnico.|
 
 ## SERVIÇO
-SERVICO = @id_servico + nome_servico + descricao + valor_base
+SERVICO = @ID_SERVICO + NM_SERVICO + DS_DESCRICAO + QT_VALOR_BASE
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
-	          
-| id_servico   | 	Identificador único do serviço no catálogo.  | Obrigatório; chave primária, gerada automaticamente.|  
-| nome_servico         | 	Nome do serviço oferecido. Ex.: "Troca de óleo".         |   Obrigatório.       |	
-| descricao         |  		Explicação detalhada do que o serviço inclui.       |  Obrigatório.          | 
-| valor_base  | 	Valor de referência do serviço, antes de ajustes por manutenção.| Obrigatório; valor numérico positivo.  | 
+          
+
 
 ## MANUTENÇÃO_TÉCNICO
 MANUTENCAO_TECNICO = id_manutencao + id_tecnico
