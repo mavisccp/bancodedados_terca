@@ -166,21 +166,23 @@ Tipos de dado:
 ## Dicionário de dados por entidade
 ## CLIENTE 
 CLIENTE = @ID_CLIENTE + NM_CLIENTE + ID_CPF_CNPJ + DS_TELEFONE + DS_ENDERECO + DS_EMAIL + NM_CIDADE+ CD_ESTADO
+
 Leitura: @ID_CLIENTE é o identificador único; os sete campos seguintes são obrigatórios e conectados por +, formando o cadastro completo exigido no primeiro atendimento do cliente.
 
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
 |ID_CLIENTE   |  integer          |  Sim (PK)           | Identificador único do cliente no sistema; gerado automaticamente. |
 |NM_CLIENTE  | varchar(120)          |  Sim            |Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: “Comércio Fictício LTDA”. |
-|ID_CPF_CNPJ  |  varchar(18)         |  Sim (único)  |Documento de identificação do cliente (CPF ou CNPJ); dado sensível — armazenado de forma criptografada. |
+|ID_CPF_CNPJ  |  varchar(18)         |  Sim (único)  |Documento de identificação do cliente (CPF ou CNPJ); dado sensível armazenado de forma criptografada. |
 |DS_TELEFONE |  varchar(20)         |   Sim           |Telefone de contato do cliente. |
-|DS_ENDERECO  | varchar(200)          |  Sim            | Endereço completo do cliente (rua, número, bairro); dado sensível — armazenado de forma criptografada. |
+|DS_ENDERECO  | varchar(200)          |  Sim            | Endereço completo do cliente (rua, número, bairro); dado sensível armazenado de forma criptografada. |
 | DS_EMAIL  | varchar(120)          |   Sim           |  E-mail de contato do cliente.|
 | NM_CIDADE | varchar(80)          |   Sim           |  Cidade onde o cliente está localizado.|
 | CD_ESTADO |char(2)            |   Sim           | Sigla do estado (ex.: SP); domínio fixo das 27 UFs brasileiras.|
 
 ## GERADOR
 GERADOR = @ID_GERADOR + ID_CLIENTE + ID_NUMERO_SERIE + NM_MARCA + NM_MODELO + TP_STATUS +QT_POTENCIA
+
 Leitura: @ID_GERADOR é o identificador único; ID_CLIENTE é a chave estrangeira que implementa, na tabela física, o relacionamento 1:N descrito é o que garante a regra de que todo gerador deve estar vinculado a um cliente. Os demais campos são obrigatórios e conectados por +.
 
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
@@ -194,8 +196,8 @@ TP_STATUS  | enum(‘ativo’,‘em_manutencao’,‘inativo’) |  Sim  | Situa
 QT_POTENCIA  | decimal(10,2) |  Sim  | Potência do gerador em kVA; valor numérico positivo. | 
 
 ## MANUTENÇÃO
-MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO +
-DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR
+MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO +DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR
+
 Leitura: @ID_MANUTENCAO é o identificador único, digitado somente com números; ID_GERADOR é a chave estrangeira que liga a manutenção ao gerador atendido, garantindo que toda manutenção esteja vinculada a exatamente um gerador. Os demais campos são obrigatórios e conectados por +.
 
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
@@ -210,18 +212,20 @@ QT_VALOR |decimal(10,2)| Sim |Valor total cobrado, soma dos serviços vinculados
 
 ## TÉCNICO
 TECNICO = @ID_TECNICO + NM_TECNICO + ID_CPF + DS_TELEFONE + DS_EMAIL
+
 Leitura: @ID_TECNICO é o identificador único; os demais campos são obrigatórios e conectados por +.
 
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
 ID_TECNICO| integer| Sim (PK)| Identificador único do técnico; gerado automaticamente.|
 NM_TECNICO| varchar(120)| Sim| Nome completo do técnico.|
-ID_CPF |char(11)| Sim (único) |CPF do técnico, digitado somente com números, exatamente 11 dígitos; dado sensível  armazenado de forma criptografada.|
+ID_CPF |char(11)| Sim (único) |CPF do técnico, digitado somente com números, exatamente 11 dígitos; dado sensível armazenado de forma criptografada.|
 DS_TELEFONE| varchar(20)| Sim | Telefone de contato do técnico.|
 DS_EMAIL| varchar(120)|Sim| E-mail de contato do técnico.|
 
 ## SERVIÇO
 SERVICO = @ID_SERVICO + NM_SERVICO + DS_DESCRICAO + QT_VALOR_BASE
+
 Leitura: @ID_SERVICO é o identificador único; os demais campos são obrigatórios e conectados por +.
 
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
@@ -229,10 +233,13 @@ Leitura: @ID_SERVICO é o identificador único; os demais campos são obrigatór
 ID_SERVICO|integer|Sim (PK)| Identificador único do serviço no catálogo; gerado automaticamente.|
 NM_SERVICO| varchar(120) |Sim| Nome do serviço oferecido. Ex.: “Troca de óleo”.|
 DS_DESCRICAO| text| Sim |Explicação detalhada do que o serviço inclui.|
-QT_VALOR_BASE| decimal(10,2)| Sim |Valor de referência do serviço, antes de ajustes por manutenção; dado sensível — armazenado de forma criptografada.|
+QT_VALOR_BASE| decimal(10,2)| Sim |Valor de referência do serviço, antes de ajustes por manutenção; dado sensível armazenado de forma criptografada.|
           
 ## MANUTENÇÃO_TÉCNICO
 MANUTENCAO_TECNICO = @ID_MANUTENCAO + @ID_TECNICO
+
+Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO e TECNICO os dois campos, marcados com @, formam juntos a chave primária composta desta tabela e são, cada um, chave estrangeira para sua entidade de origem.
+
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
 ID_MANUTENCAO| integer| Sim (FK, compõe PK)| Referência à manutenção envolvida.|
@@ -240,12 +247,13 @@ ID_TECNICO |integer |Sim (FK, compõe PK) |Referência ao técnico envolvido; pe
 
 ## MANUTENÇÃO_SERVIÇO
 MANUTENCAO_SERVICO = @ID_MANUTENCAO + @ID_SERVICO
+
+Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO e SERVICO os dois campos, marcados com @, formam juntos a chave primária composta desta tabela e são, cada um, chave estrangeira para sua entidade de origem.
+
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
 ID_MANUTENCAO | integer| Sim (FK, compõe PK) |Referência à manutenção envolvida.|
 ID_SERVICO| integer| Sim (FK, compõe PK) |Referência ao serviço envolvido; permite mais de um serviço por manutenção.|
-
-
 
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
