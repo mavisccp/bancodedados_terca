@@ -123,10 +123,10 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 ## 5.1 Modelo conceitual
 | Entidade |  Relaciona-se com | Cardinalidade |
 |----------|----------     |-----------------------|
-| Cliente   | Gerador      | 	1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente (1,1).             
-| Gerador   | Manutenção   |  1:N — um gerador pode ter zero ou várias manutenções (0,n); cada manutenção é feita em exatamente um gerador (1,1).             |
-| Manutenção| Técnico      | 	N:N — uma manutenção precisa de pelo menos um técnico, podendo ter mais (1,n); um técnico pode participar de zero ou várias manutenções (0,n).             |
-| Manutenção| Serviço      | 	N:N — uma manutenção usa pelo menos um serviço, podendo usar mais (1,n); um serviço pode ser usado em zero ou várias manutenções (0,n).              |
+| Cliente   | Gerador      | 	1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente.             
+| Gerador   | Manutenção   |  1:N — um gerador pode ter zero ou várias manutenções; cada manutenção é feita em exatamente um gerador.             |
+| Manutenção| Técnico      | 	N:N — uma manutenção precisa de pelo menos um técnico, e pode ter vários; um técnico pode participar de zero ou várias manutenções.             |
+| Manutenção| Serviço      | 	N:N — uma manutenção usa pelo menos um serviço, e pode usar vários; um serviço pode ser usado em zero ou várias manutenções.              |
 
 Manutenção é a entidade que concentra os dois relacionamentos N:N do modelo — com Técnico e com Serviço — por isso conta com duas tabelas associativas (Manutencao_Tecnico e Manutencao_Servico), que existem só para guardar essas ligações.
 
