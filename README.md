@@ -228,8 +228,8 @@ MANUTENCAO_TECNICO = id_manutencao + id_tecnico
 
 ## MANUTENÇÃO_SERVIÇO
 MANUTENCAO_SERVICO = id_manutencao + id_servico
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
+| Atributo | Tipo físico | Obrigatório |Significado e relevância|
+|----------|-----------|------------------------------|-----------|
 | id_manutencao   | Referência à manutenção envolvida.         | Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela.           |    
 | id_servico  | 	Referência ao serviço envolvido.        |  Obrigatório; chave estrangeira referenciando Serviço; compõe a chave primária desta tabela — permite mais de um serviço por manutenção.          |  	
 
