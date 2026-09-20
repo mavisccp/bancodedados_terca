@@ -128,41 +128,49 @@
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_gerador</td>
+    <td>INT</td>
     <td>Identificador único do gerador no sistema.</td>
     <td>Obrigatório; chave primária, gerada automaticamente.</td>
   </tr>
   <tr>
     <td>id_cliente</td>
+    <td>INT</td>
     <td>Indica a qual cliente o gerador pertence.</td>
     <td>Obrigatório; chave estrangeira referenciando Cliente.</td>
   </tr>
   <tr>
     <td>numero_serie</td>
+    <td>VARCHAR(50)</td>
     <td>Número de série de fabricação do gerador.</td>
     <td>Obrigatório; deve ser único — não pode existir mais de um gerador com o mesmo número de série.</td>
   </tr>
   <tr>
     <td>marca</td>
+    <td>VARCHAR(50)</td>
     <td>Fabricante do gerador. Ex.: "Cummins".</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>modelo</td>
+    <td>VARCHAR(50)</td>
     <td>Modelo do gerador dentro da marca.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>status</td>
+    <td>VARCHAR(20)</td>
     <td>Situação atual do gerador.</td>
     <td>Obrigatório; valores possíveis: ativo, em manutenção, inativo.</td>
   </tr>
   <tr>
     <td>potencia</td>
+    <td>DECIMAL(8,2)</td>
     <td>Potência do gerador em kVA.</td>
     <td>Obrigatório; valor numérico positivo.</td>
   </tr>
