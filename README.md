@@ -155,42 +155,41 @@ Tipos de dado:
 |PK    |Chave primária | O campo que identifica aquele registro de forma única dentro da tabela não pode existir dois registros com o mesmo valor nesse campo.|
 |FK    | Chave estrangeira  |  Um campo que “empresta” o ID de outra tabela, para ligar as duas. É assim que, um gerador fica sabendo a qual cliente ele pertence.|
 
-
 |Símbolo    |Significado  |
 |----------|-----------|
 | =         | é composto de.          |
 | +         | e (conecta elementos obrigatórios).|
 | @         | identificador (chave primária).           |
 | ( )       |opcional.               |
-|           |             |
-|           |             |
-
-
 
 ## CLIENTE 
-CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade + estado
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-|id_cliente|Identificador único do cliente no sistema. | Obrigatório; chave primária, gerada automaticamente.|
-|nome |	Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: "Comércio Fictício LTDA".|Obrigatório.|
-|cpf_cnpj          | Documento de identificação do cliente (CPF ou CNPJ).          | Obrigatório; deve ser único; dado sensível — armazenado de forma criptografada.   | 
-|telefone        | Telefone de contato do cliente.          |     Obrigatório.      | 
-|endereco        |  Endereço completo do cliente (rua, número, bairro).         |    Obrigatório.          | 
-| email         | 	E-mail de contato do cliente.          |  Obrigatório.            | 
-|  cidade        | Cidade onde o cliente está localizado.          |    Obrigatório.          | 
-|  estado    |Sigla do estado (ex.: SP).           |    Obrigatório; 2 caracteres.          | 
+CLIENTE = @ID_CLIENTE + NM_CLIENTE + ID_CPF_CNPJ + DS_TELEFONE + DS_ENDERECO + DS_EMAIL + NM_CIDADE+ CD_ESTADO
+| Atributo | Tipo físico | Obrigatório |Significado e relevância|
+|----------|-----------|------------------------------|-----------|
+|ID_CLIENTE   |  integer          |  Sim (PK)           | Identificador único do cliente no sistema; gerado automaticamente. |
+|NM_CLIENTE  | varchar(120)          |  Sim            |Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: “Comércio Fictício LTDA”. |
+|ID_CPF_CNPJ  |  varchar(18)         |  Sim (único)  |Documento de identificação do cliente (CPF ou CNPJ); dado sensível — armazenado de forma criptografada. |
+|DS_TELEFONE |  varchar(20)         |   Sim           |Telefone de contato do cliente. |
+|DS_ENDERECO  | varchar(200)          |  Sim            | Endereço completo do cliente (rua, número, bairro); dado sensível — armazenado de forma criptografada. |
+| DS_EMAIL  | varchar(120)          |   Sim           |  E-mail de contato do cliente.|
+| NM_CIDADE | varchar(80)          |   Sim           |  Cidade onde o cliente está localizado.|
+| CD_ESTADO |char(2)            |   Sim           | Sigla do estado (ex.: SP); domínio fixo das 27 UFs brasileiras.|
 
 ## GERADOR
-GERADOR = @id_gerador + id_cliente + numero_serie + marca + modelo + status + potencia
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-|id_gerador| 	Identificador único do gerador no sistema.    |  Obrigatório; chave primária, gerada automaticamente.     
-|id_cliente|  	Indica a qual cliente o gerador pertence.   |  Obrigatório; chave estrangeira referenciando Cliente.   |  
-|numero_serie| Número de série de fabricação do gerador.  | Obrigatório; deve ser único — não pode existir mais de um gerador com o mesmo número de série.            |   	                
-|marca  |  	Fabricante do gerador. Ex.: "Cummins".    |  Obrigatório.        |  	                  
-|modelo   | Modelo do gerador dentro da marca.        |   Obrigatório.          |                     
-|status |  	Situação atual do gerador.        |  Obrigatório; valores possíveis: ativo, em manutenção, inativo.          |  	              
-|potencia |   	Potência do gerador em kVA.   | Obrigatório; valor numérico positivo.        | 	                    
+GERADOR = @ID_GERADOR + ID_CLIENTE + ID_NUMERO_SERIE + NM_MARCA + NM_MODELO + TP_STATUS +QT_POTENCIA
+| Atributo | Tipo físico | Obrigatório |Significado e relevância|
+|----------|-----------|------------------------------|-----------|
+ID_GERADOR |  integer |  Sim (PK) |  Identificador único do gerador no sistema; gerado automaticamente. | 
+ID_CLIENTE |  integer  | Sim (FK) |  Referência ao cliente proprietário do gerador. | 
+ID_NUMERO_SERIE |  varchar(30) |  Sim (único) |  Número de série de fabricação do gerador; aceita letras e números, não pode se repetir. | 
+NM_MARCA |  varchar(60) |  Sim |  Fabricante do gerador. Ex.: “Cummins”. | 
+NM_MODELO  | varchar(60) |  Sim |  Modelo do gerador dentro da marca. | 
+TP_STATUS  | enum(‘ativo’,‘em_manutencao’,‘inativo’) |  Sim  | Situação atual do gerador. | 
+QT_POTENCIA  | decimal(10,2) |  Sim  | Potência do gerador em kVA; valor numérico
+positivo. | 
+
+
+                
 
 ## MANUTENÇÃO
 MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + servico_realizado + status + valor
