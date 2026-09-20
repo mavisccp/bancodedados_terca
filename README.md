@@ -128,7 +128,7 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 | Manutenção| Técnico      | 	N:N — uma manutenção precisa de pelo menos um técnico, e pode ter vários; um técnico pode participar de zero ou várias manutenções.             |
 | Manutenção| Serviço      | 	N:N — uma manutenção usa pelo menos um serviço, e pode usar vários; um serviço pode ser usado em zero ou várias manutenções.              |
 
-MANUTENCAO é a entidade que concentra os dois relacionamentos N:N do modelo com TECNICO e com SERVICO  por isso, na implementação física, é desdobrada em duas entidades associativas, MANUTENCAO_TECNICO e MANUTENCAO_SERVICO, que existem só para guardar essas ligações.
+MANUTENCAO é a entidade que concentra os dois relacionamentos N:N do modelo com TECNICO e com SERVICO,  por isso, na implementação física é desdobrada em duas entidades associativas, MANUTENCAO_TECNICO e MANUTENCAO_SERVICO, que existem só para guardar essas ligações.
 
 Cliente é a pessoa física ou jurídica que contrata os serviços e possui geradores cadastrados. Gerador é o equipamento de geração de energia pertencente a um cliente. Manutenção é o evento de atendimento (preventivo ou corretivo) realizado em um gerador. Técnico é o profissional responsável por executar as manutenções. Serviço é o catálogo de tipos de serviço que podem
 ser prestados durante uma manutenção.
@@ -148,12 +148,12 @@ Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculad
 |INTEGER    |  Número inteiro, sem casas decimais   | Número inteiro, sem casas decimais.     |
 |DECIMAL    | Número com casas decimais, usado para valores em dinheiro ou medidas   |  Decimal(10,2) guarda até 10 dígitos no total, sendo 2 deles depois da vírgula.    |
 |CHAR       | Texto de tamanho fixo            |   Char(2) sempre guarda exatamente 2 caracteres, como a sigla de um estado ("SP"). |
-|VARCHAR    |Texto de tamanho variável, até um limite máximo  |  Varchar(120) guarda até 120 caracteres usado em nomes, e-mails, telefones.|
+|VARCHAR    |Texto de tamanho variável, até um limite máximo  |  Varchar(120) guarda até 120 caracteres, usado em nomes, e-mails, telefones.|
 |TEXT       |Texto livre e longo, sem um limite fixo de tamanho   | Usado em descrições mais extensas. |
-|DATE       | Guarda uma data           |  Dia,mês e ano. |
+|DATE       | Guarda uma data           |  Dia, mês e ano. |
 |ENUM       | Só aceita um valor de uma lista fixa, definida de antemão| Enum(‘ativo’,‘em_manutencao’,‘inativo’) só permite essas três opções, nenhuma outra. |
-|PK    |Chave primária | O campo que identifica aquele registro de forma única dentro da tabela não pode existir dois registros com o mesmo valor nesse campo.|
-|FK    | Chave estrangeira  |  Um campo que “empresta” o ID de outra tabela, para ligar as duas. É assim que, um gerador fica sabendo a qual cliente ele pertence.|
+|PK    |Chave primária | O campo que identifica aquele registro de forma única dentro da tabela; não pode existir dois registros com o mesmo valor nesse campo.|
+|FK    | Chave estrangeira  |  Um campo que “empresta” o ID de outra tabela, para ligar as duas. É assim que um gerador fica sabendo a qual cliente ele pertence.|
 
 ## Notação formal (símbolos usados neste dicionário):
 |Símbolo    |Significado  |
@@ -181,9 +181,9 @@ Leitura: @ID_CLIENTE é o identificador único; os sete campos seguintes são ob
 | CD_ESTADO |char(2)            |   Sim           | Sigla do estado (ex.: SP); domínio fixo das 27 UFs brasileiras.|
 
 ## GERADOR
-GERADOR = @ID_GERADOR + ID_CLIENTE + ID_NUMERO_SERIE + NM_MARCA + NM_MODELO + TP_STATUS +QT_POTENCIA
+GERADOR = @ID_GERADOR + ID_CLIENTE + ID_NUMERO_SERIE + NM_MARCA + NM_MODELO + TP_STATUS + QT_POTENCIA
 
-Leitura: @ID_GERADOR é o identificador único; ID_CLIENTE é a chave estrangeira que implementa, na tabela física, o relacionamento 1:N descrito é o que garante a regra de que todo gerador deve estar vinculado a um cliente. Os demais campos são obrigatórios e conectados por +.
+Leitura: @ID_GERADOR é o identificador único; ID_CLIENTE é a chave estrangeira que implementa, na tabela física, o relacionamento 1:N descrito acima é o que garante a regra de que todo gerador deve estar vinculado a um cliente. Os demais campos são obrigatórios e conectados por +.
 
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
@@ -196,7 +196,7 @@ TP_STATUS  | enum(‘ativo’,‘em_manutencao’,‘inativo’) |  Sim  | Situa
 QT_POTENCIA  | decimal(10,2) |  Sim  | Potência do gerador em kVA; valor numérico positivo. | 
 
 ## MANUTENÇÃO
-MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO +DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR
+MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO + DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR
 
 Leitura: @ID_MANUTENCAO é o identificador único, digitado somente com números; ID_GERADOR é a chave estrangeira que liga a manutenção ao gerador atendido, garantindo que toda manutenção esteja vinculada a exatamente um gerador. Os demais campos são obrigatórios e conectados por +.
 
@@ -238,7 +238,7 @@ QT_VALOR_BASE| decimal(10,2)| Sim |Valor de referência do serviço, antes de aj
 ## MANUTENÇÃO_TÉCNICO
 MANUTENCAO_TECNICO = @ID_MANUTENCAO + @ID_TECNICO
 
-Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO e TECNICO os dois campos, marcados com @, formam juntos a chave primária composta desta tabela e são, cada um, chave estrangeira para sua entidade de origem.
+Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO e TECNICO; os dois campos, marcados com @, formam juntos a chave primária composta desta tabela e são, cada um, chave estrangeira para sua entidade de origem.
 
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
@@ -248,7 +248,7 @@ ID_TECNICO |integer |Sim (FK, compõe PK) |Referência ao técnico envolvido; pe
 ## MANUTENÇÃO_SERVIÇO
 MANUTENCAO_SERVICO = @ID_MANUTENCAO + @ID_SERVICO
 
-Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO e SERVICO os dois campos, marcados com @, formam juntos a chave primária composta desta tabela e são, cada um, chave estrangeira para sua entidade de origem.
+Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO e SERVICO; os dois campos, marcados com @, formam juntos a chave primária composta desta tabela e são, cada um, chave estrangeira para sua entidade de origem.
 
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
