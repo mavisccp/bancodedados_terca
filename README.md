@@ -227,11 +227,12 @@ ID_MANUTENCAO| integer| Sim (FK, compõe PK)| Referência à manutenção envolv
 ID_TECNICO |integer |Sim (FK, compõe PK) |Referência ao técnico envolvido; permite mais de um técnico por manutenção.|
 
 ## MANUTENÇÃO_SERVIÇO
-MANUTENCAO_SERVICO = id_manutencao + id_servico
+MANUTENCAO_SERVICO = @ID_MANUTENCAO + @ID_SERVICO
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
-| id_manutencao   | Referência à manutenção envolvida.         | Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela.           |    
-| id_servico  | 	Referência ao serviço envolvido.        |  Obrigatório; chave estrangeira referenciando Serviço; compõe a chave primária desta tabela — permite mais de um serviço por manutenção.          |  	
+ID_MANUTENCAO | integer| Sim (FK, compõe PK) |Referência à manutenção envolvida.|
+ID_SERVICO| integer| Sim (FK, compõe PK) |Referência ao serviço envolvido; permite mais de um serviço por manutenção.|
+
 
 
 
