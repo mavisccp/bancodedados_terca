@@ -52,7 +52,9 @@ Técnico:
 - Regras: CPF único, digitado somente com números e com exatamente 11 dígitos; o CPF é armazenado de forma criptografada.
 - Resultado: técnicos disponíveis para alocação nas manutenções.
 
-<img width="2720" height="3904" alt="fluxograma" src="https://github.com/user-attachments/assets/0da5054d-7259-4467-9c8f-ac9218c198b5" />
+<img width="2760" height="5480" alt="fluxograma" src="https://github.com/user-attachments/assets/2b8c7e42-1e12-4c75-9921-3dda790e9081" />
+
+
 
 
 
