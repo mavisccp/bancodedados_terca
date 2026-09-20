@@ -118,10 +118,9 @@ Restrições organizacionais:
 ---
 
 ## 5. Dicionário de Dados Conceitual (Preliminar)
-## 5.1 Objetivo
-Este documento apresenta o dicionário de dados referente ao Diagrama Entidade-Relacionamento (DER) elaborado para o sistema da empresa escolhida pelo grupo. O sistema tem como finalidade controlar os clientes, os geradores de energia pertencentes a cada cliente, as manutenções realizadas nesses geradores, os técnicos responsáveis e os serviços prestados.
+Este modelo representa a empresa S. A DE LIMA, especializada em manutenção preventiva e corretiva de geradores de energia. O sistema tem como finalidade controlar os clientes, os geradores pertencentes a cada cliente, as manutenções realizadas nesses geradores, os técnicos responsáveis e os serviços prestados.
 
-## 5.2 Modelo conceitual
+## 5.1 Modelo conceitual
 | Entidade |  Relaciona-se com | Cardinalidade |
 |----------|----------     |-----------------------|
 | Cliente   | Gerador      | 	1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente (1,1).             
