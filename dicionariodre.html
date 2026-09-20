@@ -181,41 +181,49 @@
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_manutencao</td>
+    <td>INT</td>
     <td>Identificador único da manutenção.</td>
     <td>Obrigatório; chave primária, gerada automaticamente.</td>
   </tr>
   <tr>
     <td>id_gerador</td>
+    <td>INT</td>
     <td>Indica em qual gerador a manutenção foi realizada.</td>
     <td>Obrigatório; chave estrangeira referenciando Gerador.</td>
   </tr>
   <tr>
     <td>data_manutencao</td>
+    <td>DATE</td>
     <td>Data em que a manutenção foi executada.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>tipo_manutencao</td>
+    <td>VARCHAR(20)</td>
     <td>Classifica a manutenção quanto ao motivo do atendimento.</td>
     <td>Obrigatório; valores possíveis: preventiva, corretiva.</td>
   </tr>
   <tr>
     <td>servico_realizado</td>
+    <td>TEXT</td>
     <td>Descrição do que foi feito no atendimento.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>status</td>
+    <td>VARCHAR(20)</td>
     <td>Situação atual da manutenção.</td>
     <td>Obrigatório; valores possíveis: aberta, em andamento, concluída.</td>
   </tr>
   <tr>
     <td>valor</td>
+    <td>DECIMAL(10,2)</td>
     <td>Valor total cobrado pela manutenção.</td>
     <td>Obrigatório; valor numérico positivo.</td>
   </tr>
