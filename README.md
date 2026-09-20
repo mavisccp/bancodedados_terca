@@ -220,11 +220,11 @@ DS_DESCRICAO| text| Sim |Explicação detalhada do que o serviço inclui.|
 QT_VALOR_BASE| decimal(10,2)| Sim |Valor de referência do serviço, antes de ajustes por manutenção; dado sensível — armazenado de forma criptografada.|
           
 ## MANUTENÇÃO_TÉCNICO
-MANUTENCAO_TECNICO = id_manutencao + id_tecnico
+MANUTENCAO_TECNICO = @ID_MANUTENCAO + @ID_TECNICO
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
-| id_manutencao   |Referência à manutenção envolvida.          |  Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela. 	 |    
-|  id_tecnico        |	Referência ao técnico envolvido.        |  Obrigatório; chave estrangeira referenciando Técnico; compõe a chave primária desta tabela — permite mais de um técnico por manutenção.       |	
+ID_MANUTENCAO| integer| Sim (FK, compõe PK)| Referência à manutenção envolvida.|
+ID_TECNICO |integer |Sim (FK, compõe PK) |Referência ao técnico envolvido; permite mais de um técnico por manutenção.|
 
 ## MANUTENÇÃO_SERVIÇO
 MANUTENCAO_SERVICO = id_manutencao + id_servico
