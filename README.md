@@ -133,14 +133,39 @@ MANUTENCAO é a entidade que concentra os dois relacionamentos N:N do modelo com
 Cliente é a pessoa física ou jurídica que contrata os serviços e possui geradores cadastrados. Gerador é o equipamento de geração de energia pertencente a um cliente. Manutenção é o evento de atendimento (preventivo ou corretivo) realizado em um gerador. Técnico é o profissional responsável por executar as manutenções. Serviço é o catálogo de tipos de serviço que podem
 ser prestados durante uma manutenção.
 
-## 5.3 Fluxo de dados (visão de DFD)
+## 5.2 Fluxo de dados (visão de DFD)
 Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.
 
 Tipos de dado:
 |Tipo | Significado | 
 |----------|-----------|
-|Chave primária| Identifica cada registro de uma tabela de forma exclusiva, sem repetição — é o "RG" daquele registro.|
-|Chave estrangeira| É o campo que guarda o valor da chave primária de outra tabela, ligando as duas.|
+|Chave primária (PK)| Identifica cada registro de uma tabela de forma exclusiva, sem repetição — é o "RG" daquele registro.|
+|Chave estrangeira (FK)| É o campo que guarda o valor da chave primária de outra tabela, ligando as duas.|
+|ID_        |             |
+|NM_        |             |
+|DS_        |             |
+|CD_        |             |
+|TP_        |             |
+|QT_        |             |
+|INTEGER    |             |
+|DECIMAL    |             |
+|CHAR       |             |
+|VARCHAR    |             |
+|TEXT       |             |
+|DATE       |             |
+|ENUM       |             |
+
+
+
+|Símbolo    |Significado  |
+|----------|-----------|
+| =         | é composto de.          |
+| +         | e (conecta elementos obrigatórios).|
+| @         | identificador (chave primária).           |
+| ( )       |opcional.               |
+|           |             |
+|           |             |
+
 
 
 ## CLIENTE 
