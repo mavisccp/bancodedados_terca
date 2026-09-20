@@ -214,13 +214,15 @@ DS_EMAIL| varchar(120)|Sim| E-mail de contato do técnico.|
 SERVICO = @ID_SERVICO + NM_SERVICO + DS_DESCRICAO + QT_VALOR_BASE
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
+ID_SERVICO|integer|Sim (PK)| Identificador único do serviço no catálogo; gerado automaticamente.|
+NM_SERVICO| varchar(120) |Sim| Nome do serviço oferecido. Ex.: “Troca de óleo”.|
+DS_DESCRICAO| text| Sim |Explicação detalhada do que o serviço inclui.|
+QT_VALOR_BASE| decimal(10,2)| Sim |Valor de referência do serviço, antes de ajustes por manutenção; dado sensível — armazenado de forma criptografada.|
           
-
-
 ## MANUTENÇÃO_TÉCNICO
 MANUTENCAO_TECNICO = id_manutencao + id_tecnico
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
+| Atributo | Tipo físico | Obrigatório |Significado e relevância|
+|----------|-----------|------------------------------|-----------|
 | id_manutencao   |Referência à manutenção envolvida.          |  Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela. 	 |    
 |  id_tecnico        |	Referência ao técnico envolvido.        |  Obrigatório; chave estrangeira referenciando Técnico; compõe a chave primária desta tabela — permite mais de um técnico por manutenção.       |	
 
