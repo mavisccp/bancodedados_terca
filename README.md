@@ -136,7 +136,7 @@ ser prestados durante uma manutenção.
 ## 5.2 Fluxo de dados (visão de DFD)
 Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.
 
-Tipos de dado:
+## Tipos de dado:
 |Tipo | Significado | Exemplo no documento |
 |----------|-----------|-----------|
 |ID_        |Identificador            | ID_CLIENTE, ID_GERADOR. |
