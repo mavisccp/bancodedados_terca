@@ -185,38 +185,39 @@ ID_NUMERO_SERIE |  varchar(30) |  Sim (único) |  Número de série de fabricaç
 NM_MARCA |  varchar(60) |  Sim |  Fabricante do gerador. Ex.: “Cummins”. | 
 NM_MODELO  | varchar(60) |  Sim |  Modelo do gerador dentro da marca. | 
 TP_STATUS  | enum(‘ativo’,‘em_manutencao’,‘inativo’) |  Sim  | Situação atual do gerador. | 
-QT_POTENCIA  | decimal(10,2) |  Sim  | Potência do gerador em kVA; valor numérico
-positivo. | 
-
-
-                
+QT_POTENCIA  | decimal(10,2) |  Sim  | Potência do gerador em kVA; valor numérico positivo. | 
 
 ## MANUTENÇÃO
-MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + servico_realizado + status + valor
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| id_manutencao |  	Identificador único da manutenção.         |  Obrigatório; chave primária, gerada automaticamente.  |  
-| id_gerador |  	Indica em qual gerador a manutenção foi realizada.       | Obrigatório; chave estrangeira referenciando Gerador.   | 	  
-| data_manutencao  |  Data em que a manutenção foi executada.       |    Obrigatório.          |                     
-| tipo_manutencao | 	Classifica a manutenção quanto ao motivo do atendimento.    	     |  Obrigatório; valores possíveis: preventiva, corretiva.     |  
-| servico_realizado | 	Descrição do que foi feito no atendimento.        |   Obrigatório.         | 	                      
-| status | 	Situação atual da manutenção.        |  Obrigatório; valores possíveis: aberta, em andamento, concluída.   |  	
-| valor | 	Valor total cobrado pela manutenção.          | Obrigatório; valor numérico positivo.          | 	 
+MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO +
+DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR
+| Atributo | Tipo físico | Obrigatório |Significado e relevância|
+|----------|-----------|------------------------------|-----------|
+ID_MANUTENCAO|integer| Sim (PK)|Identificador único e exclusivo da manutenção; gerado automaticamente.|
+ID_GERADOR| integer| Sim (FK) | Referência ao gerador atendido nesta manutenção.|
+DT_MANUTENCAO| date| Sim| Data em que a manutenção foi executada.|
+TP_MANUTENCAO| enum(‘preventiva’,‘corretiva’)| Sim |Classifica a manutenção quanto ao motivo do atendimento.|
+DS_SERVICO_REALIZADO| text |Sim |Descrição do que foi feito no atendimento.|
+TP_STATUS| enum(‘aberta’,‘em_andamento’,‘concluida’)| Sim |Situação atual da manutenção.|
+QT_VALOR |decimal(10,2)| Sim |Valor total cobrado, soma dos serviços vinculados via MANUTENCAO_SERVICO; dado sensível armazenado de forma criptografada. |
 
 ## TÉCNICO
-TECNICO = @id_tecnico + nome + cpf + telefone + email
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| id_tecnico |  Identificador único do técnico.        |  Obrigatório; chave primária, gerada automaticamente.  	   | 
-| nome |  Nome completo do técnico.	        |    Obrigatório.         |
-| cpf |  CPF do técnico.        |  	Obrigatório; deve ser único — não pode existir mais de um técnico com o mesmo CPF; dado sensível — armazenado de forma criptografada.           | 
-| telefone |  Telefone de contato do técnico.	      |   Obrigatório.       |  
-| email | 	E-mail de contato do técnico.        |  Obrigatório.            | 	          
+TECNICO = @ID_TECNICO + NM_TECNICO + ID_CPF + DS_TELEFONE + DS_EMAIL
+| Atributo | Tipo físico | Obrigatório |Significado e relevância|
+|----------|-----------|------------------------------|-----------|
+ID_TECNICO integer Sim (PK) Identificador único do técnico; gerado automaticamente.
+NM_TECNICO varchar(120) Sim Nome completo do técnico.
+ID_CPF char(11) Sim (único) CPF do técnico, digitado somente com números, exatamente
+11 dígitos; dado sensível — armazenado de forma
+criptografada.
+DS_TELEFONE varchar(20) Sim Telefone de contato do técnico.
+DS_EMAIL varchar(120) Sim E-mail de contato do técnico.
+	          
 
 ## SERVIÇO
 SERVICO = @id_servico + nome_servico + descricao + valor_base
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
+| Atributo | Tipo físico | Obrigatório |Significado e relevância|
+|----------|-----------|------------------------------|-----------|
+	          
 | id_servico   | 	Identificador único do serviço no catálogo.  | Obrigatório; chave primária, gerada automaticamente.|  
 | nome_servico         | 	Nome do serviço oferecido. Ex.: "Troca de óleo".         |   Obrigatório.       |	
 | descricao         |  		Explicação detalhada do que o serviço inclui.       |  Obrigatório.          | 
