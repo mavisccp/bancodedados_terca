@@ -155,6 +155,7 @@ Tipos de dado:
 |PK    |Chave primária | O campo que identifica aquele registro de forma única dentro da tabela não pode existir dois registros com o mesmo valor nesse campo.|
 |FK    | Chave estrangeira  |  Um campo que “empresta” o ID de outra tabela, para ligar as duas. É assim que, um gerador fica sabendo a qual cliente ele pertence.|
 
+## Notação formal (símbolos usados neste dicionário):
 |Símbolo    |Significado  |
 |----------|-----------|
 | =         | é composto de.          |
@@ -162,8 +163,11 @@ Tipos de dado:
 | @         | identificador (chave primária).           |
 | ( )       |opcional.               |
 
+## Dicionário de dados por entidade
 ## CLIENTE 
 CLIENTE = @ID_CLIENTE + NM_CLIENTE + ID_CPF_CNPJ + DS_TELEFONE + DS_ENDERECO + DS_EMAIL + NM_CIDADE+ CD_ESTADO
+Leitura: @ID_CLIENTE é o identificador único; os sete campos seguintes são obrigatórios e conectados por +, formando o cadastro completo exigido no primeiro atendimento do cliente.
+
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
 |ID_CLIENTE   |  integer          |  Sim (PK)           | Identificador único do cliente no sistema; gerado automaticamente. |
@@ -177,6 +181,8 @@ CLIENTE = @ID_CLIENTE + NM_CLIENTE + ID_CPF_CNPJ + DS_TELEFONE + DS_ENDERECO + D
 
 ## GERADOR
 GERADOR = @ID_GERADOR + ID_CLIENTE + ID_NUMERO_SERIE + NM_MARCA + NM_MODELO + TP_STATUS +QT_POTENCIA
+Leitura: @ID_GERADOR é o identificador único; ID_CLIENTE é a chave estrangeira que implementa, na tabela física, o relacionamento 1:N descrito é o que garante a regra de que todo gerador deve estar vinculado a um cliente. Os demais campos são obrigatórios e conectados por +.
+
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
 ID_GERADOR |  integer |  Sim (PK) |  Identificador único do gerador no sistema; gerado automaticamente. | 
@@ -190,6 +196,8 @@ QT_POTENCIA  | decimal(10,2) |  Sim  | Potência do gerador em kVA; valor numér
 ## MANUTENÇÃO
 MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO +
 DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR
+Leitura: @ID_MANUTENCAO é o identificador único, digitado somente com números; ID_GERADOR é a chave estrangeira que liga a manutenção ao gerador atendido, garantindo que toda manutenção esteja vinculada a exatamente um gerador. Os demais campos são obrigatórios e conectados por +.
+
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
 ID_MANUTENCAO|integer| Sim (PK)|Identificador único e exclusivo da manutenção; gerado automaticamente.|
@@ -202,6 +210,8 @@ QT_VALOR |decimal(10,2)| Sim |Valor total cobrado, soma dos serviços vinculados
 
 ## TÉCNICO
 TECNICO = @ID_TECNICO + NM_TECNICO + ID_CPF + DS_TELEFONE + DS_EMAIL
+Leitura: @ID_TECNICO é o identificador único; os demais campos são obrigatórios e conectados por +.
+
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
 ID_TECNICO| integer| Sim (PK)| Identificador único do técnico; gerado automaticamente.|
@@ -212,6 +222,8 @@ DS_EMAIL| varchar(120)|Sim| E-mail de contato do técnico.|
 
 ## SERVIÇO
 SERVICO = @ID_SERVICO + NM_SERVICO + DS_DESCRICAO + QT_VALOR_BASE
+Leitura: @ID_SERVICO é o identificador único; os demais campos são obrigatórios e conectados por +.
+
 | Atributo | Tipo físico | Obrigatório |Significado e relevância|
 |----------|-----------|------------------------------|-----------|
 ID_SERVICO|integer|Sim (PK)| Identificador único do serviço no catálogo; gerado automaticamente.|
