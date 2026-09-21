@@ -348,6 +348,8 @@
  
 <h3>MANUTENÇÃO_SERVIÇO</h3>
 <p>MANUTENCAO_SERVICO = @id_manutencao + @id_servico</p>
+<p><b>Leitura:</b> Tabela associativa entre MANUTENCAO e SERVICO. Os dois campos, marcados com @, juntos formam a chave primária, o que permite vários serviços por manutenção sem repetir o mesmo serviço na mesma manutenção.</p>
+
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
@@ -368,5 +370,7 @@
     <td>Obrigatório; chave estrangeira referenciando Serviço; compõe a chave primária desta tabela — permite mais de um serviço por manutenção.</td>
   </tr>
 </table>
+<p><b>Índices:</b> PK composta (id_manutencao, id_servico); índice em id_servico (listar as manutenções em que um serviço foi usado).</p>
+
 </body>
 </html>
