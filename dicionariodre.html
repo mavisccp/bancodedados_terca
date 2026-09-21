@@ -234,31 +234,37 @@
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_tecnico</td>
+    <td>INT</td>
     <td>Identificador único do técnico.</td>
     <td>Obrigatório; chave primária, gerada automaticamente.</td>
   </tr>
   <tr>
     <td>nome</td>
+    <td>VARCHAR(100)</td>
     <td>Nome completo do técnico.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>cpf</td>
+    <td>CPF</td>
+    <td>VARCHAR(255)</td>
     <td>CPF do técnico.</td>
     <td>Obrigatório; deve ser único — não pode existir mais de um técnico com o mesmo CPF; dado sensível — armazenado de forma criptografada.</td>
   </tr>
   <tr>
     <td>telefone</td>
+    <td>VARCHAR(20)</td>
     <td>Telefone de contato do técnico.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>email</td>
+    <td>VARCHAR(100)</td>
     <td>E-mail de contato do técnico.</td>
     <td>Obrigatório.</td>
   </tr>
