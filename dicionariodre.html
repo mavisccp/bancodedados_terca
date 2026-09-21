@@ -45,7 +45,7 @@
  
 <p>Cliente é a pessoa física ou jurídica que contrata os serviços e possui geradores cadastrados. Gerador é o equipamento de geração de energia pertencente a um cliente. Manutenção é o evento de atendimento (preventivo ou corretivo) realizado em um gerador. Técnico é o profissional responsável por executar as manutenções. Serviço é o catálogo de tipos de serviço que podem ser prestados durante uma manutenção.</p>
  
-<h2>Fluxo de dados (visão DFD)</h2>
+<h2>Fluxo de dados (visão de DFD)</h2>
 <p>Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.</p>
  
 <p><b>Tipos de chave:</b></p>
@@ -66,6 +66,8 @@
  
 <h3>CLIENTE</h3>
 <p>CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade + estado</p>
+<p><b>Leitura:</b> Todos os campos são obrigatórios e ligados por +; id_cliente é o identificador único e cpf_cnpj é único, então não existem dois clientes com o mesmo documento.</p>
+
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
@@ -122,9 +124,12 @@
     <td>Obrigatório; 2 caracteres.</td>
   </tr>
 </table>
- 
+ <p><b>Índices:</b> PK id_manutencao; índice em id_gerador (histórico de manutenções de um gerador); índice em data_manutencao (relatórios por período).</p>
+
 <h3>GERADOR</h3>
 <p>GERADOR = @id_gerador + id_cliente + numero_serie + marca + modelo + status + potencia</p>
+<p><b>Leitura:</b> Todos os campos são obrigatórios e ligados por +; id_cliente liga o gerador ao cliente dono dele (um cliente pode ter vários geradores) e numero_serie é único, então não existem dois geradores com o mesmo número.</p>
+
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
@@ -175,6 +180,7 @@
     <td>Obrigatório; valor numérico positivo.</td>
   </tr>
 </table>
+<p><b>Índices:</b> PK id_gerador; índice único em numero_serie; índice em id_cliente (localizar os geradores de um cliente).</p>
  
 <h3>MANUTENÇÃO</h3>
 <p>MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + servico_realizado + status + valor</p>
