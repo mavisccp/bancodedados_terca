@@ -294,7 +294,7 @@ Cliente
 | Atributo     | Classificação         |
 | ------------ | --------------------- |
 | `id_cliente` | Identificador         |
-| `nome`       | Descritivo            |
+| `NM_cliente`       | Descritivo            |
 | `cpf_cnpj`   | Identificação / único |
 | `telefone`   | Contato               |
 | `endereco`   | Localização           |
