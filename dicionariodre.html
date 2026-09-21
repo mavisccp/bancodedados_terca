@@ -322,6 +322,8 @@
 
 <h3>MANUTENÇÃO_TÉCNICO</h3>
 <p>MANUTENCAO_TECNICO = @id_manutencao + @id_tecnico</p>
+<p><b>Leitura:</b> Tabela associativa entre MANUTENCAO e TECNICO. Os dois campos, marcados com @, juntos formam a chave primária, o que permite vários técnicos por manutenção sem repetir o mesmo técnico na mesma manutenção.</p>
+
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
@@ -342,6 +344,7 @@
     <td>Obrigatório; chave estrangeira referenciando Técnico; compõe a chave primária desta tabela — permite mais de um técnico por manutenção.</td>
   </tr>
 </table>
+<p><b>Índices:</b> PK composta (id_manutencao, id_tecnico); índice em id_tecnico (listar as manutenções de um técnico).</p>
  
 <h3>MANUTENÇÃO_SERVIÇO</h3>
 <p>MANUTENCAO_SERVICO = @id_manutencao + @id_servico</p>
