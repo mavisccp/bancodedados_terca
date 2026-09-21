@@ -6,13 +6,11 @@
     <title>Dicionário de Dados Conceitual (Preliminar)</title>
 </head>
 <body>
-   
-<h1>Dicionário de Dados Conceitual (Preliminar)</h1>
  
-<h2>Objetivo</h2>
-<p>Este documento apresenta o dicionário de dados referente ao Diagrama Entidade-Relacionamento (DER) elaborado para o sistema da empresa escolhida pelo grupo. O sistema tem como finalidade controlar os clientes, os geradores de energia pertencentes a cada cliente, as manutenções realizadas nesses geradores, os técnicos responsáveis e os serviços prestados.</p>
+<h1> Dicionário de Dados Conceitual (Preliminar)</h1>
+<p>Este modelo representa a empresa S. A DE LIMA, especializada em manutenção preventiva e corretiva de geradores de energia. O sistema tem como finalidade controlar os clientes, os geradores pertencentes a cada cliente, as manutenções realizadas nesses geradores, os técnicos responsáveis e os serviços prestados.</p>
  
-<h2>Modelo conceitual</h2>
+<h2> Modelo conceitual</h2>
 <table border="1" cellpadding="5">
   <tr>
     <th>Entidade</th>
@@ -22,355 +20,460 @@
   <tr>
     <td>Cliente</td>
     <td>Gerador</td>
-    <td>1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente (1,1).</td>
+    <td>1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente.</td>
   </tr>
   <tr>
     <td>Gerador</td>
     <td>Manutenção</td>
-    <td>1:N — um gerador pode ter zero ou várias manutenções (0,n); cada manutenção é feita em exatamente um gerador (1,1).</td>
+    <td>1:N — um gerador pode ter zero ou várias manutenções; cada manutenção é feita em exatamente um gerador.</td>
   </tr>
   <tr>
     <td>Manutenção</td>
     <td>Técnico</td>
-    <td>N:N — uma manutenção precisa de pelo menos um técnico, podendo ter mais (1,n); um técnico pode participar de zero ou várias manutenções (0,n).</td>
+    <td>N:N — uma manutenção precisa de pelo menos um técnico, e pode ter vários; um técnico pode participar de zero ou várias manutenções.</td>
   </tr>
   <tr>
     <td>Manutenção</td>
     <td>Serviço</td>
-    <td>N:N — uma manutenção usa pelo menos um serviço, podendo usar mais (1,n); um serviço pode ser usado em zero ou várias manutenções (0,n).</td>
+    <td>N:N — uma manutenção usa pelo menos um serviço, e pode usar vários; um serviço pode ser usado em zero ou várias manutenções.</td>
   </tr>
 </table>
  
-<p>Manutenção é a entidade que concentra os dois relacionamentos N:N do modelo — com Técnico e com Serviço — por isso conta com duas tabelas associativas (Manutencao_Tecnico e Manutencao_Servico), que existem só para guardar essas ligações.</p>
+<p>MANUTENCAO é a entidade que concentra os dois relacionamentos N:N do modelo com TECNICO e com SERVICO, por isso, na implementação física é desdobrada em duas entidades associativas, MANUTENCAO_TECNICO e MANUTENCAO_SERVICO, que existem só para guardar essas ligações.</p>
  
 <p>Cliente é a pessoa física ou jurídica que contrata os serviços e possui geradores cadastrados. Gerador é o equipamento de geração de energia pertencente a um cliente. Manutenção é o evento de atendimento (preventivo ou corretivo) realizado em um gerador. Técnico é o profissional responsável por executar as manutenções. Serviço é o catálogo de tipos de serviço que podem ser prestados durante uma manutenção.</p>
  
-<h2>Fluxo de dados (visão de DFD)</h2>
+<h2> Fluxo de dados (visão de DFD)</h2>
 <p>Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.</p>
  
-<p><b>Tipos de chave:</b></p>
+<p><b>Tipos de dado:</b></p>
 <table border="1" cellpadding="5">
   <tr>
     <th>Tipo</th>
     <th>Significado</th>
+    <th>Exemplo no documento</th>
   </tr>
   <tr>
+    <td>ID_</td>
+    <td>Identificador</td>
+    <td>ID_CLIENTE, ID_GERADOR.</td>
+  </tr>
+  <tr>
+    <td>NM_</td>
+    <td>Nome</td>
+    <td>NM_CLIENTE, NM_MARCA.</td>
+  </tr>
+  <tr>
+    <td>DS_</td>
+    <td>Descrição</td>
+    <td>DS_ENDERECO, DS_EMAIL.</td>
+  </tr>
+  <tr>
+    <td>CD_</td>
+    <td>Código</td>
+    <td>CD_ESTADO.</td>
+  </tr>
+  <tr>
+    <td>TP_</td>
+    <td>Tipo</td>
+    <td>TP_STATUS, TP_MANUTENCAO.</td>
+  </tr>
+  <tr>
+    <td>QT_</td>
+    <td>Quantidade</td>
+    <td>QT_POTENCIA, QT_VALOR.</td>
+  </tr>
+  <tr>
+    <td>INTEGER</td>
+    <td>Número inteiro, sem casas decimais</td>
+    <td>Número inteiro, sem casas decimais.</td>
+  </tr>
+  <tr>
+    <td>DECIMAL</td>
+    <td>Número com casas decimais, usado para valores em dinheiro ou medidas</td>
+    <td>Decimal(10,2) guarda até 10 dígitos no total, sendo 2 deles depois da vírgula.</td>
+  </tr>
+  <tr>
+    <td>CHAR</td>
+    <td>Texto de tamanho fixo</td>
+    <td>Char(2) sempre guarda exatamente 2 caracteres, como a sigla de um estado ("SP").</td>
+  </tr>
+  <tr>
+    <td>VARCHAR</td>
+    <td>Texto de tamanho variável, até um limite máximo</td>
+    <td>Varchar(120) guarda até 120 caracteres, usado em nomes, e-mails, telefones.</td>
+  </tr>
+  <tr>
+    <td>TEXT</td>
+    <td>Texto livre e longo, sem um limite fixo de tamanho</td>
+    <td>Usado em descrições mais extensas.</td>
+  </tr>
+  <tr>
+    <td>DATE</td>
+    <td>Guarda uma data</td>
+    <td>Dia, mês e ano.</td>
+  </tr>
+  <tr>
+    <td>ENUM</td>
+    <td>Só aceita um valor de uma lista fixa, definida de antemão</td>
+    <td>Enum('ativo','em_manutencao','inativo') só permite essas três opções, nenhuma outra.</td>
+  </tr>
+  <tr>
+    <td>PK</td>
     <td>Chave primária</td>
-    <td>Identifica cada registro de uma tabela de forma exclusiva, sem repetição — é o "RG" daquele registro.</td>
+    <td>O campo que identifica aquele registro de forma única dentro da tabela; não pode existir dois registros com o mesmo valor nesse campo.</td>
   </tr>
   <tr>
+    <td>FK</td>
     <td>Chave estrangeira</td>
-    <td>É o campo que guarda o valor da chave primária de outra tabela, ligando as duas.</td>
+    <td>Um campo que "empresta" o ID de outra tabela, para ligar as duas. É assim que um gerador fica sabendo a qual cliente ele pertence.</td>
   </tr>
 </table>
+ 
+<p><b>Notação formal (símbolos usados neste dicionário):</b></p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Símbolo</th>
+    <th>Significado</th>
+  </tr>
+  <tr>
+    <td>=</td>
+    <td>é composto de.</td>
+  </tr>
+  <tr>
+    <td>+</td>
+    <td>e (conecta elementos obrigatórios).</td>
+  </tr>
+  <tr>
+    <td>@</td>
+    <td>identificador (chave primária).</td>
+  </tr>
+  <tr>
+    <td>( )</td>
+    <td>opcional.</td>
+  </tr>
+</table>
+ 
+<h2>Dicionário de dados por entidade</h2>
  
 <h3>CLIENTE</h3>
-<p>CLIENTE = @id_cliente + nome + cpf_cnpj + telefone + endereco + email + cidade + estado</p>
-<p><b>Leitura:</b> Todos os campos são obrigatórios e ligados por +; id_cliente é o identificador único e cpf_cnpj é único, então não existem dois clientes com o mesmo documento.</p>
-
+<p>CLIENTE = @ID_CLIENTE + NM_CLIENTE + ID_CPF_CNPJ + DS_TELEFONE + DS_ENDERECO + DS_EMAIL + NM_CIDADE+ CD_ESTADO</p>
+ 
+<p>Leitura: @ID_CLIENTE é o identificador único; os sete campos seguintes são obrigatórios e conectados por +, formando o cadastro completo exigido no primeiro atendimento do cliente.</p>
+ 
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
-    <th>Tipo</th>
-    <th>Descrição</th>
-    <th>Regra de negócio associada</th>
+    <th>Tipo físico</th>
+    <th>Obrigatório</th>
+    <th>Significado e relevância</th>
   </tr>
   <tr>
-    <td>id_cliente</td>
-    <td>INT</td>
-    <td>Identificador único do cliente no sistema.</td>
-    <td>Obrigatório; chave primária, gerada automaticamente.</td>
+    <td>ID_CLIENTE</td>
+    <td>integer</td>
+    <td>Sim (PK)</td>
+    <td>Identificador único do cliente no sistema; gerado automaticamente.</td>
   </tr>
   <tr>
-    <td>nome</td>
-    <td>VARCHAR(100)</td>
+    <td>NM_CLIENTE</td>
+    <td>varchar(120)</td>
+    <td>Sim</td>
     <td>Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: "Comércio Fictício LTDA".</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>cpf_cnpj</td>
-    <td>VARCHAR(255)</td>
-    <td>Documento de identificação do cliente (CPF ou CNPJ).</td>
-    <td>Obrigatório; deve ser único; dado sensível — armazenado de forma criptografada.</td>
+    <td>ID_CPF_CNPJ</td>
+    <td>varchar(18)</td>
+    <td>Sim (único)</td>
+    <td>Documento de identificação do cliente (CPF ou CNPJ); dado sensível armazenado de forma criptografada.</td>
   </tr>
   <tr>
-    <td>telefone</td>
-    <td>VARCHAR(20)</td>
+    <td>DS_TELEFONE</td>
+    <td>varchar(20)</td>
+    <td>Sim</td>
     <td>Telefone de contato do cliente.</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>endereco</td>
-    <td>VARCHAR(150)</td>
-    <td>Endereço completo do cliente (rua, número, bairro).</td>
-    <td>Obrigatório.</td>
+    <td>DS_ENDERECO</td>
+    <td>varchar(200)</td>
+    <td>Sim</td>
+    <td>Endereço completo do cliente (rua, número, bairro); dado sensível armazenado de forma criptografada.</td>
   </tr>
   <tr>
-    <td>email</td>
-    <td>VARCHAR(100)</td>
+    <td>DS_EMAIL</td>
+    <td>varchar(120)</td>
+    <td>Sim</td>
     <td>E-mail de contato do cliente.</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>cidade</td>
-    <td>VARCHAR(60)</td>
+    <td>NM_CIDADE</td>
+    <td>varchar(80)</td>
+    <td>Sim</td>
     <td>Cidade onde o cliente está localizado.</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>estado</td>
-    <td>CHAR(2)</td>
-    <td>Sigla do estado (ex.: SP).</td>
-    <td>Obrigatório; 2 caracteres.</td>
+    <td>CD_ESTADO</td>
+    <td>char(2)</td>
+    <td>Sim</td>
+    <td>Sigla do estado (ex.: SP); domínio fixo das 27 UFs brasileiras.</td>
   </tr>
 </table>
- <p><b>Índices:</b> PK id_manutencao; índice em id_gerador (histórico de manutenções de um gerador); índice em data_manutencao (relatórios por período).</p>
-
+<p>Índices: PK ID_CLIENTE (clusterizado); índice único em ID_CPF_CNPJ (garante a unicidade exigida e agiliza a busca por documento).</p>
+ 
 <h3>GERADOR</h3>
-<p>GERADOR = @id_gerador + id_cliente + numero_serie + marca + modelo + status + potencia</p>
-<p><b>Leitura:</b> Todos os campos são obrigatórios e ligados por +; id_cliente liga o gerador ao cliente dono dele (um cliente pode ter vários geradores) e numero_serie é único, então não existem dois geradores com o mesmo número.</p>
-
+<p>GERADOR = @ID_GERADOR + ID_CLIENTE + ID_NUMERO_SERIE + NM_MARCA + NM_MODELO + TP_STATUS + QT_POTENCIA</p>
+ 
+<p>Leitura: @ID_GERADOR é o identificador único; ID_CLIENTE é a chave estrangeira que implementa, na tabela física, o relacionamento 1:N descrito acima é o que garante a regra de que todo gerador deve estar vinculado a um cliente. Os demais campos são obrigatórios e conectados por +.</p>
+ 
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
-    <th>Tipo</th>
-    <th>Descrição</th>
-    <th>Regra de negócio associada</th>
+    <th>Tipo físico</th>
+    <th>Obrigatório</th>
+    <th>Significado e relevância</th>
   </tr>
   <tr>
-    <td>id_gerador</td>
-    <td>INT</td>
-    <td>Identificador único do gerador no sistema.</td>
-    <td>Obrigatório; chave primária, gerada automaticamente.</td>
+    <td>ID_GERADOR</td>
+    <td>integer</td>
+    <td>Sim (PK)</td>
+    <td>Identificador único do gerador no sistema; gerado automaticamente.</td>
   </tr>
   <tr>
-    <td>id_cliente</td>
-    <td>INT</td>
-    <td>Indica a qual cliente o gerador pertence.</td>
-    <td>Obrigatório; chave estrangeira referenciando Cliente.</td>
+    <td>ID_CLIENTE</td>
+    <td>integer</td>
+    <td>Sim (FK)</td>
+    <td>Referência ao cliente proprietário do gerador.</td>
   </tr>
   <tr>
-    <td>numero_serie</td>
-    <td>VARCHAR(50)</td>
-    <td>Número de série de fabricação do gerador.</td>
-    <td>Obrigatório; deve ser único — não pode existir mais de um gerador com o mesmo número de série.</td>
+    <td>ID_NUMERO_SERIE</td>
+    <td>varchar(30)</td>
+    <td>Sim (único)</td>
+    <td>Número de série de fabricação do gerador; aceita letras e números, não pode se repetir.</td>
   </tr>
   <tr>
-    <td>marca</td>
-    <td>VARCHAR(50)</td>
+    <td>NM_MARCA</td>
+    <td>varchar(60)</td>
+    <td>Sim</td>
     <td>Fabricante do gerador. Ex.: "Cummins".</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>modelo</td>
-    <td>VARCHAR(50)</td>
+    <td>NM_MODELO</td>
+    <td>varchar(60)</td>
+    <td>Sim</td>
     <td>Modelo do gerador dentro da marca.</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>status</td>
-    <td>VARCHAR(20)</td>
+    <td>TP_STATUS</td>
+    <td>enum('ativo','em_manutencao','inativo')</td>
+    <td>Sim</td>
     <td>Situação atual do gerador.</td>
-    <td>Obrigatório; valores possíveis: ativo, em manutenção, inativo.</td>
   </tr>
   <tr>
-    <td>potencia</td>
-    <td>DECIMAL(8,2)</td>
-    <td>Potência do gerador em kVA.</td>
-    <td>Obrigatório; valor numérico positivo.</td>
+    <td>QT_POTENCIA</td>
+    <td>decimal(10,2)</td>
+    <td>Sim</td>
+    <td>Potência do gerador em kVA; valor numérico positivo.</td>
   </tr>
 </table>
-<p><b>Índices:</b> PK id_gerador; índice único em numero_serie; índice em id_cliente (localizar os geradores de um cliente).</p>
+<p>Índices: PK ID_GERADOR; índice único em ID_NUMERO_SERIE (impede dois geradores com o mesmo número de série); índice em ID_CLIENTE (acelera a consulta "geradores de um cliente X").</p>
  
 <h3>MANUTENÇÃO</h3>
-<p>MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + servico_realizado + status + valor</p>
-<p><b>Leitura:</b> Todos os campos são obrigatórios; id_gerador liga a manutenção ao gerador atendido. Os técnicos e os serviços não aparecem aqui porque ficam nas tabelas MANUTENCAO_TECNICO e MANUTENCAO_SERVICO.</p>
-
+<p>MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO + DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR</p>
+ 
+<p>Leitura: @ID_MANUTENCAO é o identificador único, digitado somente com números; ID_GERADOR é a chave estrangeira que liga a manutenção ao gerador atendido, garantindo que toda manutenção esteja vinculada a exatamente um gerador. Os demais campos são obrigatórios e conectados por +.</p>
+ 
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
-    <th>Tipo</th>
-    <th>Descrição</th>
-    <th>Regra de negócio associada</th>
+    <th>Tipo físico</th>
+    <th>Obrigatório</th>
+    <th>Significado e relevância</th>
   </tr>
   <tr>
-    <td>id_manutencao</td>
-    <td>INT</td>
-    <td>Identificador único da manutenção.</td>
-    <td>Obrigatório; chave primária, gerada automaticamente.</td>
+    <td>ID_MANUTENCAO</td>
+    <td>integer</td>
+    <td>Sim (PK)</td>
+    <td>Identificador único e exclusivo da manutenção; gerado automaticamente.</td>
   </tr>
   <tr>
-    <td>id_gerador</td>
-    <td>INT</td>
-    <td>Indica em qual gerador a manutenção foi realizada.</td>
-    <td>Obrigatório; chave estrangeira referenciando Gerador.</td>
+    <td>ID_GERADOR</td>
+    <td>integer</td>
+    <td>Sim (FK)</td>
+    <td>Referência ao gerador atendido nesta manutenção.</td>
   </tr>
   <tr>
-    <td>data_manutencao</td>
-    <td>DATE</td>
+    <td>DT_MANUTENCAO</td>
+    <td>date</td>
+    <td>Sim</td>
     <td>Data em que a manutenção foi executada.</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>tipo_manutencao</td>
-    <td>VARCHAR(20)</td>
+    <td>TP_MANUTENCAO</td>
+    <td>enum('preventiva','corretiva')</td>
+    <td>Sim</td>
     <td>Classifica a manutenção quanto ao motivo do atendimento.</td>
-    <td>Obrigatório; valores possíveis: preventiva, corretiva.</td>
   </tr>
   <tr>
-    <td>servico_realizado</td>
-    <td>TEXT</td>
+    <td>DS_SERVICO_REALIZADO</td>
+    <td>text</td>
+    <td>Sim</td>
     <td>Descrição do que foi feito no atendimento.</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>status</td>
-    <td>VARCHAR(20)</td>
+    <td>TP_STATUS</td>
+    <td>enum('aberta','em_andamento','concluida')</td>
+    <td>Sim</td>
     <td>Situação atual da manutenção.</td>
-    <td>Obrigatório; valores possíveis: aberta, em andamento, concluída.</td>
   </tr>
   <tr>
-    <td>valor</td>
-    <td>DECIMAL(10,2)</td>
-    <td>Valor total cobrado pela manutenção.</td>
-    <td>Obrigatório; valor numérico positivo.</td>
+    <td>QT_VALOR</td>
+    <td>decimal(10,2)</td>
+    <td>Sim</td>
+    <td>Valor total cobrado, soma dos serviços vinculados via MANUTENCAO_SERVICO; dado sensível armazenado de forma criptografada.</td>
   </tr>
 </table>
-<p><b>Índices:</b> PK id_manutencao; índice em id_gerador (histórico de manutenções de um gerador); índice em data_manutencao (relatórios por período).</p>
-
+<p>Índices: PK ID_MANUTENCAO; índice em ID_GERADOR (acelera o histórico de manutenções de um gerador); índice em DT_MANUTENCAO (relatórios por período).</p>
+ 
 <h3>TÉCNICO</h3>
-<p>TECNICO = @id_tecnico + nome + cpf + telefone + email</p>
-<p><b>Leitura:</b> Todos os campos são obrigatórios e ligados por +; cpf é único, então não existem dois técnicos com o mesmo CPF.</p>
-
+<p>TECNICO = @ID_TECNICO + NM_TECNICO + ID_CPF + DS_TELEFONE + DS_EMAIL</p>
+ 
+<p>Leitura: @ID_TECNICO é o identificador único; os demais campos são obrigatórios e conectados por +.</p>
+ 
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
-    <th>Tipo</th>
-    <th>Descrição</th>
-    <th>Regra de negócio associada</th>
+    <th>Tipo físico</th>
+    <th>Obrigatório</th>
+    <th>Significado e relevância</th>
   </tr>
   <tr>
-    <td>id_tecnico</td>
-    <td>INT</td>
-    <td>Identificador único do técnico.</td>
-    <td>Obrigatório; chave primária, gerada automaticamente.</td>
+    <td>ID_TECNICO</td>
+    <td>integer</td>
+    <td>Sim (PK)</td>
+    <td>Identificador único do técnico; gerado automaticamente.</td>
   </tr>
   <tr>
-    <td>nome</td>
-    <td>VARCHAR(100)</td>
+    <td>NM_TECNICO</td>
+    <td>varchar(120)</td>
+    <td>Sim</td>
     <td>Nome completo do técnico.</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>cpf</td>
-    <td>VARCHAR(255)</td>
-    <td>CPF do técnico.</td>
-    <td>Obrigatório; deve ser único — não pode existir mais de um técnico com o mesmo CPF; dado sensível — armazenado de forma criptografada.</td>
+    <td>ID_CPF</td>
+    <td>char(11)</td>
+    <td>Sim (único)</td>
+    <td>CPF do técnico, digitado somente com números, exatamente 11 dígitos; dado sensível armazenado de forma criptografada.</td>
   </tr>
   <tr>
-    <td>telefone</td>
-    <td>VARCHAR(20)</td>
+    <td>DS_TELEFONE</td>
+    <td>varchar(20)</td>
+    <td>Sim</td>
     <td>Telefone de contato do técnico.</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>email</td>
-    <td>VARCHAR(100)</td>
+    <td>DS_EMAIL</td>
+    <td>varchar(120)</td>
+    <td>Sim</td>
     <td>E-mail de contato do técnico.</td>
-    <td>Obrigatório.</td>
   </tr>
 </table>
-<p><b>Índices:</b> PK id_tecnico; índice único em cpf.</p>
+<p>Índices: PK ID_TECNICO; índice único em ID_CPF (impede dois técnicos com o mesmo CPF).</p>
  
 <h3>SERVIÇO</h3>
-<p>SERVICO = @id_servico + nome_servico + descricao + valor_base</p>
-<p><b>Leitura:</b> Todos os campos são obrigatórios e ligados por +. SERVICO é um catálogo: guarda os tipos de serviço e o valor de referência, e a ligação com a manutenção fica em MANUTENCAO_SERVICO.</p>
-
+<p>SERVICO = @ID_SERVICO + NM_SERVICO + DS_DESCRICAO + QT_VALOR_BASE</p>
+ 
+<p>Leitura: @ID_SERVICO é o identificador único; os demais campos são obrigatórios e conectados por +.</p>
+ 
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
-    <th>Tipo</th>
-    <th>Descrição</th>
-    <th>Regra de negócio associada</th>
+    <th>Tipo físico</th>
+    <th>Obrigatório</th>
+    <th>Significado e relevância</th>
   </tr>
   <tr>
-    <td>id_servico</td>
-    <td>INT</td>
-    <td>Identificador único do serviço no catálogo.</td>
-    <td>Obrigatório; chave primária, gerada automaticamente.</td>
+    <td>ID_SERVICO</td>
+    <td>integer</td>
+    <td>Sim (PK)</td>
+    <td>Identificador único do serviço no catálogo; gerado automaticamente.</td>
   </tr>
   <tr>
-    <td>nome_servico</td>
-    <td>VARCHAR(80)</td>
+    <td>NM_SERVICO</td>
+    <td>varchar(120)</td>
+    <td>Sim</td>
     <td>Nome do serviço oferecido. Ex.: "Troca de óleo".</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>descricao</td>
-    <td>TEXT</td>
+    <td>DS_DESCRICAO</td>
+    <td>text</td>
+    <td>Sim</td>
     <td>Explicação detalhada do que o serviço inclui.</td>
-    <td>Obrigatório.</td>
   </tr>
   <tr>
-    <td>valor_base</td>
-    <td>DECIMAL(10,2)</td>
-    <td>Valor de referência do serviço, antes de ajustes por manutenção.</td>
-    <td>Obrigatório; valor numérico positivo.</td>
+    <td>QT_VALOR_BASE</td>
+    <td>decimal(10,2)</td>
+    <td>Sim</td>
+    <td>Valor de referência do serviço, antes de ajustes por manutenção; dado sensível armazenado de forma criptografada.</td>
   </tr>
 </table>
-<p><b>Índices:</b> PK id_servico.</p>
-
+<p>Índices: PK ID_SERVICO.</p>
+ 
 <h3>MANUTENÇÃO_TÉCNICO</h3>
-<p>MANUTENCAO_TECNICO = @id_manutencao + @id_tecnico</p>
-<p><b>Leitura:</b> Tabela associativa entre MANUTENCAO e TECNICO. Os dois campos, marcados com @, juntos formam a chave primária, o que permite vários técnicos por manutenção sem repetir o mesmo técnico na mesma manutenção.</p>
-
+<p>MANUTENCAO_TECNICO = @ID_MANUTENCAO + @ID_TECNICO</p>
+ 
+<p>Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO e TECNICO; os dois campos, marcados com @, formam juntos a chave primária composta desta tabela e são, cada um, chave estrangeira para sua entidade de origem.</p>
+ 
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
-    <th>Tipo</th>
-    <th>Descrição</th>
-    <th>Regra de negócio associada</th>
+    <th>Tipo físico</th>
+    <th>Obrigatório</th>
+    <th>Significado e relevância</th>
   </tr>
   <tr>
-    <td>id_manutencao</td>
-    <td>INT</td>
+    <td>ID_MANUTENCAO</td>
+    <td>integer</td>
+    <td>Sim (FK, compõe PK)</td>
     <td>Referência à manutenção envolvida.</td>
-    <td>Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela.</td>
   </tr>
   <tr>
-    <td>id_tecnico</td>
-    <td>INT</td>
-    <td>Referência ao técnico envolvido.</td>
-    <td>Obrigatório; chave estrangeira referenciando Técnico; compõe a chave primária desta tabela — permite mais de um técnico por manutenção.</td>
+    <td>ID_TECNICO</td>
+    <td>integer</td>
+    <td>Sim (FK, compõe PK)</td>
+    <td>Referência ao técnico envolvido; permite mais de um técnico por manutenção.</td>
   </tr>
 </table>
-<p><b>Índices:</b> PK composta (id_manutencao, id_tecnico); índice em id_tecnico (listar as manutenções de um técnico).</p>
+<p>Índices: chave primária composta (ID_MANUTENCAO, ID_TECNICO); índice de chave estrangeira em cada coluna.</p>
  
 <h3>MANUTENÇÃO_SERVIÇO</h3>
-<p>MANUTENCAO_SERVICO = @id_manutencao + @id_servico</p>
-<p><b>Leitura:</b> Tabela associativa entre MANUTENCAO e SERVICO. Os dois campos, marcados com @, juntos formam a chave primária, o que permite vários serviços por manutenção sem repetir o mesmo serviço na mesma manutenção.</p>
-
+<p>MANUTENCAO_SERVICO = @ID_MANUTENCAO + @ID_SERVICO</p>
+ 
+<p>Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO e SERVICO; os dois campos, marcados com @, formam juntos a chave primária composta desta tabela e são, cada um, chave estrangeira para sua entidade de origem.</p>
+ 
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
-    <th>Tipo</th>
-    <th>Descrição</th>
-    <th>Regra de negócio associada</th>
+    <th>Tipo físico</th>
+    <th>Obrigatório</th>
+    <th>Significado e relevância</th>
   </tr>
   <tr>
-    <td>id_manutencao</td>
-    <td>INT</td>
+    <td>ID_MANUTENCAO</td>
+    <td>integer</td>
+    <td>Sim (FK, compõe PK)</td>
     <td>Referência à manutenção envolvida.</td>
-    <td>Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela.</td>
   </tr>
   <tr>
-    <td>id_servico</td>
-    <td>INT</td>
-    <td>Referência ao serviço envolvido.</td>
-    <td>Obrigatório; chave estrangeira referenciando Serviço; compõe a chave primária desta tabela — permite mais de um serviço por manutenção.</td>
+    <td>ID_SERVICO</td>
+    <td>integer</td>
+    <td>Sim (FK, compõe PK)</td>
+    <td>Referência ao serviço envolvido; permite mais de um serviço por manutenção.</td>
   </tr>
 </table>
-<p><b>Índices:</b> PK composta (id_manutencao, id_servico); índice em id_servico (listar as manutenções em que um serviço foi usado).</p>
-
+<p>Índices: chave primária composta (ID_MANUTENCAO, ID_SERVICO); índice de chave estrangeira em cada coluna.</p>
+ 
 </body>
 </html>
+ 
+
+
+    
