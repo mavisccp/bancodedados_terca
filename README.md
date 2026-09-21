@@ -182,6 +182,8 @@ Leitura: @ID_CLIENTE é o identificador único; os sete campos seguintes são ob
 | NM_CIDADE | varchar(80)          |   Sim           |  Cidade onde o cliente está localizado.|
 | CD_ESTADO |char(2)            |   Sim           | Sigla do estado (ex.: SP); domínio fixo das 27 UFs brasileiras.|
 
+Índices: PK ID_CLIENTE (clusterizado); índice único em ID_CPF_CNPJ (garante a unicidade exigida e agiliza a busca por documento).
+
 ## GERADOR
 GERADOR = @ID_GERADOR + ID_CLIENTE + ID_NUMERO_SERIE + NM_MARCA + NM_MODELO + TP_STATUS + QT_POTENCIA
 
@@ -196,6 +198,8 @@ NM_MARCA |  varchar(60) |  Sim |  Fabricante do gerador. Ex.: “Cummins”. |
 NM_MODELO  | varchar(60) |  Sim |  Modelo do gerador dentro da marca. | 
 TP_STATUS  | enum(‘ativo’,‘em_manutencao’,‘inativo’) |  Sim  | Situação atual do gerador. | 
 QT_POTENCIA  | decimal(10,2) |  Sim  | Potência do gerador em kVA; valor numérico positivo. | 
+
+Índices: PK ID_GERADOR; índice único em ID_NUMERO_SERIE (impede dois geradores com o mesmo número de série); índice em ID_CLIENTE (acelera a consulta "geradores de um cliente X").
 
 ## MANUTENÇÃO
 MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO + DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR
@@ -212,6 +216,8 @@ DS_SERVICO_REALIZADO| text |Sim |Descrição do que foi feito no atendimento.|
 TP_STATUS| enum(‘aberta’,‘em_andamento’,‘concluida’)| Sim |Situação atual da manutenção.|
 QT_VALOR |decimal(10,2)| Sim |Valor total cobrado, soma dos serviços vinculados via MANUTENCAO_SERVICO; dado sensível armazenado de forma criptografada. |
 
+Índices: PK ID_MANUTENCAO; índice em ID_GERADOR (acelera o histórico de manutenções de um gerador); índice em DT_MANUTENCAO (relatórios por período).
+
 ## TÉCNICO
 TECNICO = @ID_TECNICO + NM_TECNICO + ID_CPF + DS_TELEFONE + DS_EMAIL
 
@@ -225,6 +231,8 @@ ID_CPF |char(11)| Sim (único) |CPF do técnico, digitado somente com números, 
 DS_TELEFONE| varchar(20)| Sim | Telefone de contato do técnico.|
 DS_EMAIL| varchar(120)|Sim| E-mail de contato do técnico.|
 
+Índices: PK ID_TECNICO; índice único em ID_CPF (impede dois técnicos com o mesmo CPF).
+
 ## SERVIÇO
 SERVICO = @ID_SERVICO + NM_SERVICO + DS_DESCRICAO + QT_VALOR_BASE
 
@@ -236,6 +244,8 @@ ID_SERVICO|integer|Sim (PK)| Identificador único do serviço no catálogo; gera
 NM_SERVICO| varchar(120) |Sim| Nome do serviço oferecido. Ex.: “Troca de óleo”.|
 DS_DESCRICAO| text| Sim |Explicação detalhada do que o serviço inclui.|
 QT_VALOR_BASE| decimal(10,2)| Sim |Valor de referência do serviço, antes de ajustes por manutenção; dado sensível armazenado de forma criptografada.|
+
+Índices: PK ID_SERVICO.
           
 ## MANUTENÇÃO_TÉCNICO
 MANUTENCAO_TECNICO = @ID_MANUTENCAO + @ID_TECNICO
@@ -247,6 +257,8 @@ Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO 
 ID_MANUTENCAO| integer| Sim (FK, compõe PK)| Referência à manutenção envolvida.|
 ID_TECNICO |integer |Sim (FK, compõe PK) |Referência ao técnico envolvido; permite mais de um técnico por manutenção.|
 
+Índices: chave primária composta (ID_MANUTENCAO, ID_TECNICO); índice de chave estrangeira em cada coluna.
+
 ## MANUTENÇÃO_SERVIÇO
 MANUTENCAO_SERVICO = @ID_MANUTENCAO + @ID_SERVICO
 
@@ -256,6 +268,8 @@ Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO 
 |----------|-----------|------------------------------|-----------|
 ID_MANUTENCAO | integer| Sim (FK, compõe PK) |Referência à manutenção envolvida.|
 ID_SERVICO| integer| Sim (FK, compõe PK) |Referência ao serviço envolvido; permite mais de um serviço por manutenção.|
+
+Índices: chave primária composta (ID_MANUTENCAO, ID_SERVICO); índice de chave estrangeira em cada coluna.
 
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
