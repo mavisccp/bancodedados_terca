@@ -240,6 +240,8 @@
 
 <h3>TÉCNICO</h3>
 <p>TECNICO = @id_tecnico + nome + cpf + telefone + email</p>
+<p><b>Leitura:</b> Todos os campos são obrigatórios e ligados por +; cpf é único, então não existem dois técnicos com o mesmo CPF.</p>
+
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
@@ -278,6 +280,7 @@
     <td>Obrigatório.</td>
   </tr>
 </table>
+<p><b>Índices:</b> PK id_tecnico; índice único em cpf.</p>
  
 <h3>SERVIÇO</h3>
 <p>SERVICO = @id_servico + nome_servico + descricao + valor_base</p>
