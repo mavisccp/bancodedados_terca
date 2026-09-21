@@ -73,9 +73,9 @@ Técnico:
 
 - O sistema deve permitir que exista apenas um técnico por CPF, sendo digitado apenas com números e tendo tamanho exato de 11 dígitos.
 
-- O sistema deve permitir que haja o cadastro de mais de um serviço por cliente, de forma ilimitada
+- O sistema deve permitir que haja o cadastro de mais de um serviço por cliente, de forma ilimitada.
 
-- O sistema deve cadastrar apenas quando todos os requisitos obrigatórios estiverem preenchidos (estes que foram citados no primeiro requisito funcional)
+- O sistema deve cadastrar apenas quando todos os requisitos obrigatórios estiverem preenchidos (estes que foram citados no primeiro requisito funcional).
 
 - O sistema deve permitir que uma manutenção tenha mais de um técnico vinculado, a manutenção precisa ser digitada somente em números, pois trata-se de código único e exclusivo.
 
