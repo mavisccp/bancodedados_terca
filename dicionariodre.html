@@ -184,6 +184,8 @@
  
 <h3>MANUTENÇÃO</h3>
 <p>MANUTENCAO = @id_manutencao + id_gerador + data_manutencao + tipo_manutencao + servico_realizado + status + valor</p>
+<p><b>Leitura:</b> Todos os campos são obrigatórios; id_gerador liga a manutenção ao gerador atendido. Os técnicos e os serviços não aparecem aqui porque ficam nas tabelas MANUTENCAO_TECNICO e MANUTENCAO_SERVICO.</p>
+
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
@@ -234,7 +236,8 @@
     <td>Obrigatório; valor numérico positivo.</td>
   </tr>
 </table>
- 
+<p><b>Índices:</b> PK id_manutencao; índice em id_gerador (histórico de manutenções de um gerador); índice em data_manutencao (relatórios por período).</p>
+
 <h3>TÉCNICO</h3>
 <p>TECNICO = @id_tecnico + nome + cpf + telefone + email</p>
 <table border="1" cellpadding="5">
