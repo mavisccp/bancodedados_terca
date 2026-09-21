@@ -275,26 +275,31 @@
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_servico</td>
+    <td>INT</td>
     <td>Identificador único do serviço no catálogo.</td>
     <td>Obrigatório; chave primária, gerada automaticamente.</td>
   </tr>
   <tr>
     <td>nome_servico</td>
+    <td>VARCHAR(80)</td>
     <td>Nome do serviço oferecido. Ex.: "Troca de óleo".</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>descricao</td>
+    <td>TEXT</td>
     <td>Explicação detalhada do que o serviço inclui.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>valor_base</td>
+    <td>DECIMAL(10,2)</td>
     <td>Valor de referência do serviço, antes de ajustes por manutenção.</td>
     <td>Obrigatório; valor numérico positivo.</td>
   </tr>
