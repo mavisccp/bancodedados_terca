@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dicionario de Dados Conceitual (Preliminar)</title>
+    <title>Dicionário de Dados Conceitual (Preliminar)</title>
 </head>
 <body>
    
@@ -45,10 +45,10 @@
  
 <p>Cliente é a pessoa física ou jurídica que contrata os serviços e possui geradores cadastrados. Gerador é o equipamento de geração de energia pertencente a um cliente. Manutenção é o evento de atendimento (preventivo ou corretivo) realizado em um gerador. Técnico é o profissional responsável por executar as manutenções. Serviço é o catálogo de tipos de serviço que podem ser prestados durante uma manutenção.</p>
  
-<h2>Fluxo de dados</h2>
+<h2>Fluxo de dados (visão DFD)</h2>
 <p>Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.</p>
  
-<p><b>Tipos de dado:</b></p>
+<p><b>Tipos de chave:</b></p>
 <table border="1" cellpadding="5">
   <tr>
     <th>Tipo</th>
@@ -69,46 +69,55 @@
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_cliente</td>
+    <td>INT</td>
     <td>Identificador único do cliente no sistema.</td>
     <td>Obrigatório; chave primária, gerada automaticamente.</td>
   </tr>
   <tr>
     <td>nome</td>
+    <td>VARCHAR(100)</td>
     <td>Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: "Comércio Fictício LTDA".</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>cpf_cnpj</td>
+    <td>VARCHAR(255)</td>
     <td>Documento de identificação do cliente (CPF ou CNPJ).</td>
     <td>Obrigatório; deve ser único; dado sensível — armazenado de forma criptografada.</td>
   </tr>
   <tr>
     <td>telefone</td>
+    <td>VARCHAR(20)</td>
     <td>Telefone de contato do cliente.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>endereco</td>
+    <td>VARCHAR(150)</td>
     <td>Endereço completo do cliente (rua, número, bairro).</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>email</td>
+    <td>VARCHAR(100)</td>
     <td>E-mail de contato do cliente.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>cidade</td>
+    <td>VARCHAR(60)</td>
     <td>Cidade onde o cliente está localizado.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>estado</td>
+    <td>CHAR(2)</td>
     <td>Sigla do estado (ex.: SP).</td>
     <td>Obrigatório; 2 caracteres.</td>
   </tr>
@@ -119,41 +128,49 @@
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_gerador</td>
+    <td>INT</td>
     <td>Identificador único do gerador no sistema.</td>
     <td>Obrigatório; chave primária, gerada automaticamente.</td>
   </tr>
   <tr>
     <td>id_cliente</td>
+    <td>INT</td>
     <td>Indica a qual cliente o gerador pertence.</td>
     <td>Obrigatório; chave estrangeira referenciando Cliente.</td>
   </tr>
   <tr>
     <td>numero_serie</td>
+    <td>VARCHAR(50)</td>
     <td>Número de série de fabricação do gerador.</td>
     <td>Obrigatório; deve ser único — não pode existir mais de um gerador com o mesmo número de série.</td>
   </tr>
   <tr>
     <td>marca</td>
+    <td>VARCHAR(50)</td>
     <td>Fabricante do gerador. Ex.: "Cummins".</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>modelo</td>
+    <td>VARCHAR(50)</td>
     <td>Modelo do gerador dentro da marca.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>status</td>
+    <td>VARCHAR(20)</td>
     <td>Situação atual do gerador.</td>
     <td>Obrigatório; valores possíveis: ativo, em manutenção, inativo.</td>
   </tr>
   <tr>
     <td>potencia</td>
+    <td>DECIMAL(8,2)</td>
     <td>Potência do gerador em kVA.</td>
     <td>Obrigatório; valor numérico positivo.</td>
   </tr>
@@ -164,41 +181,49 @@
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_manutencao</td>
+    <td>INT</td>
     <td>Identificador único da manutenção.</td>
     <td>Obrigatório; chave primária, gerada automaticamente.</td>
   </tr>
   <tr>
     <td>id_gerador</td>
+    <td>INT</td>
     <td>Indica em qual gerador a manutenção foi realizada.</td>
     <td>Obrigatório; chave estrangeira referenciando Gerador.</td>
   </tr>
   <tr>
     <td>data_manutencao</td>
+    <td>DATE</td>
     <td>Data em que a manutenção foi executada.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>tipo_manutencao</td>
+    <td>VARCHAR(20)</td>
     <td>Classifica a manutenção quanto ao motivo do atendimento.</td>
     <td>Obrigatório; valores possíveis: preventiva, corretiva.</td>
   </tr>
   <tr>
     <td>servico_realizado</td>
+    <td>TEXT</td>
     <td>Descrição do que foi feito no atendimento.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>status</td>
+    <td>VARCHAR(20)</td>
     <td>Situação atual da manutenção.</td>
     <td>Obrigatório; valores possíveis: aberta, em andamento, concluída.</td>
   </tr>
   <tr>
     <td>valor</td>
+    <td>DECIMAL(10,2)</td>
     <td>Valor total cobrado pela manutenção.</td>
     <td>Obrigatório; valor numérico positivo.</td>
   </tr>
@@ -209,31 +234,37 @@
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_tecnico</td>
+    <td>INT</td>
     <td>Identificador único do técnico.</td>
     <td>Obrigatório; chave primária, gerada automaticamente.</td>
   </tr>
   <tr>
     <td>nome</td>
+    <td>VARCHAR(100)</td>
     <td>Nome completo do técnico.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>cpf</td>
+    <td>VARCHAR(255)</td>
     <td>CPF do técnico.</td>
     <td>Obrigatório; deve ser único — não pode existir mais de um técnico com o mesmo CPF; dado sensível — armazenado de forma criptografada.</td>
   </tr>
   <tr>
     <td>telefone</td>
+    <td>VARCHAR(20)</td>
     <td>Telefone de contato do técnico.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>email</td>
+    <td>VARCHAR(100)</td>
     <td>E-mail de contato do técnico.</td>
     <td>Obrigatório.</td>
   </tr>
@@ -244,66 +275,77 @@
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_servico</td>
+    <td>INT</td>
     <td>Identificador único do serviço no catálogo.</td>
     <td>Obrigatório; chave primária, gerada automaticamente.</td>
   </tr>
   <tr>
     <td>nome_servico</td>
+    <td>VARCHAR(80)</td>
     <td>Nome do serviço oferecido. Ex.: "Troca de óleo".</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>descricao</td>
+    <td>TEXT</td>
     <td>Explicação detalhada do que o serviço inclui.</td>
     <td>Obrigatório.</td>
   </tr>
   <tr>
     <td>valor_base</td>
+    <td>DECIMAL(10,2)</td>
     <td>Valor de referência do serviço, antes de ajustes por manutenção.</td>
     <td>Obrigatório; valor numérico positivo.</td>
   </tr>
 </table>
  
 <h3>MANUTENÇÃO_TÉCNICO</h3>
-<p>MANUTENCAO_TECNICO = id_manutencao + id_tecnico</p>
+<p>MANUTENCAO_TECNICO = @id_manutencao + @id_tecnico</p>
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_manutencao</td>
+    <td>INT</td>
     <td>Referência à manutenção envolvida.</td>
     <td>Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela.</td>
   </tr>
   <tr>
     <td>id_tecnico</td>
+    <td>INT</td>
     <td>Referência ao técnico envolvido.</td>
     <td>Obrigatório; chave estrangeira referenciando Técnico; compõe a chave primária desta tabela — permite mais de um técnico por manutenção.</td>
   </tr>
 </table>
  
 <h3>MANUTENÇÃO_SERVIÇO</h3>
-<p>MANUTENCAO_SERVICO = id_manutencao + id_servico</p>
+<p>MANUTENCAO_SERVICO = @id_manutencao + @id_servico</p>
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
+    <th>Tipo</th>
     <th>Descrição</th>
     <th>Regra de negócio associada</th>
   </tr>
   <tr>
     <td>id_manutencao</td>
+    <td>INT</td>
     <td>Referência à manutenção envolvida.</td>
     <td>Obrigatório; chave estrangeira referenciando Manutenção; compõe a chave primária desta tabela.</td>
   </tr>
   <tr>
     <td>id_servico</td>
+    <td>INT</td>
     <td>Referência ao serviço envolvido.</td>
     <td>Obrigatório; chave estrangeira referenciando Serviço; compõe a chave primária desta tabela — permite mais de um serviço por manutenção.</td>
   </tr>
