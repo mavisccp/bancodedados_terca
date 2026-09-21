@@ -284,6 +284,8 @@
  
 <h3>SERVIÇO</h3>
 <p>SERVICO = @id_servico + nome_servico + descricao + valor_base</p>
+<p><b>Leitura:</b> Todos os campos são obrigatórios e ligados por +. SERVICO é um catálogo: guarda os tipos de serviço e o valor de referência, e a ligação com a manutenção fica em MANUTENCAO_SERVICO.</p>
+
 <table border="1" cellpadding="5">
   <tr>
     <th>Atributo</th>
@@ -316,7 +318,8 @@
     <td>Obrigatório; valor numérico positivo.</td>
   </tr>
 </table>
- 
+<p><b>Índices:</b> PK id_servico.</p>
+
 <h3>MANUTENÇÃO_TÉCNICO</h3>
 <p>MANUTENCAO_TECNICO = @id_manutencao + @id_tecnico</p>
 <table border="1" cellpadding="5">
