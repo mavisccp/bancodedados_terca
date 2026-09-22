@@ -1,5 +1,7 @@
 ## 1. Caracterização da Organização
 
+<img width="2760" height="5480" alt="empresa" src= "imagem empresa.jpg">
+
 - S. A DE LIMA - Manutenção preventiva e corretiva de geradores.
 - Telefone:+55 11 98373-9556
 - E-mail: sandrolima@limasenergia.com.br
