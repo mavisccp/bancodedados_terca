@@ -1,6 +1,7 @@
 Nomes:
-Maria Vitória Pereira Alves 
 Kauê Romaneto Machado
+Maria Vitória Pereira Alves 
+
 
 
 ## 1. Caracterização da Organização
