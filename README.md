@@ -1,3 +1,7 @@
+Nomes:
+Maria Vitória Pereira Alves 
+
+
 ## 1. Caracterização da Organização
 
 <img width="2760" height="5480" alt="empresa" src= "imagem empresa.jpg">
