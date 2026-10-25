@@ -136,6 +136,30 @@ Restrições organizacionais:
 ## 5. Dicionário de Dados Conceitual (Preliminar)
 Este modelo representa a empresa S. A DE LIMA, especializada em manutenção preventiva e corretiva de geradores de energia. O sistema tem como finalidade controlar os clientes, os geradores pertencentes a cada cliente, as manutenções realizadas nesses geradores, os técnicos responsáveis e os serviços prestados.
 
+## Ficha técnica
+| Item           |   Definição     |                
+|----------|-----------|
+| SGBD           |   MySQL 8.0, a partir da versão 8.0.16.                   |                 
+| Mecanismo de armazenamento           |  	InnoDB, escolhido por suportar chaves estrangeiras, transações e restrições.        |        
+| Conjunto de caracteres           | utf8mb4, que cobre todo o Unicode e preserva acentos de nomes, cidades e endereços em português.    |    
+| Collation            | utf8mb4_0900_ai_ci. É a padrão do MySQL 8; ignora acentos e diferença de maiúsculas e minúsculas, então a busca por “Sao Paulo” encontra “São Paulo”, e o número de série “abc123” não pode coexistir com “ABC123”, o que reforça a unicidade exigida. O mesmo vale para os demais campos únicos de texto (NM_SERVICO, NM_PECA, DS_LOGIN)                     |    
+| Criptografia em repouso            |  Requisito de segurança previsto: criptografia de tablespace do InnoDB (ENCRYPTION='Y'), que exige keyring configurado no servidor.    |    
+| Versão do documento            |  5.5                     |    
+| Data           |   25/10/2026                    |    
+| Notação dos modelos           |  brModelo, no modelo conceitual (DER) e no modelo lógico.                     |    
+|  Notação deste dicionário          |  Formal, conforme a tabela de símbolos abaixo.                     |    
+| Nomes           | Maiúsculas, sem acentos, no formato PREFIXO_NOME; tabelas no singular. No script SQL, usar exatamente estes nomes.      |    
+ 
+## Notação formal (símbolos usados neste dicionário):
+|Símbolo    |Significado  |Exemplo neste dicionário |
+|----------|-----------|-----------|
+| =         | é composto de.          | CLIENTE = @ID_CLIENTE + NM_CLIENTE + …     |
+| +         | e (conecta elementos obrigatórios).| NM_CLIENTE + NR_CPF_CNPJ |
+| @         | identificador (chave primária).           |	@ID_CLIENTE  |
+| { }      |  repetição (iteração); mín{ }máx indica o mínimo e o máximo de ocorrências, e n no máximo significa sem limite fixo (1{ }n = uma ou mais). Convenção de documentação, não é sintaxe SQL           | 1{ID_TECNICO}n	 |
+| [ ] |   seleção: um dos valores da lista, separados por  | [ ativo  em_manutencao  inativo ]	 |
+|  * *    |     comentário       | 	* via MANUTENCAO_TECNICO *	 |
+
 ## 5.1 Modelo conceitual
 | Entidade |  Relaciona-se com | Cardinalidade |
 |----------|----------     |-----------------------|
@@ -184,15 +208,6 @@ Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculad
 |PK    |Chave primária | O campo que identifica aquele registro de forma única dentro da tabela; não pode existir dois registros com o mesmo valor nesse campo.|
 |FK    | Chave estrangeira  |  Um campo que “empresta” o ID de outra tabela, para ligar as duas. É assim que um gerador fica sabendo a qual cliente ele pertence.|
 
-## Notação formal (símbolos usados neste dicionário):
-|Símbolo    |Significado  |Exemplo neste dicionário |
-|----------|-----------|-----------|
-| =         | é composto de.          | CLIENTE = @ID_CLIENTE + NM_CLIENTE + …     |
-| +         | e (conecta elementos obrigatórios).| NM_CLIENTE + NR_CPF_CNPJ |
-| @         | identificador (chave primária).           |	@ID_CLIENTE  |
-| { }      |  repetição (iteração); mín{ }máx indica o mínimo e o máximo de ocorrências, e n no máximo significa sem limite fixo (1{ }n = uma ou mais). Convenção de documentação, não é sintaxe SQL           | 1{ID_TECNICO}n	 |
-| [ ] |   seleção: um dos valores da lista, separados por  | [ ativo  em_manutencao  inativo ]	 |
-|  * *    |     comentário       | 	* via MANUTENCAO_TECNICO *	 |
 
 ## Dicionário de dados por entidade
 ## CLIENTE 
