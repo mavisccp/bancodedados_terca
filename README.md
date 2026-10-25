@@ -160,6 +160,35 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 | [ ] |   seleção: um dos valores da lista, separados por  | [ ativo  em_manutencao  inativo ]	 |
 |  * *    |     comentário       | 	* via MANUTENCAO_TECNICO *	 |
 
+## Convenção de prefixos:
+|Tipo | Significado | Exemplo no documento |            
+|----------|-----------|-----------|
+|ID_        |Identificador      | ID_CLIENTE, ID_GERADOR |
+|NM_        | Nome       | NM_CLIENTE, NM_MARCA             |
+|DS_        |  Descrição ou dado textual de contato     | DS_ENDERECO, DS_EMAIL, DS_TELEFONE    |
+|CD_        |    Código de domínio fixo       | CD_ESTADO                  |
+|TP_        |   Tipo ou situação, com lista fechada de valores    | TP_STATUS, TP_MANUTENCAO.     |
+|QT_        |   Quantidade contável         |  QT_ESTOQUE, QT_PECA|
+|DT_         |  Data                       | DT_MANUTENCAO, DT_INICIO                |
+|DH_           |  Data e hora                     | DH_ACESSO                 |
+|VL_            |  Valor monetário                     | 	VL_BASE, VL_MENSAL                |
+| MD_           |    Medida com unidade                   | 	MD_POTENCIA (kVA), MD_HORIMETRO (h), MD_PRAZO_TROCA_DIAS (dias)                |
+| NR_           |   Número de documento ou de série (texto) e número de ordem (inteiro)    |  NR_CPF_CNPJ, NR_CPF, NR_SERIE, NR_NOTA_FISCAL, NR_PARCELA, NR_REGISTRO       |
+
+## Tipos de dado:
+|Tipo | Significado | Exemplo no documento |   
+|INTEGER    |  Número inteiro, sem casas decimais   | Chaves e quantidades.     |
+|BIGINT     |  Inteiro de faixa ampla                     | ID_LOG, que cresce a cada acesso.                |
+|DECIMAL    | Número com casas decimais, usado para valores em dinheiro ou medidas   |  Decimal(10,2) guarda até 10 dígitos no total, sendo 2 deles depois da vírgula.    |
+|CHAR       | Texto de tamanho fixo            |   Char(2) sempre guarda exatamente 2 caracteres, como a sigla de um estado ("SP"),  CHAR(11) para o CPF. |
+|VARCHAR    |Texto de tamanho variável, até um limite máximo  |  Varchar(120) guarda até 120 caracteres, usado em nomes, e-mails, telefones.|
+|TEXT       |Texto livre e longo, sem um limite fixo de tamanho   | Usado em descrições mais extensas. |
+|DATE / DATETIME      | Guarda uma data / hora          |  Dia, mês e ano / mais horário. |
+|ENUM       | Só aceita um valor de uma lista fixa, definida de antemão| Enum(‘ativo’,‘em_manutencao’,‘inativo’) só permite essas três opções, nenhuma outra. |
+|PK    |Chave primária | O campo que identifica aquele registro de forma única dentro da tabela; não pode existir dois registros com o mesmo valor nesse campo.|
+|FK    | Chave estrangeira  |  Um campo que “empresta” o ID de outra tabela, para ligar as duas. É assim que um gerador fica sabendo a qual cliente ele pertence.|
+
+
 ## 5.1 Modelo conceitual
 | Entidade |  Relaciona-se com | Cardinalidade |
 |----------|----------     |-----------------------|
@@ -176,37 +205,14 @@ ser prestados durante uma manutenção.
 ## 5.2 Fluxo de dados (visão de DFD)
 Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.
 
-## Convenção de prefixos:
-|Tipo | Significado | Exemplo no documento |            
-|----------|-----------|-----------|
-|ID_        |Identificador      | ID_CLIENTE, ID_GERADOR |
-|NM_        | Nome       | NM_CLIENTE, NM_MARCA             |
-|DS_        |  Descrição ou dado textual de contato     | DS_ENDERECO, DS_EMAIL, DS_TELEFONE    |
-|CD_        |    Código de domínio fixo       | CD_ESTADO                  |
-|TP_        |   Tipo ou situação, com lista fechada de valores    | TP_STATUS, TP_MANUTENCAO.     |
-|QT_        |   Quantidade contável         |  QT_ESTOQUE, QT_PECA|
-|DT_         |  Data                       | DT_MANUTENCAO, DT_INICIO                |
-|DH_           |  Data e hora                     | DH_ACESSO                 |
-|VL_            |  Valor monetário                     | 	VL_BASE, VL_MENSAL                |
-| MD_           |    Medida com unidade                   | 	MD_POTENCIA (kVA), MD_HORIMETRO (h), MD_PRAZO_TROCA_DIAS (dias)                |
-| NR_           |   Número de documento ou de série (texto) e número de ordem (inteiro)    |  NR_CPF_CNPJ, NR_CPF, NR_SERIE, NR_NOTA_FISCAL, NR_PARCELA, NR_REGISTRO       |
+
 |            |                       |                 |
 |            |                       |                 |
 |            |                       |                 |
 
 
 
-## Tipos de dado:
-|Tipo | Significado | Exemplo no documento |   
-|INTEGER    |  Número inteiro, sem casas decimais   | Número inteiro, sem casas decimais.     |
-|DECIMAL    | Número com casas decimais, usado para valores em dinheiro ou medidas   |  Decimal(10,2) guarda até 10 dígitos no total, sendo 2 deles depois da vírgula.    |
-|CHAR       | Texto de tamanho fixo            |   Char(2) sempre guarda exatamente 2 caracteres, como a sigla de um estado ("SP"). |
-|VARCHAR    |Texto de tamanho variável, até um limite máximo  |  Varchar(120) guarda até 120 caracteres, usado em nomes, e-mails, telefones.|
-|TEXT       |Texto livre e longo, sem um limite fixo de tamanho   | Usado em descrições mais extensas. |
-|DATE       | Guarda uma data           |  Dia, mês e ano. |
-|ENUM       | Só aceita um valor de uma lista fixa, definida de antemão| Enum(‘ativo’,‘em_manutencao’,‘inativo’) só permite essas três opções, nenhuma outra. |
-|PK    |Chave primária | O campo que identifica aquele registro de forma única dentro da tabela; não pode existir dois registros com o mesmo valor nesse campo.|
-|FK    | Chave estrangeira  |  Um campo que “empresta” o ID de outra tabela, para ligar as duas. É assim que um gerador fica sabendo a qual cliente ele pertence.|
+
 
 
 ## Dicionário de dados por entidade
