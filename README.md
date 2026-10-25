@@ -236,9 +236,9 @@ Leitura: @ID_CLIENTE é o identificador único; os demais campos são obrigatór
 |----------|----------- |---- |-----------|----|-----------|----|-----------|----|
 |ID_CLIENTE   | id_cliente   | INTEGER AUTO_INCREMENT |PK| Sim  | Sim  |  —  | — |  Identificador único do cliente no sistema; gerado automaticamente. |   
 |NM_CLIENTE  | 	nome     | VARCHAR(120)   | — | Sim | Não  | —  |  —  | Nome completo (pessoa física) ou razão social (pessoa jurídica). |   
-|NR_CPF_CNPJ | cpf_cnpj      | VARCHAR(14)  |—| Sim | Sim | —  | somente dígitos: 11 (CPF) ou 14 (CNPJ)   | Documento de identificação do cliente, gravado sem pontuação; não pode se repetir. Dado pessoal (quando pessoa física), com proteção prevista por criptografia em repouso (seção 12). |   
+|NR_CPF_CNPJ | cpf_cnpj      | VARCHAR(14)  |—| Sim | Sim | —  | somente dígitos: 11 (CPF) ou 14 (CNPJ)   | Documento de identificação do cliente, gravado sem pontuação; não pode se repetir. Dado pessoal (quando pessoa física), com proteção prevista por criptografia em repouso. |   
 |DS_TELEFONE |  telefone  |  VARCHAR(20)    |— | Sim |Não  | —  |  —  | Telefone de contato. |   
-|DS_ENDERECO  | endereco   | VARCHAR(200)    | — | Sim | Não  | —  |  —  | Endereço completo (rua, número, bairro). Dado pessoal, com proteção prevista por criptografia em repouso (seção 12). |    
+|DS_ENDERECO  | endereco   | VARCHAR(200)    | — | Sim | Não  | —  |  —  | Endereço completo (rua, número, bairro). Dado pessoal, com proteção prevista por criptografia em repouso. |    
 | DS_EMAIL  | email   |  VARCHAR(120)    |  — | Sim | Não  | —  | contém @ |E-mail de contato.  | 
 | NM_CIDADE |cidade    |  VARCHAR(80)   | — | Sim | Não  | —  | —   | Cidade do cliente. |   
 | CD_ESTADO |estado | CHAR(2)  |— | Sim | Não  | —  | uma das 27 UFs  |Sigla do estado (ex.: SP). | 
@@ -257,12 +257,12 @@ Leitura: @ID_GERADOR é o identificador único; chaves estrangeiras: ID_CLIENTE 
 |----------|----------- |---- |-----------|----|-----------|----|-----------|----|
 ID_GERADOR | id_gerador |  INTEGER AUTO_INCREMENT |  PK | Sim | Sim   | —  | —   | Identificador único do gerador. | 
 ID_CLIENTE |  — | INTEGER | 	FK → CLIENTE |Sim | Não   | —  | —   | Cliente proprietário; implementa a regra de que todo gerador pertence a um cliente.  | 
-ID_CONTRATO| — | INTEGER| FK → CONTRATO | Não | Não  | NULL   |  —  |Contrato que cobre o gerador, quando houver; deve pertencer ao mesmo cliente do gerador (seção 10).  | 
+ID_CONTRATO| — | INTEGER| FK → CONTRATO | Não | Não  | NULL   |  —  |Contrato que cobre o gerador, quando houver; deve pertencer ao mesmo cliente do gerador.  | 
 |NR_SERIE |numero_serie |VARCHAR(30) |— |Sim |Sim | — | letras e números | Número de série de fabricação; um gerador por número de série. |
-NM_MARCA |  marca |  VARCHAR(60) |  — | Sim | Não  | —  | —   | Fabricante. Ex.: Cummins. | 
-NM_MODELO  | modelo | VARCHAR(60) | — | Sim | Não  |  — |  —  | Modelo dentro da marca. | 
-TP_STATUS  | status |  ENUM | —  | Sim | Não  | 'ativo'  | [ativo | em_manutencao | inativo]   | Situação atual do gerador. |  
-MD_POTENCIA | potencia|  DECIMAL(10,2)  | — | Sim | Não  | —  | > 0   | Potência nominal em kVA. |
+|NM_MARCA |  marca |  VARCHAR(60) |  — | Sim | Não  | —  | —   | Fabricante. Ex.: Cummins. | 
+|NM_MODELO  | modelo | VARCHAR(60) | — | Sim | Não  |  — |  —  | Modelo dentro da marca. | 
+|TP_STATUS | status | ENUM | — | Sim | Não | 'ativo' | [ativo \ em_manutencao \ inativo] | Situação atual do gerador. |
+|MD_POTENCIA | potencia|  DECIMAL(10,2)  | — | Sim | Não  | —  | > 0   | Potência nominal em kVA. |
 |MD_HORIMETRO| horimetro | DECIMAL(10,1)| — | Sim |Não | 0 | ≥ 0 | Horas de operação acumuladas, em horas.|
 
 Índices: PK ID_GERADOR; índice único em NR_SERIE; índices em ID_CLIENTE (geradores de um cliente) e em ID_CONTRATO.
@@ -279,7 +279,7 @@ Leitura: @ID_CONTRATO é o identificador único; chaves estrangeiras: ID_CLIENTE
 | ID_CLIENTE | — | INTEGER | FK → CLIENTE | Sim | Não | — | — | Cliente contratante. |
 | DT_INICIO | data_inicio | DATE | — | Sim | Não | — | — | Início da vigência. |
 | DT_FIM | data_fim | DATE | — | Não | Não | NULL | nula ou ≥ DT_INICIO; obrigatória se TP_STATUS = 'encerrado' | Fim da vigência. Nula em contrato ativo sem data final (prazo indeterminado). |
-| VL_MENSAL | valor_mensal | DECIMAL(10,2) | — | Sim | Não | — | > 0 | Valor mensal de referência do contrato; a cobrança por período é VL_MENSAL × meses da periodicidade. Dado confidencial do negócio, com proteção prevista por criptografia em repouso (seção 12). |
+| VL_MENSAL | valor_mensal | DECIMAL(10,2) | — | Sim | Não | — | > 0 | Valor mensal de referência do contrato; a cobrança por período é VL_MENSAL × meses da periodicidade. Dado confidencial do negócio, com proteção prevista por criptografia em repouso. |
 | TP_PERIODICIDADE | tipo_periodicidade | ENUM | — | Sim | Não | — | [mensal \| bimestral \| trimestral \| semestral \| anual] | Periodicidade da cobrança do contrato (define quantos meses cada cobrança abrange). |
 | TP_STATUS | status | ENUM | — | Sim | Não | 'ativo' | [ativo \| encerrado \| cancelado] | Situação do contrato. |
 
@@ -319,7 +319,7 @@ Leitura: @ID_SERVICO é o identificador único; entre parênteses, opcionais: DS
 Índices: PK ID_SERVICO; índice único em NM_SERVICO.
 
 
-## MANUTENÇÃO
+## MANUTENCAO
 Atendimento preventivo ou corretivo realizado em um gerador.
 MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + (ID_CONTRATO) + (ID_ORCAMENTO) + DT_MANUTENCAO + TP_MANUTENCAO + TP_STATUS + (NR_NOTA_FISCAL) + (DS_PROBLEMA) + (DT_CONCLUSAO)
 
@@ -333,8 +333,10 @@ Leitura: @ID_MANUTENCAO é o identificador único; chaves estrangeiras: ID_GERAD
 | ID_ORCAMENTO | — | INTEGER | FK → ORCAMENTO | Não | Sim | NULL | — | Orçamento que originou a manutenção (relação 0,1 : 0,1). |
 | DT_MANUTENCAO | data_manutencao | DATE | — | Sim | Não | — | — | Data do atendimento. |
 | TP_MANUTENCAO | tipo_manutencao | ENUM | — | Sim | Não | — | [preventiva \| corretiva] | Motivo do atendimento. |
-| TP_STATUS | status | ENUM | — | Sim | Não | 'aberta' | [aberta \| em_andamento \| concluida] | Situação do atendimento. Transições permitidas: aberta → em_andamento e em_andamento → concluida; sem reabertura nem cancelamento (seção 10). Itens e valor só mudam enquanto aberta. |
+| TP_STATUS | status | ENUM | — | Sim | Não | 'aberta' | [aberta \| em_andamento \| concluida] | Situação do atendimento. Transições permitidas: aberta → em_andamento e em_andamento → concluida; sem reabertura nem cancelamento. Itens e valor só mudam enquanto aberta. |
 | NR_NOTA_FISCAL | numero_nota_fiscal | VARCHAR(20) | — | Não | Não | NULL | — | Nota fiscal de serviço emitida. |
+| DS_PROBLEMA | descricao_problema | TEXT | — | Não | Não | NULL | — | Problema relatado na solicitação. |
+| DT_CONCLUSAO | data_conclusao | DATE | — | Não | Não | NULL | ≥ DT_MANUTENCAO; preenchida se e somente se TP_STATUS = 'concluida' | Data de encerramento; preenchida na passagem para concluída. |
 
 Índices: PK ID_MANUTENCAO; índice único em ID_ORCAMENTO; índices em ID_GERADOR (histórico do gerador), ID_CONTRATO e DT_MANUTENCAO (relatórios por período).
 
@@ -349,6 +351,8 @@ Leitura: @ID_TECNICO é o identificador único; os demais campos são obrigatór
 | ID_TECNICO | id_tecnico | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do técnico. |
 | NM_TECNICO | nome | VARCHAR(120) | — | Sim | Não | — | — | Nome completo. |
 | NR_CPF | cpf | CHAR(11) | — | Sim | Sim | — | somente números, 11 dígitos | CPF; um técnico por CPF. Dado pessoal, com proteção prevista por criptografia em repouso . |
+| DS_TELEFONE | telefone | VARCHAR(20) | — | Sim | Não | — | — | Telefone de contato. |
+| DS_EMAIL | email | VARCHAR(120) | — | Sim | Não | — | contém @ | E-mail de contato. |
 
 Índices: PK ID_TECNICO; índice único em NR_CPF.
 
@@ -416,13 +420,13 @@ Leitura: @ID_PAGAMENTO é o identificador único; chaves estrangeiras: ID_MANUTE
 | ID_CONTRATO | — | INTEGER | FK → CONTRATO | Não | Não | NULL | — | Contrato que gerou a mensalidade; exatamente um entre ID_MANUTENCAO e ID_CONTRATO é preenchido. |
 | NR_PARCELA | numero_parcela | INTEGER | — | Sim | Sim, por origem | 1 | ≥ 1 | Número da parcela dentro da manutenção ou do contrato; não se repete na mesma origem. |
 | DT_VENCIMENTO | data_vencimento | DATE | — | Sim | Não | — | — | Vencimento. |
-| VL_PREVISTO | valor_previsto | DECIMAL(10,2) | — | Sim | Não | — | > 0 | Valor devido na parcela, gravado ao gerá-la: em parcela de contrato, VL_MENSAL × meses da periodicidade; em parcela de manutenção, a fração do valor calculado da manutenção (a soma de VL_PREVISTO das parcelas não canceladas é igual ao valor calculado; ver seção 10). Permite comparar o devido com VL_PAGO e dá valor às parcelas pendentes. Dado confidencial do negócio, com proteção prevista por criptografia em repouso.  |
+| VL_PREVISTO | valor_previsto | DECIMAL(10,2) | — | Sim | Não | — | > 0 | Valor devido na parcela, gravado ao gerá-la: em parcela de contrato, VL_MENSAL × meses da periodicidade; em parcela de manutenção, a fração do valor calculado da manutenção (a soma de VL_PREVISTO das parcelas não canceladas é igual ao valor calculado;). Permite comparar o devido com VL_PAGO e dá valor às parcelas pendentes. Dado confidencial do negócio, com proteção prevista por criptografia em repouso.  |
 | DT_PAGAMENTO | data_pagamento | DATE | — | Não | Não | NULL | preenchida se e somente se TP_STATUS = 'pago' | Data do pagamento efetivo. |
 | TP_FORMA_PAGAMENTO | forma | ENUM | — | Não | Não | NULL | [dinheiro \| pix \| boleto \| cartao \| transferencia] | Forma de pagamento; preenchida somente quando TP_STATUS = 'pago'. |
 | TP_STATUS | status | ENUM | — | Sim | Não | 'pendente' | [pendente \| pago \| atrasado \| cancelado] | Situação da parcela; define quais campos de pagamento são exigidos. Parcela cancelada por recálculo permanece no histórico; não é apagada. Transições permitidas e correção de parcela paga. |
 | VL_PAGO | valor_pago | DECIMAL(10,2) | — | Não | Não | NULL | ≥ 0 | Valor efetivamente pago; pode diferir de VL_PREVISTO (juros ou desconto). Dado confidencial do negócio, com proteção prevista por criptografia em repouso. |
 
-Quitação e exclusão: a parcela é quitada de uma só vez (sem pagamento parcial nem saldo restante) e PAGAMENTO nunca é excluído: erros são tratados por cancelamento e nova parcela ou, em parcela já paga, por correção do administrador registrada em LOG_ACESSO (seção 10).
+Quitação e exclusão: a parcela é quitada de uma só vez (sem pagamento parcial nem saldo restante) e PAGAMENTO nunca é excluído: erros são tratados por cancelamento e nova parcela ou, em parcela já paga, por correção do administrador registrada em LOG_ACESSO.
 
 Índices: PK ID_PAGAMENTO; índice único composto (ID_MANUTENCAO, NR_PARCELA) e índice único composto (ID_CONTRATO, NR_PARCELA): como o MySQL aceita vários NULL em índice único, a linha cuja origem é nula não colide, e cada origem tem suas parcelas numeradas sem repetição; índice em DT_VENCIMENTO (contas a receber).
 
@@ -458,7 +462,7 @@ Leitura: @ID_COMPRA é o identificador único; chaves estrangeiras: ID_FORNECEDO
 | TP_STATUS | status | ENUM | — | Sim | Não | 'pedida' | [pedida \| recebida \| cancelada] | Situação da compra. Transições permitidas: pedida → recebida e pedida → cancelada; recebida e cancelada são finais. |
 | NR_NOTA_FISCAL | numero_nota_fiscal | VARCHAR(20) | — | Não | Não | NULL | — | Nota fiscal do fornecedor. |
 
-Itens da compra: os itens (COMPRA_PECA) só podem ser alterados enquanto TP_STATUS = 'pedida'; compra recebida ou cancelada tem os itens bloqueados (seção 10).
+Itens da compra: os itens (COMPRA_PECA) só podem ser alterados enquanto TP_STATUS = 'pedida'; compra recebida ou cancelada tem os itens bloqueados.
 
 Índices: PK ID_COMPRA; índices em ID_FORNECEDOR e DT_COMPRA.
 
@@ -568,7 +572,7 @@ Leitura: @ID_LOG é o identificador único; chaves estrangeiras: ID_USUARIO refe
 | TP_RESULTADO | resultado | ENUM | — | Sim | Não | 'sucesso' | [sucesso \| negado] | Resultado da tentativa. |
 | DS_FINALIDADE | finalidade_acesso | VARCHAR(150) | — | Não | Não | NULL | — | Finalidade do tratamento, quando há acesso a dado pessoal. Também guarda a justificativa de uma alteração excepcional de itens da manutenção, de uma correção de parcela paga e de cada execução da rotina de retenção. |
 
-Índices: PK ID_LOG; índices em ID_USUARIO e em DH_ACESSO. Nenhum perfil tem UPDATE nem DELETE: o log só recebe INSERT. Apenas a rotina de retenção (seção 10) elimina registros vencidos ou anonimiza o IP.
+Índices: PK ID_LOG; índices em ID_USUARIO e em DH_ACESSO. Nenhum perfil tem UPDATE nem DELETE: o log só recebe INSERT. Apenas a rotina de retenção elimina registros vencidos ou anonimiza o IP.
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
 A modelagem conceitual foi elaborada a partir dos processos de negócio, requisitos funcionais e regras de negócios levantados para a empresa. O modelo busca representar as principais informações relacionadas aos clientes, seu geradores, manutenções realizadas, os técnicos envolvidos e os serviços prestados.
