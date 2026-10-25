@@ -153,12 +153,12 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 ## Notação formal (símbolos usados neste dicionário):
 |Símbolo    |Significado  |Exemplo neste dicionário |
 |----------|-----------|-----------|
-| =         | é composto de.          | CLIENTE = @ID_CLIENTE + NM_CLIENTE + …     |
-| +         | e (conecta elementos obrigatórios).| NM_CLIENTE + NR_CPF_CNPJ |
-| @         | identificador (chave primária).           |	@ID_CLIENTE  |
-| { }      |  repetição (iteração); mín{ }máx indica o mínimo e o máximo de ocorrências, e n no máximo significa sem limite fixo (1{ }n = uma ou mais). Convenção de documentação, não é sintaxe SQL           | 1{ID_TECNICO}n	 |
-| [ ] |   seleção: um dos valores da lista, separados por  | [ ativo  em_manutencao  inativo ]	 |
-|  * *    |     comentário       | 	* via MANUTENCAO_TECNICO *	 |
+| =         | É composto de          | CLIENTE = @ID_CLIENTE + NM_CLIENTE + …     |
+| +         | E (conecta elementos obrigatórios) | NM_CLIENTE + NR_CPF_CNPJ |
+| @         | Identificador (chave primária)           |	@ID_CLIENTE  |
+| { }      |  Repetição (iteração); mín{ }máx indica o mínimo e o máximo de ocorrências, e n no máximo significa sem limite fixo (1{ }n = uma ou mais). Convenção de documentação, não é sintaxe SQL           | 1{ID_TECNICO}n	 |
+| [ ] |   Seleção: um dos valores da lista, separados por  | [ ativo  em_manutencao  inativo ]	 |
+|  * *    |     Comentário       | 	* via MANUTENCAO_TECNICO *	 |
 
 ## Convenção de prefixos:
 |Tipo | Significado | Exemplo no documento |            
@@ -176,7 +176,8 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 | NR_           |   Número de documento ou de série (texto) e número de ordem (inteiro)    |  NR_CPF_CNPJ, NR_CPF, NR_SERIE, NR_NOTA_FISCAL, NR_PARCELA, NR_REGISTRO       |
 
 ## Tipos de dado:
-|Tipo | Significado | Exemplo no documento |   
+|Tipo | Significado | Exemplo no documento |  
+|----------|---------- |-----------------------|
 |INTEGER    |  Número inteiro, sem casas decimais   | Chaves e quantidades.     |
 |BIGINT     |  Inteiro de faixa ampla                     | ID_LOG, que cresce a cada acesso.                |
 |DECIMAL    | Número com casas decimais, usado para valores em dinheiro ou medidas   |  Decimal(10,2) guarda até 10 dígitos no total, sendo 2 deles depois da vírgula.    |
