@@ -285,23 +285,42 @@ Leitura: @ID_CONTRATO é o identificador único; chaves estrangeiras: ID_CLIENTE
 
 Índices: PK ID_CONTRATO; índice em ID_CLIENTE; índice em DT_FIM (contratos a vencer).
 
+## ORCAMENTO
+Proposta de valor para um gerador; quando aprovada, origina uma manutenção. É uma estimativa do valor total: não registra serviços nem peças previstos, e o valor final da manutenção é calculado pelos itens efetivamente aplicados, podendo diferir de VL_ORCADO.
+
+ORCAMENTO = @ID_ORCAMENTO + ID_GERADOR + DT_ORCAMENTO + VL_ORCADO + TP_STATUS + (DT_APROVACAO)
+
+Leitura: @ID_ORCAMENTO é o identificador único; chaves estrangeiras: ID_GERADOR referencia GERADOR; entre parênteses, opcionais: DT_APROVACAO; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_ORCAMENTO | id_orcamento | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do orçamento. |
+| ID_GERADOR | — | INTEGER | FK → GERADOR | Sim | Não | — | — | Gerador para o qual o orçamento foi solicitado. |
+| DT_ORCAMENTO | data_orcamento | DATE | — | Sim | Não | CURRENT_DATE | — | Data de emissão. |
+| VL_ORCADO | valor_orcado | DECIMAL(10,2) | — | Sim | Não | — | ≥ 0 | Valor total estimado, sem detalhamento de itens. Dado confidencial do negócio, com proteção prevista por criptografia em repouso (seção 12). |
+| TP_STATUS | status | ENUM | — | Sim | Não | 'pendente' | [pendente \| aprovado \| recusado] | Situação do orçamento. |
+| DT_APROVACAO | data_aprovacao | DATE | — | Não | Não | NULL | ≥ DT_ORCAMENTO; preenchida se e somente se TP_STATUS = 'aprovado' | Data da aprovação; nula em orçamento pendente ou recusado. |
+Índices: PK ID_ORCAMENTO; índice em ID_GERADOR.
+
 
 ## MANUTENÇÃO
-MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO + DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR
+Atendimento preventivo ou corretivo realizado em um gerador.
+MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + (ID_CONTRATO) + (ID_ORCAMENTO) + DT_MANUTENCAO + TP_MANUTENCAO + TP_STATUS + (NR_NOTA_FISCAL) + (DS_PROBLEMA) + (DT_CONCLUSAO)
 
-Leitura: @ID_MANUTENCAO é o identificador único, digitado somente com números; ID_GERADOR é a chave estrangeira que liga a manutenção ao gerador atendido, garantindo que toda manutenção esteja vinculada a exatamente um gerador. Os demais campos são obrigatórios e conectados por +.
+Leitura: @ID_MANUTENCAO é o identificador único; chaves estrangeiras: ID_GERADOR referencia GERADOR; ID_CONTRATO referencia CONTRATO; ID_ORCAMENTO referencia ORCAMENTO; entre parênteses, opcionais: ID_CONTRATO, ID_ORCAMENTO, NR_NOTA_FISCAL, DS_PROBLEMA, DT_CONCLUSAO; os demais campos são obrigatórios e conectados por +.
 
-| Atributo | Tipo físico | Obrigatório |Significado e relevância|
-|----------|-----------|------------------------------|-----------|
-ID_MANUTENCAO|integer| Sim (PK)|Identificador único e exclusivo da manutenção; gerado automaticamente.|
-ID_GERADOR| integer| Sim (FK) | Referência ao gerador atendido nesta manutenção.|
-DT_MANUTENCAO| date| Sim| Data em que a manutenção foi executada.|
-TP_MANUTENCAO| enum(‘preventiva’,‘corretiva’)| Sim |Classifica a manutenção quanto ao motivo do atendimento.|
-DS_SERVICO_REALIZADO| text |Sim |Descrição do que foi feito no atendimento.|
-TP_STATUS| enum(‘aberta’,‘em_andamento’,‘concluida’)| Sim |Situação atual da manutenção.|
-QT_VALOR |decimal(10,2)| Sim |Valor total cobrado, soma dos serviços vinculados via MANUTENCAO_SERVICO; dado sensível armazenado de forma criptografada. |
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_MANUTENCAO | id_manutencao | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | somente números | Código único e exclusivo da manutenção. |
+| ID_GERADOR | — | INTEGER | FK → GERADOR | Sim | Não | — | — | Gerador atendido; toda manutenção pertence a exatamente um gerador. |
+| ID_CONTRATO | — | INTEGER | FK → CONTRATO | Não | Não | NULL | — | Contrato em que a manutenção se enquadra. |
+| ID_ORCAMENTO | — | INTEGER | FK → ORCAMENTO | Não | Sim | NULL | — | Orçamento que originou a manutenção (relação 0,1 : 0,1). |
+| DT_MANUTENCAO | data_manutencao | DATE | — | Sim | Não | — | — | Data do atendimento. |
+| TP_MANUTENCAO | tipo_manutencao | ENUM | — | Sim | Não | — | [preventiva \| corretiva] | Motivo do atendimento. |
+| TP_STATUS | status | ENUM | — | Sim | Não | 'aberta' | [aberta \| em_andamento \| concluida] | Situação do atendimento. Transições permitidas: aberta → em_andamento e em_andamento → concluida; sem reabertura nem cancelamento (seção 10). Itens e valor só mudam enquanto aberta. |
+| NR_NOTA_FISCAL | numero_nota_fiscal | VARCHAR(20) | — | Não | Não | NULL | — | Nota fiscal de serviço emitida. |
 
-Índices: PK ID_MANUTENCAO; índice em ID_GERADOR (acelera o histórico de manutenções de um gerador); índice em DT_MANUTENCAO (relatórios por período).
+Índices: PK ID_MANUTENCAO; índice único em ID_ORCAMENTO; índices em ID_GERADOR (histórico do gerador), ID_CONTRATO e DT_MANUTENCAO (relatórios por período).
 
 ## TÉCNICO
 TECNICO = @ID_TECNICO + NM_TECNICO + ID_CPF + DS_TELEFONE + DS_EMAIL
