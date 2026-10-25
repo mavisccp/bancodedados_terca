@@ -152,15 +152,28 @@ ser prestados durante uma manutenção.
 ## 5.2 Fluxo de dados (visão de DFD)
 Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.
 
-## Tipos de dado:
-|Tipo | Significado | Exemplo no documento |
+## Convenção de prefixos:
+|Tipo | Significado | Exemplo no documento |            
 |----------|-----------|-----------|
-|ID_        |Identificador            | ID_CLIENTE, ID_GERADOR. |
-|NM_        | Nome       | NM_CLIENTE, NM_MARCA.              |
-|DS_        |  Descrição           | DS_ENDERECO, DS_EMAIL.                   |
-|CD_        |    Código         | CD_ESTADO.                    |
-|TP_        |   Tipo          | TP_STATUS, TP_MANUTENCAO.     |
-|QT_        |   Quantidade          |  QT_POTENCIA, QT_VALOR.|
+|ID_        |Identificador      | ID_CLIENTE, ID_GERADOR |
+|NM_        | Nome       | NM_CLIENTE, NM_MARCA             |
+|DS_        |  Descrição ou dado textual de contato     | DS_ENDERECO, DS_EMAIL, DS_TELEFONE    |
+|CD_        |    Código de domínio fixo       | CD_ESTADO                  |
+|TP_        |   Tipo ou situação, com lista fechada de valores    | TP_STATUS, TP_MANUTENCAO.     |
+|QT_        |   Quantidade contável         |  QT_ESTOQUE, QT_PECA|
+|DT_         |  Data                       | DT_MANUTENCAO, DT_INICIO                |
+|DH_           |  Data e hora                     | DH_ACESSO                 |
+|VL_            |  Valor monetário                     | 	VL_BASE, VL_MENSAL                |
+| MD_           |    Medida com unidade                   | 	MD_POTENCIA (kVA), MD_HORIMETRO (h), MD_PRAZO_TROCA_DIAS (dias)                |
+| NR_           |   Número de documento ou de série (texto) e número de ordem (inteiro)    |  NR_CPF_CNPJ, NR_CPF, NR_SERIE, NR_NOTA_FISCAL, NR_PARCELA, NR_REGISTRO       |
+|            |                       |                 |
+|            |                       |                 |
+|            |                       |                 |
+
+
+
+## Tipos de dado:
+|Tipo | Significado | Exemplo no documento |   
 |INTEGER    |  Número inteiro, sem casas decimais   | Número inteiro, sem casas decimais.     |
 |DECIMAL    | Número com casas decimais, usado para valores em dinheiro ou medidas   |  Decimal(10,2) guarda até 10 dígitos no total, sendo 2 deles depois da vírgula.    |
 |CHAR       | Texto de tamanho fixo            |   Char(2) sempre guarda exatamente 2 caracteres, como a sigla de um estado ("SP"). |
