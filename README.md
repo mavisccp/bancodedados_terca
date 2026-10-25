@@ -248,6 +248,7 @@ Padrão do documento: NR_CPF_CNPJ é armazenado somente com dígitos (sem pontos
 Índices: PK ID_CLIENTE (clusterizado); índice único em NR_CPF_CNPJ (garante a unicidade e agiliza a busca por documento).
 
 ## GERADOR
+Equipamento de geração de energia pertencente a um cliente e supervisionado pela empresa.
 GERADOR = @ID_GERADOR + ID_CLIENTE + (ID_CONTRATO) + NR_SERIE + NM_MARCA + NM_MODELO + TP_STATUS + MD_POTENCIA + MD_HORIMETRO
 
 Leitura: @ID_GERADOR é o identificador único; chaves estrangeiras: ID_CLIENTE referencia CLIENTE; ID_CONTRATO referencia CONTRATO; entre parênteses, opcionais: ID_CONTRATO; os demais campos são obrigatórios e conectados por +.
@@ -265,6 +266,25 @@ MD_POTENCIA | potencia|  DECIMAL(10,2)  | — | Sim | Não  | —  | > 0   | Pot
 |MD_HORIMETRO| horimetro | DECIMAL(10,1)| — | Sim |Não | 0 | ≥ 0 | Horas de operação acumuladas, em horas.|
 
 Índices: PK ID_GERADOR; índice único em NR_SERIE; índices em ID_CLIENTE (geradores de um cliente) e em ID_CONTRATO.
+
+## CONTRATO
+Contrato de manutenção firmado com um cliente fixo, com cobrança periódica.
+CONTRATO = @ID_CONTRATO + ID_CLIENTE + DT_INICIO + (DT_FIM) + VL_MENSAL + TP_PERIODICIDADE + TP_STATUS
+
+Leitura: @ID_CONTRATO é o identificador único; chaves estrangeiras: ID_CLIENTE referencia CLIENTE; entre parênteses, opcionais: DT_FIM; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_CONTRATO | id_contrato | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do contrato. |
+| ID_CLIENTE | — | INTEGER | FK → CLIENTE | Sim | Não | — | — | Cliente contratante. |
+| DT_INICIO | data_inicio | DATE | — | Sim | Não | — | — | Início da vigência. |
+| DT_FIM | data_fim | DATE | — | Não | Não | NULL | nula ou ≥ DT_INICIO; obrigatória se TP_STATUS = 'encerrado' | Fim da vigência. Nula em contrato ativo sem data final (prazo indeterminado). |
+| VL_MENSAL | valor_mensal | DECIMAL(10,2) | — | Sim | Não | — | > 0 | Valor mensal de referência do contrato; a cobrança por período é VL_MENSAL × meses da periodicidade. Dado confidencial do negócio, com proteção prevista por criptografia em repouso (seção 12). |
+| TP_PERIODICIDADE | tipo_periodicidade | ENUM | — | Sim | Não | — | [mensal \| bimestral \| trimestral \| semestral \| anual] | Periodicidade da cobrança do contrato (define quantos meses cada cobrança abrange). |
+| TP_STATUS | status | ENUM | — | Sim | Não | 'ativo' | [ativo \| encerrado \| cancelado] | Situação do contrato. |
+
+Índices: PK ID_CONTRATO; índice em ID_CLIENTE; índice em DT_FIM (contratos a vencer).
+
 
 ## MANUTENÇÃO
 MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO + DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR
