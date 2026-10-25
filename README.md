@@ -170,9 +170,9 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 |TP_        |   Tipo ou situação, com lista fechada de valores    | TP_STATUS, TP_MANUTENCAO.     |
 |QT_        |   Quantidade contável         |  QT_ESTOQUE, QT_PECA|
 |DT_         |  Data                       | DT_MANUTENCAO, DT_INICIO                |
-|DH_           |  Data e hora                     | DH_ACESSO                 |
-|VL_            |  Valor monetário                     | 	VL_BASE, VL_MENSAL                |
-| MD_           |    Medida com unidade                   | 	MD_POTENCIA (kVA), MD_HORIMETRO (h), MD_PRAZO_TROCA_DIAS (dias)                |
+|DH_           |  Data e hora              | DH_ACESSO                 |
+|VL_            |  Valor monetário            | 	VL_BASE, VL_MENSAL                |
+| MD_     |    Medida com unidade          | 	MD_POTENCIA (kVA), MD_HORIMETRO (h), MD_PRAZO_TROCA_DIAS (dias)      |
 | NR_           |   Número de documento ou de série (texto) e número de ordem (inteiro)    |  NR_CPF_CNPJ, NR_CPF, NR_SERIE, NR_NOTA_FISCAL, NR_PARCELA, NR_REGISTRO       |
 
 ## Tipos de dado:
@@ -180,31 +180,40 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 |INTEGER    |  Número inteiro, sem casas decimais   | Chaves e quantidades.     |
 |BIGINT     |  Inteiro de faixa ampla                     | ID_LOG, que cresce a cada acesso.                |
 |DECIMAL    | Número com casas decimais, usado para valores em dinheiro ou medidas   |  Decimal(10,2) guarda até 10 dígitos no total, sendo 2 deles depois da vírgula.    |
-|CHAR       | Texto de tamanho fixo            |   Char(2) sempre guarda exatamente 2 caracteres, como a sigla de um estado ("SP"),  CHAR(11) para o CPF. |
+|CHAR       | Texto de tamanho fixo      |   Char(2) sempre guarda exatamente 2 caracteres, como a sigla de um estado ("SP"),  CHAR(11) para o CPF. |
 |VARCHAR    |Texto de tamanho variável, até um limite máximo  |  Varchar(120) guarda até 120 caracteres, usado em nomes, e-mails, telefones.|
 |TEXT       |Texto livre e longo, sem um limite fixo de tamanho   | Usado em descrições mais extensas. |
-|DATE / DATETIME      | Guarda uma data / hora          |  Dia, mês e ano / mais horário. |
+|DATE / DATETIME   | Guarda uma data / hora          |  Dia, mês e ano / mais horário. |
 |ENUM       | Só aceita um valor de uma lista fixa, definida de antemão| Enum(‘ativo’,‘em_manutencao’,‘inativo’) só permite essas três opções, nenhuma outra. |
 |PK    |Chave primária | O campo que identifica aquele registro de forma única dentro da tabela; não pode existir dois registros com o mesmo valor nesse campo.|
 |FK    | Chave estrangeira  |  Um campo que “empresta” o ID de outra tabela, para ligar as duas. É assim que um gerador fica sabendo a qual cliente ele pertence.|
 
-
 ## 5.1 Modelo conceitual
 | Entidade |  Relaciona-se com | Cardinalidade |
-|----------|----------     |-----------------------|
-| Cliente   | Gerador      | 	1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente.             
-| Gerador   | Manutenção   |  1:N — um gerador pode ter zero ou várias manutenções; cada manutenção é feita em exatamente um gerador.             |
-| Manutenção| Técnico      | 	N:N — uma manutenção precisa de pelo menos um técnico, e pode ter vários; um técnico pode participar de zero ou várias manutenções.             |
-| Manutenção| Serviço      | 	N:N — uma manutenção usa pelo menos um serviço, e pode usar vários; um serviço pode ser usado em zero ou várias manutenções.              |
-
-MANUTENCAO é a entidade que concentra os dois relacionamentos N:N do modelo com TECNICO e com SERVICO,  por isso, na implementação física é desdobrada em duas entidades associativas, MANUTENCAO_TECNICO e MANUTENCAO_SERVICO, que existem só para guardar essas ligações.
-
-Cliente é a pessoa física ou jurídica que contrata os serviços e possui geradores cadastrados. Gerador é o equipamento de geração de energia pertencente a um cliente. Manutenção é o evento de atendimento (preventivo ou corretivo) realizado em um gerador. Técnico é o profissional responsável por executar as manutenções. Serviço é o catálogo de tipos de serviço que podem
-ser prestados durante uma manutenção.
+|----------|---------- |-----------------------|
+|Cliente    | Gerador  | 	1:N — um cliente pode ter zero ou vários geradores (0,n); cada gerador pertence a exatamente um cliente.      |
+| Cliente    | Contrato     |  1:N — um cliente pode firmar zero ou vários contratos (0,n); cada contrato é firmado por exatamente um cliente.      |
+| Contrato           |  Gerador    |  1:N — um contrato cobre pelo menos um gerador, e pode cobrir vários; um gerador é coberto por zero ou um contrato.               |
+|  Contrato          |  Manutenção      | 1:N — um contrato pode enquadrar zero ou várias manutenções; cada manutenção é enquadrada em zero ou um contrato.                |
+| Contrato           |  Pagamento       | 1:N — um contrato pode gerar zero ou várias mensalidades; cada pagamento é gerado por zero ou um contrato.    |
+| Gerador           | Manutenção      | 1:N — um gerador pode ter zero ou várias manutenções; cada manutenção é feita em exatamente um gerador.   |
+|  Gerador          |  Orçamento     |  1:N — um gerador pode ter zero ou vários orçamentos; cada orçamento é solicitado para exatamente um gerador.    |
+|  Gerador          |  Cronograma preventivo    |  1:N — um gerador pode ter zero ou vários cronogramas; cada cronograma pertence a exatamente um gerador.               |
+| Peça   | Cronograma preventivo    |  1:N — uma peça pode definir o prazo de zero ou vários cronogramas; cada cronograma tem o prazo definido por exatamente uma peça.               |
+| Orçamento   |  Manutenção     | 1:1 — um orçamento pode originar zero ou uma manutenção; uma manutenção pode ser originada por zero ou um orçamento.                |
+| Manutenção           |  Cronograma preventivo     |  N:N — uma manutenção pode atualizar zero ou vários cronogramas; um cronograma pode ser atualizado por zero ou várias manutenções.               |
+| Manutenção           |  Peça    |  N:N — uma manutenção pode usar zero ou várias peças; uma peça pode ser usada em zero ou várias manutenções. Atributos da relação: valor_unitario_aplicado e quantidade.               |
+| Manutenção           |   Técnico    | N:N — uma manutenção precisa de pelo menos um técnico, e pode ter vários; um técnico pode participar de zero ou várias manutenções.                |
+| Manutenção           | Serviço   | N:N — uma manutenção usa pelo menos um serviço, e pode usar vários; um serviço pode ser usado em zero ou várias manutenções. Atributos da relação: valor_aplicado e quantidade.                |
+| Manutenção     | Pagamento       |  1:N — uma manutenção pode gerar zero ou vários pagamentos; cada pagamento é gerado por zero ou uma manutenção.               |
+| Técnico           |  Escala                     |  1:N — um técnico pode cumprir zero ou várias escalas; cada escala é cumprida por exatamente um técnico.               |
+| Fornecedor           |  Compra       |  1:N — um fornecedor pode fornecer zero ou várias compras; cada compra é feita de exatamente um fornecedor.               |
+| Compra           |    Peça    |  N:N — uma compra contém pelo menos uma peça, e pode conter várias; uma peça pode estar em zero ou várias compras. Atributos da relação: quantidade e valor_custo.               |
+| Usuário           | Técnico      | 1:1 — um usuário com perfil técnico é vinculado a exatamente um técnico; um técnico pode ter zero ou um usuário.                |
+| Usuário           | Log de acesso       |  1:N — um usuário pode ter zero ou vários logs; cada log pertence a zero ou um usuário, pois tentativas de login negadas não identificam o usuário.               |
 
 ## 5.2 Fluxo de dados (visão de DFD)
-Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculados a ele em GERADOR → quando um gerador precisa de atendimento, abre-se um registro em MANUTENÇÃO, ligado a esse gerador → a manutenção é associada a um ou mais técnicos (via MANUTENCAO_TECNICO) e a um ou mais serviços do catálogo SERVIÇO (via MANUTENCAO_SERVICO) → o valor final da manutenção é calculado a partir dos serviços realizados e registrado em MANUTENÇÃO.
-
+Cliente é cadastrado em CLIENTE e, quando fixo, firma um CONTRATO → seus geradores são registrados em GERADOR, ligados ao cliente e, se houver, ao contrato que os cobre → cada gerador recebe um CRONOGRAMA_PREVENTIVO por peça, com o prazo definido em PECA → quando um gerador precisa de atendimento, solicita-se um ORCAMENTO (valor total estimado, sem itens) → aprovado o orçamento, ele origina uma MANUTENCAO, ligada ao gerador (e ao contrato, quando houver) → a manutenção é associada a um ou mais técnicos (MANUTENCAO_TECNICO), a um ou mais serviços do catálogo (MANUTENCAO_SERVICO) e às peças usadas (MANUTENCAO_PECA), e atualiza o cronograma preventivo (MANUTENCAO_CRONOGRAMA) → o valor da manutenção é calculado pela soma dos serviços e peças aplicados (valor unitário × quantidade), não é gravado em MANUTENCAO e pode diferir do valor orçado → quando a cobrança da manutenção é parcelada, esse valor calculado é dividido entre as parcelas de PAGAMENTO (VL_PREVISTO), de modo que a soma das parcelas bata com o total → a cobrança gera um PAGAMENTO apenas quando o valor calculado da manutenção é maior que zero: na preventiva, todas as parcelas são quitadas antes da execução; na corretiva, a execução pode ocorrer antes do pagamento somente se a manutenção estiver ligada (ID_ORCAMENTO) a um orçamento aprovado, isto é, confirmado pelo cliente; sem esse orçamento, vale a mesma regra da preventiva → os contratos geram cobranças periódicas em PAGAMENTO, calculadas a partir do valor mensal de referência e da periodicidade, com o valor devido de cada parcela gravado em VL_PREVISTO → do lado das compras, o FORNECEDOR fornece COMPRAS, que contêm as peças (COMPRA_PECA) e repõem o estoque em PECA → cada técnico cumpre suas ESCALAS de plantão → cada USUARIO, com seu perfil (e, no perfil técnico, ligado ao seu cadastro em TECNICO), realiza acessos ao sistema → todo acesso é registrado em LOG_ACESSO, inclusive tentativas de login negadas, nas quais o usuário pode não ser identificado.
 
 |            |                       |                 |
 |            |                       |                 |
