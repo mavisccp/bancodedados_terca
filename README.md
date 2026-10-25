@@ -1,12 +1,12 @@
 Nomes:
 
-Kauan José da SIlva 
+Kauan José da SIlva/ RGM:47346850
 
-Kauê Romaneto Machado
+Kauê Romaneto Machado/ RGM:47357304
 
-Kaylany Thayna de Oliveira de Paula 
+Kaylany Thayna de Oliveira de Paula/ RGM:47039035
 
-Maria Vitória Pereira Alves 
+Maria Vitória Pereira Alves/ RGM:47230720
 
 
 
