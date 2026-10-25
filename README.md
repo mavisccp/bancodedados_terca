@@ -242,6 +242,7 @@ Leitura: @ID_CLIENTE é o identificador único; os demais campos são obrigatór
 | DS_EMAIL  | email   |  VARCHAR(120)    |  — | Sim | Não  | —  | contém @ |E-mail de contato.  | 
 | NM_CIDADE |cidade    |  VARCHAR(80)   | — | Sim | Não  | —  | —   | Cidade do cliente. |   
 | CD_ESTADO |estado | CHAR(2)  |— | Sim | Não  | —  | uma das 27 UFs  |Sigla do estado (ex.: SP). | 
+
 Padrão do documento: NR_CPF_CNPJ é armazenado somente com dígitos (sem pontos, barra ou hífen); a pontuação é aplicada apenas na exibição. A aplicação remove a pontuação e valida os dígitos verificadores, e um CHECK com REGEXP garante 11 ou 14 dígitos numéricos.
 
 Índices: PK ID_CLIENTE (clusterizado); índice único em NR_CPF_CNPJ (garante a unicidade e agiliza a busca por documento).
@@ -262,6 +263,7 @@ NM_MODELO  | modelo | VARCHAR(60) | — | Sim | Não  |  — |  —  | Modelo de
 TP_STATUS  | status |  ENUM | —  | Sim | Não  | 'ativo'  | [ativo | em_manutencao | inativo]   | Situação atual do gerador. |  
 MD_POTENCIA | potencia|  DECIMAL(10,2)  | — | Sim | Não  | —  | > 0   | Potência nominal em kVA. |
 |MD_HORIMETRO| horimetro | DECIMAL(10,1)| — | Sim |Não | 0 | ≥ 0 | Horas de operação acumuladas, em horas.|
+
 Índices: PK ID_GERADOR; índice único em NR_SERIE; índices em ID_CLIENTE (geradores de um cliente) e em ID_CONTRATO.
 
 ## MANUTENÇÃO
