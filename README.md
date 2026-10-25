@@ -1,12 +1,12 @@
 Nomes:
 
-Kauan José da SIlva/ RGM: 47346850
+Kauan José da SIlva 
 
-Kauê Romaneto Machado/ RGM: 47357304
+Kauê Romaneto Machado
 
-Kaylany Thayna de Oliveira de Paula/ RGM:47039035
+Kaylany Thayna de Oliveira de Paula 
 
-Maria Vitória Pereira Alves/ RGM: 47230720
+Maria Vitória Pereira Alves 
 
 
 
@@ -216,16 +216,18 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 ## 5.2 Fluxo de dados (visão de DFD)
 Cliente é cadastrado em CLIENTE e, quando fixo, firma um CONTRATO → seus geradores são registrados em GERADOR, ligados ao cliente e, se houver, ao contrato que os cobre → cada gerador recebe um CRONOGRAMA_PREVENTIVO por peça, com o prazo definido em PECA → quando um gerador precisa de atendimento, solicita-se um ORCAMENTO (valor total estimado, sem itens) → aprovado o orçamento, ele origina uma MANUTENCAO, ligada ao gerador (e ao contrato, quando houver) → a manutenção é associada a um ou mais técnicos (MANUTENCAO_TECNICO), a um ou mais serviços do catálogo (MANUTENCAO_SERVICO) e às peças usadas (MANUTENCAO_PECA), e atualiza o cronograma preventivo (MANUTENCAO_CRONOGRAMA) → o valor da manutenção é calculado pela soma dos serviços e peças aplicados (valor unitário × quantidade), não é gravado em MANUTENCAO e pode diferir do valor orçado → quando a cobrança da manutenção é parcelada, esse valor calculado é dividido entre as parcelas de PAGAMENTO (VL_PREVISTO), de modo que a soma das parcelas bata com o total → a cobrança gera um PAGAMENTO apenas quando o valor calculado da manutenção é maior que zero: na preventiva, todas as parcelas são quitadas antes da execução; na corretiva, a execução pode ocorrer antes do pagamento somente se a manutenção estiver ligada (ID_ORCAMENTO) a um orçamento aprovado, isto é, confirmado pelo cliente; sem esse orçamento, vale a mesma regra da preventiva → os contratos geram cobranças periódicas em PAGAMENTO, calculadas a partir do valor mensal de referência e da periodicidade, com o valor devido de cada parcela gravado em VL_PREVISTO → do lado das compras, o FORNECEDOR fornece COMPRAS, que contêm as peças (COMPRA_PECA) e repõem o estoque em PECA → cada técnico cumpre suas ESCALAS de plantão → cada USUARIO, com seu perfil (e, no perfil técnico, ligado ao seu cadastro em TECNICO), realiza acessos ao sistema → todo acesso é registrado em LOG_ACESSO, inclusive tentativas de login negadas, nas quais o usuário pode não ser identificado.
 
-|            |                       |                 |
-|            |                       |                 |
-|            |                       |                 |
-
-
-
-
-
-
 ## Dicionário de dados por entidade
+| | | |
+|---|---|---|
+| • CLIENTE | • ESCALA | • MANUTENCAO_PECA |
+| • GERADOR | • PECA | • MANUTENCAO_TECNICO |
+| • CONTRATO | • CRONOGRAMA_PREVENTIVO | • MANUTENCAO_CRONOGRAMA |
+| • ORCAMENTO | • PAGAMENTO | • COMPRA_PECA |
+| • MANUTENCAO| • FORNECEDOR | • USUARIO |
+| • SERVICO | • COMPRA | • LOG_ACESSO |
+| • TECNICO | • MANUTENCAO_SERVICO | 
+
+
 ## CLIENTE 
 CLIENTE = @ID_CLIENTE + NM_CLIENTE + ID_CPF_CNPJ + DS_TELEFONE + DS_ENDERECO + DS_EMAIL + NM_CIDADE+ CD_ESTADO
 
@@ -495,7 +497,7 @@ O atendimento não deve possuir limitação de horário devido ao plantão de 24
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
 
-<img width="2048" height="920" alt="image" src="DER.png" />
+<img width="2048" height="920" alt="image" src="DER-1.png" />
 
 ---
 
