@@ -156,9 +156,10 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 | =         | É composto de          | CLIENTE = @ID_CLIENTE + NM_CLIENTE + …     |
 | +         | E (conecta elementos obrigatórios) | NM_CLIENTE + NR_CPF_CNPJ |
 | @         | Identificador (chave primária)           |	@ID_CLIENTE  |
-| { }      |  Repetição (iteração); mín{ }máx indica o mínimo e o máximo de ocorrências, e n no máximo significa sem limite fixo (1{ }n = uma ou mais). Convenção de documentação, não é sintaxe SQL           | 1{ID_TECNICO}n	 |
-| [ ] |   Seleção: um dos valores da lista, separados por  | [ ativo  em_manutencao  inativo ]	 |
-|  * *    |     Comentário       | 	* via MANUTENCAO_TECNICO *	 |
+|( )        | Elemento opcional          |	(ID_CONTRATO) |
+| { }      |  Repetição (iteração); mín{ }máx indica o mínimo e o máximo de ocorrências, e n no máximo significa sem limite fixo (1{ }n = uma ou mais). Convenção de documentação, não é sintaxe SQL  | 1{ID_TECNICO}n	 |
+| ( ) | Elemento opcional | (ID_CONTRATO) |
+| [ \| ] | Seleção: um dos valores da lista, separados por \| | [ativo \| em_manutencao \| inativo] |
 
 ## Convenção de prefixos:
 |Tipo | Significado | Exemplo no documento |            
@@ -217,21 +218,22 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 Cliente é cadastrado em CLIENTE e, quando fixo, firma um CONTRATO → seus geradores são registrados em GERADOR, ligados ao cliente e, se houver, ao contrato que os cobre → cada gerador recebe um CRONOGRAMA_PREVENTIVO por peça, com o prazo definido em PECA → quando um gerador precisa de atendimento, solicita-se um ORCAMENTO (valor total estimado, sem itens) → aprovado o orçamento, ele origina uma MANUTENCAO, ligada ao gerador (e ao contrato, quando houver) → a manutenção é associada a um ou mais técnicos (MANUTENCAO_TECNICO), a um ou mais serviços do catálogo (MANUTENCAO_SERVICO) e às peças usadas (MANUTENCAO_PECA), e atualiza o cronograma preventivo (MANUTENCAO_CRONOGRAMA) → o valor da manutenção é calculado pela soma dos serviços e peças aplicados (valor unitário × quantidade), não é gravado em MANUTENCAO e pode diferir do valor orçado → quando a cobrança da manutenção é parcelada, esse valor calculado é dividido entre as parcelas de PAGAMENTO (VL_PREVISTO), de modo que a soma das parcelas bata com o total → a cobrança gera um PAGAMENTO apenas quando o valor calculado da manutenção é maior que zero: na preventiva, todas as parcelas são quitadas antes da execução; na corretiva, a execução pode ocorrer antes do pagamento somente se a manutenção estiver ligada (ID_ORCAMENTO) a um orçamento aprovado, isto é, confirmado pelo cliente; sem esse orçamento, vale a mesma regra da preventiva → os contratos geram cobranças periódicas em PAGAMENTO, calculadas a partir do valor mensal de referência e da periodicidade, com o valor devido de cada parcela gravado em VL_PREVISTO → do lado das compras, o FORNECEDOR fornece COMPRAS, que contêm as peças (COMPRA_PECA) e repõem o estoque em PECA → cada técnico cumpre suas ESCALAS de plantão → cada USUARIO, com seu perfil (e, no perfil técnico, ligado ao seu cadastro em TECNICO), realiza acessos ao sistema → todo acesso é registrado em LOG_ACESSO, inclusive tentativas de login negadas, nas quais o usuário pode não ser identificado.
 
 ## Dicionário de dados por entidade
-|   |    |    |
+| | | |
 |---|---|---|
-| • CLIENTE | • ESCALA | • MANUTENCAO_PECA |
-| • GERADOR | • PECA | • MANUTENCAO_TECNICO |
-| • CONTRATO | • CRONOGRAMA_PREVENTIVO | • MANUTENCAO_CRONOGRAMA |
-| • ORCAMENTO | • PAGAMENTO | • COMPRA_PECA |
-| • MANUTENCAO| • FORNECEDOR | • USUARIO |
-| • SERVICO | • COMPRA | • LOG_ACESSO |
-| • TECNICO | • MANUTENCAO_SERVICO | 
+| • [CLIENTE](#cliente) | • [ESCALA](#escala) | • [MANUTENCAO_PECA](#manutencao_peca) |
+| • [GERADOR](#gerador) | • [PECA](#peca) | • [MANUTENCAO_TECNICO](#manutencao_tecnico) |
+| • [CONTRATO](#contrato) | • [CRONOGRAMA_PREVENTIVO](#cronograma_preventivo) | • [MANUTENCAO_CRONOGRAMA](#manutencao_cronograma) |
+| • [ORCAMENTO](#orcamento) | • [PAGAMENTO](#pagamento) | • [COMPRA_PECA](#compra_peca) |
+| • [MANUTENCAO](#manutencao) | • [FORNECEDOR](#fornecedor) | • [USUARIO](#usuario) |
+| • [SERVICO](#servico) | • [COMPRA](#compra) | • [LOG_ACESSO](#log_acesso) |
+| • [TECNICO](#tecnico) | • [MANUTENCAO_SERVICO](#manutencao_servico) | |
 
 ## CLIENTE 
 Pessoa física ou jurídica que contrata os serviços e possui geradores cadastrados.
 CLIENTE = @ID_CLIENTE + NM_CLIENTE + NR_CPF_CNPJ + DS_TELEFONE + DS_ENDERECO + DS_EMAIL + NM_CIDADE + CD_ESTADO
 
 Leitura: @ID_CLIENTE é o identificador único; os demais campos são obrigatórios e conectados por +.
+
 | Atributo | Atributo no DER |Tipo físico |Chave| Obrigatório | Único  | Padrão  |Valores permitidos |Significado e relevância    |
 |----------|----------- |---- |-----------|----|-----------|----|-----------|----|
 |ID_CLIENTE   | id_cliente   | INTEGER AUTO_INCREMENT |PK| Sim  | Sim  |  —  | — |  Identificador único do cliente no sistema; gerado automaticamente. |   
@@ -261,7 +263,7 @@ ID_CONTRATO| — | INTEGER| FK → CONTRATO | Não | Não  | NULL   |  —  |Con
 |NR_SERIE |numero_serie |VARCHAR(30) |— |Sim |Sim | — | letras e números | Número de série de fabricação; um gerador por número de série. |
 |NM_MARCA |  marca |  VARCHAR(60) |  — | Sim | Não  | —  | —   | Fabricante. Ex.: Cummins. | 
 |NM_MODELO  | modelo | VARCHAR(60) | — | Sim | Não  |  — |  —  | Modelo dentro da marca. | 
-|TP_STATUS | status | ENUM | — | Sim | Não | 'ativo' | [ativo \ em_manutencao \ inativo] | Situação atual do gerador. |
+| TP_STATUS | status | ENUM | — | Sim | Não | 'ativo' | [ativo \| em_manutencao \| inativo] | Situação atual do gerador. |
 |MD_POTENCIA | potencia|  DECIMAL(10,2)  | — | Sim | Não  | —  | > 0   | Potência nominal em kVA. |
 |MD_HORIMETRO| horimetro | DECIMAL(10,1)| — | Sim |Não | 0 | ≥ 0 | Horas de operação acumuladas, em horas.|
 
@@ -420,7 +422,7 @@ Leitura: @ID_PAGAMENTO é o identificador único; chaves estrangeiras: ID_MANUTE
 | ID_CONTRATO | — | INTEGER | FK → CONTRATO | Não | Não | NULL | — | Contrato que gerou a mensalidade; exatamente um entre ID_MANUTENCAO e ID_CONTRATO é preenchido. |
 | NR_PARCELA | numero_parcela | INTEGER | — | Sim | Sim, por origem | 1 | ≥ 1 | Número da parcela dentro da manutenção ou do contrato; não se repete na mesma origem. |
 | DT_VENCIMENTO | data_vencimento | DATE | — | Sim | Não | — | — | Vencimento. |
-| VL_PREVISTO | valor_previsto | DECIMAL(10,2) | — | Sim | Não | — | > 0 | Valor devido na parcela, gravado ao gerá-la: em parcela de contrato, VL_MENSAL × meses da periodicidade; em parcela de manutenção, a fração do valor calculado da manutenção (a soma de VL_PREVISTO das parcelas não canceladas é igual ao valor calculado;). Permite comparar o devido com VL_PAGO e dá valor às parcelas pendentes. Dado confidencial do negócio, com proteção prevista por criptografia em repouso.  |
+| VL_PREVISTO | valor_previsto | DECIMAL(10,2) | — | Sim | Não | — | > 0 | Valor devido na parcela, gravado ao gerá-la: em parcela de contrato, VL_MENSAL × meses da periodicidade; em parcela de manutenção, a fração do valor calculado da manutenção (a soma de VL_PREVISTO das parcelas não canceladas é igual ao valor calculado). Permite comparar o devido com VL_PAGO e dá valor às parcelas pendentes. Dado confidencial do negócio, com proteção prevista por criptografia em repouso. |
 | DT_PAGAMENTO | data_pagamento | DATE | — | Não | Não | NULL | preenchida se e somente se TP_STATUS = 'pago' | Data do pagamento efetivo. |
 | TP_FORMA_PAGAMENTO | forma | ENUM | — | Não | Não | NULL | [dinheiro \| pix \| boleto \| cartao \| transferencia] | Forma de pagamento; preenchida somente quando TP_STATUS = 'pago'. |
 | TP_STATUS | status | ENUM | — | Sim | Não | 'pendente' | [pendente \| pago \| atrasado \| cancelado] | Situação da parcela; define quais campos de pagamento são exigidos. Parcela cancelada por recálculo permanece no histórico; não é apagada. Transições permitidas e correção de parcela paga. |
@@ -478,7 +480,7 @@ Leitura: os campos marcados com @ (ID_MANUTENCAO, ID_SERVICO) formam juntos a ch
 | VL_UNITARIO_APLICADO | valor_unitario_aplicado | DECIMAL(10,2) | — | Sim | Não | — | ≥ 0 | Valor unitário do serviço nesta manutenção (não é o total da linha); o total da linha é VL_UNITARIO_APLICADO × QT_SERVICO, e o valor da manutenção soma esses totais. Dado confidencial do negócio, com proteção prevista por criptografia em repouso . |
 | QT_SERVICO | quantidade | INTEGER | — | Sim | Não | 1 | > 0 | Quantidade executada; multiplica o valor unitário aplicado. |
 
-Bloqueio: serviços só podem ser incluídos, alterados ou removidos enquanto a manutenção está aberta; fora disso, somente por autorização do administrador, registrada em LOG_ACESSO.
+Bloqueio: peças só podem ser incluídas, alteradas ou removidas enquanto a manutenção está aberta; fora disso, somente por autorização do administrador, registrada em LOG_ACESSO.
 
 Índices: Chave primária composta (ID_MANUTENCAO, ID_SERVICO); índice de chave estrangeira em ID_SERVICO.
 
@@ -507,6 +509,7 @@ Leitura: os campos marcados com @ (ID_MANUTENCAO, ID_TECNICO) formam juntos a ch
 |---|---|---|---|---|---|---|---|---|
 | ID_MANUTENCAO | — | INTEGER | PK, FK → MANUTENCAO | Sim | — | — | — | Manutenção envolvida. |
 | ID_TECNICO | — | INTEGER | PK, FK → TECNICO | Sim | — | — | — | Técnico envolvido; permite mais de um por manutenção. |
+
 Índices: Chave primária composta (ID_MANUTENCAO, ID_TECNICO); índice de chave estrangeira em ID_TECNICO.
 
 ## MANUTENCAO_CRONOGRAMA
