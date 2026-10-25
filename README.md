@@ -241,26 +241,28 @@ Leitura: @ID_CLIENTE é o identificador único; os demais campos são obrigatór
 |DS_ENDERECO  | endereco   | VARCHAR(200)    | — | Sim | Não  | —  |  —  | Endereço completo (rua, número, bairro). Dado pessoal, com proteção prevista por criptografia em repouso (seção 12). |    
 | DS_EMAIL  | email   |  VARCHAR(120)    |  — | Sim | Não  | —  | contém @ |E-mail de contato.  | 
 | NM_CIDADE |cidade    |  VARCHAR(80)   | — | Sim | Não  | —  | —   | Cidade do cliente. |   
-| CD_ESTADO |estado | CHAR(2)  |— | Sim | Não  | —  | uma das 27 UFs  |Sigla do estado (ex.: SP). |   
+| CD_ESTADO |estado | CHAR(2)  |— | Sim | Não  | —  | uma das 27 UFs  |Sigla do estado (ex.: SP). | 
+Padrão do documento: NR_CPF_CNPJ é armazenado somente com dígitos (sem pontos, barra ou hífen); a pontuação é aplicada apenas na exibição. A aplicação remove a pontuação e valida os dígitos verificadores, e um CHECK com REGEXP garante 11 ou 14 dígitos numéricos.
 
-Índices: PK ID_CLIENTE (clusterizado); índice único em ID_CPF_CNPJ (garante a unicidade exigida e agiliza a busca por documento).
+Índices: PK ID_CLIENTE (clusterizado); índice único em NR_CPF_CNPJ (garante a unicidade e agiliza a busca por documento).
 
 ## GERADOR
-GERADOR = @ID_GERADOR + ID_CLIENTE + ID_NUMERO_SERIE + NM_MARCA + NM_MODELO + TP_STATUS + QT_POTENCIA
+GERADOR = @ID_GERADOR + ID_CLIENTE + (ID_CONTRATO) + NR_SERIE + NM_MARCA + NM_MODELO + TP_STATUS + MD_POTENCIA + MD_HORIMETRO
 
-Leitura: @ID_GERADOR é o identificador único; ID_CLIENTE é a chave estrangeira que implementa, na tabela física, o relacionamento 1:N descrito acima é o que garante a regra de que todo gerador deve estar vinculado a um cliente. Os demais campos são obrigatórios e conectados por +.
+Leitura: @ID_GERADOR é o identificador único; chaves estrangeiras: ID_CLIENTE referencia CLIENTE; ID_CONTRATO referencia CONTRATO; entre parênteses, opcionais: ID_CONTRATO; os demais campos são obrigatórios e conectados por +.
 
-| Atributo | Tipo físico | Obrigatório |Significado e relevância|
-|----------|-----------|------------------------------|-----------|
-ID_GERADOR |  integer |  Sim (PK) |  Identificador único do gerador no sistema; gerado automaticamente. | 
-ID_CLIENTE |  integer  | Sim (FK) |  Referência ao cliente proprietário do gerador. | 
-ID_NUMERO_SERIE |  varchar(30) |  Sim (único) |  Número de série de fabricação do gerador; aceita letras e números, não pode se repetir. | 
-NM_MARCA |  varchar(60) |  Sim |  Fabricante do gerador. Ex.: “Cummins”. | 
-NM_MODELO  | varchar(60) |  Sim |  Modelo do gerador dentro da marca. | 
-TP_STATUS  | enum(‘ativo’,‘em_manutencao’,‘inativo’) |  Sim  | Situação atual do gerador. | 
-QT_POTENCIA  | decimal(10,2) |  Sim  | Potência do gerador em kVA; valor numérico positivo. | 
-
-Índices: PK ID_GERADOR; índice único em ID_NUMERO_SERIE (impede dois geradores com o mesmo número de série); índice em ID_CLIENTE (acelera a consulta "geradores de um cliente X").
+| Atributo | Atributo no DER |Tipo físico |Chave| Obrigatório | Único  | Padrão  |Valores permitidos |Significado e relevância    |
+|----------|----------- |---- |-----------|----|-----------|----|-----------|----|
+ID_GERADOR | id_gerador |  INTEGER AUTO_INCREMENT |  PK | Sim | Sim   | —  | —   | Identificador único do gerador. | 
+ID_CLIENTE |  — | INTEGER | 	FK → CLIENTE |Sim | Não   | —  | —   | Cliente proprietário; implementa a regra de que todo gerador pertence a um cliente.  | 
+ID_CONTRATO| — | INTEGER| FK → CONTRATO | Não | Não  | NULL   |  —  |Contrato que cobre o gerador, quando houver; deve pertencer ao mesmo cliente do gerador (seção 10).  | 
+|NR_SERIE |numero_serie |VARCHAR(30) |— |Sim |Sim | — | letras e números | Número de série de fabricação; um gerador por número de série. |
+NM_MARCA |  marca |  VARCHAR(60) |  — | Sim | Não  | —  | —   | Fabricante. Ex.: Cummins. | 
+NM_MODELO  | modelo | VARCHAR(60) | — | Sim | Não  |  — |  —  | Modelo dentro da marca. | 
+TP_STATUS  | status |  ENUM | —  | Sim | Não  | 'ativo'  | [ativo | em_manutencao | inativo]   | Situação atual do gerador. |  
+MD_POTENCIA | potencia|  DECIMAL(10,2)  | — | Sim | Não  | —  | > 0   | Potência nominal em kVA. |
+|MD_HORIMETRO| horimetro | DECIMAL(10,1)| — | Sim |Não | 0 | ≥ 0 | Horas de operação acumuladas, em horas.|
+Índices: PK ID_GERADOR; índice único em NR_SERIE; índices em ID_CLIENTE (geradores de um cliente) e em ID_CONTRATO.
 
 ## MANUTENÇÃO
 MANUTENCAO = @ID_MANUTENCAO + ID_GERADOR + DT_MANUTENCAO + TP_MANUTENCAO + DS_SERVICO_REALIZADO + TP_STATUS + QT_VALOR
