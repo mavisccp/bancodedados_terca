@@ -297,10 +297,26 @@ Leitura: @ID_ORCAMENTO é o identificador único; chaves estrangeiras: ID_GERADO
 | ID_ORCAMENTO | id_orcamento | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do orçamento. |
 | ID_GERADOR | — | INTEGER | FK → GERADOR | Sim | Não | — | — | Gerador para o qual o orçamento foi solicitado. |
 | DT_ORCAMENTO | data_orcamento | DATE | — | Sim | Não | CURRENT_DATE | — | Data de emissão. |
-| VL_ORCADO | valor_orcado | DECIMAL(10,2) | — | Sim | Não | — | ≥ 0 | Valor total estimado, sem detalhamento de itens. Dado confidencial do negócio, com proteção prevista por criptografia em repouso (seção 12). |
+| VL_ORCADO | valor_orcado | DECIMAL(10,2) | — | Sim | Não | — | ≥ 0 | Valor total estimado, sem detalhamento de itens. Dado confidencial do negócio, com proteção prevista por criptografia em repouso . |
 | TP_STATUS | status | ENUM | — | Sim | Não | 'pendente' | [pendente \| aprovado \| recusado] | Situação do orçamento. |
 | DT_APROVACAO | data_aprovacao | DATE | — | Não | Não | NULL | ≥ DT_ORCAMENTO; preenchida se e somente se TP_STATUS = 'aprovado' | Data da aprovação; nula em orçamento pendente ou recusado. |
+
 Índices: PK ID_ORCAMENTO; índice em ID_GERADOR.
+
+## SERVICO
+Catálogo de tipos de serviço que podem ser prestados em uma manutenção.
+SERVICO = @ID_SERVICO + NM_SERVICO + (DS_DESCRICAO) + VL_BASE
+
+Leitura: @ID_SERVICO é o identificador único; entre parênteses, opcionais: DS_DESCRICAO; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_SERVICO | id_servico | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do serviço. |
+| NM_SERVICO | nome_servico | VARCHAR(120) | — | Sim | Sim | — | — | Nome do serviço. Ex.: Troca de óleo. |
+| DS_DESCRICAO | descricao | TEXT | — | Não | Não | NULL | — | O que o serviço inclui. |
+| VL_BASE | valor_base | DECIMAL(10,2) | — | Sim | Não | — | ≥ 0 | Valor de referência antes de ajustes por manutenção. Dado confidencial do negócio, com proteção prevista por criptografia em repouso. |
+
+Índices: PK ID_SERVICO; índice único em NM_SERVICO.
 
 
 ## MANUTENÇÃO
@@ -322,59 +338,237 @@ Leitura: @ID_MANUTENCAO é o identificador único; chaves estrangeiras: ID_GERAD
 
 Índices: PK ID_MANUTENCAO; índice único em ID_ORCAMENTO; índices em ID_GERADOR (histórico do gerador), ID_CONTRATO e DT_MANUTENCAO (relatórios por período).
 
-## TÉCNICO
-TECNICO = @ID_TECNICO + NM_TECNICO + ID_CPF + DS_TELEFONE + DS_EMAIL
+## TECNICO
+Profissional responsável por executar as manutenções.
+TECNICO = @ID_TECNICO + NM_TECNICO + NR_CPF + DS_TELEFONE + DS_EMAIL
 
 Leitura: @ID_TECNICO é o identificador único; os demais campos são obrigatórios e conectados por +.
 
-| Atributo | Tipo físico | Obrigatório |Significado e relevância|
-|----------|-----------|------------------------------|-----------|
-ID_TECNICO| integer| Sim (PK)| Identificador único do técnico; gerado automaticamente.|
-NM_TECNICO| varchar(120)| Sim| Nome completo do técnico.|
-ID_CPF |char(11)| Sim (único) |CPF do técnico, digitado somente com números, exatamente 11 dígitos; dado sensível armazenado de forma criptografada.|
-DS_TELEFONE| varchar(20)| Sim | Telefone de contato do técnico.|
-DS_EMAIL| varchar(120)|Sim| E-mail de contato do técnico.|
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_TECNICO | id_tecnico | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do técnico. |
+| NM_TECNICO | nome | VARCHAR(120) | — | Sim | Não | — | — | Nome completo. |
+| NR_CPF | cpf | CHAR(11) | — | Sim | Sim | — | somente números, 11 dígitos | CPF; um técnico por CPF. Dado pessoal, com proteção prevista por criptografia em repouso . |
 
-Índices: PK ID_TECNICO; índice único em ID_CPF (impede dois técnicos com o mesmo CPF).
+Índices: PK ID_TECNICO; índice único em NR_CPF.
 
-## SERVIÇO
-SERVICO = @ID_SERVICO + NM_SERVICO + DS_DESCRICAO + QT_VALOR_BASE
+## ESCALA
+Período e turno de trabalho cumprido por um técnico (plantão 24 h).
+ESCALA = @ID_ESCALA + ID_TECNICO + DT_INICIO + DT_FIM + TP_TURNO
 
-Leitura: @ID_SERVICO é o identificador único; os demais campos são obrigatórios e conectados por +.
+Leitura: @ID_ESCALA é o identificador único; chaves estrangeiras: ID_TECNICO referencia TECNICO; os demais campos são obrigatórios e conectados por +.
 
-| Atributo | Tipo físico | Obrigatório |Significado e relevância|
-|----------|-----------|------------------------------|-----------|
-ID_SERVICO|integer|Sim (PK)| Identificador único do serviço no catálogo; gerado automaticamente.|
-NM_SERVICO| varchar(120) |Sim| Nome do serviço oferecido. Ex.: “Troca de óleo”.|
-DS_DESCRICAO| text| Sim |Explicação detalhada do que o serviço inclui.|
-QT_VALOR_BASE| decimal(10,2)| Sim |Valor de referência do serviço, antes de ajustes por manutenção; dado sensível armazenado de forma criptografada.|
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_ESCALA | id_escala | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único da escala. |
+| ID_TECNICO | — | INTEGER | FK → TECNICO | Sim | Não | — | — | Técnico escalado. |
+| DT_INICIO | data_inicio | DATE | — | Sim | Não | — | — | Início do período. |
+| DT_FIM | data_fim | DATE | — | Sim | Não | — | ≥ DT_INICIO | Fim do período. |
+| TP_TURNO | turno | ENUM | — | Sim | Não | — | [manha \| tarde \| noite \| integral] | Turno de trabalho. |
 
-Índices: PK ID_SERVICO.
-          
-## MANUTENÇÃO_TÉCNICO
+Índices: PK ID_ESCALA; índice em ID_TECNICO; índice em DT_INICIO.
+
+## PECA
+Peça de reposição (bateria, óleo, filtro de ar, tanque etc.) mantida em estoque e usada nas manutenções.
+
+PECA = @ID_PECA + NM_PECA + (DS_PECA) + VL_VENDA + MD_PRAZO_TROCA_DIAS + QT_ESTOQUE
+
+Leitura: @ID_PECA é o identificador único; entre parênteses, opcionais: DS_PECA; os demais campos são obrigatórios e conectados por +
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_PECA | id_peca | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único da peça. |
+| NM_PECA | nome_peca | VARCHAR(120) | — | Sim | Sim | — | — | Nome da peça. |
+| DS_PECA | descricao_peca | TEXT | — | Não | Não | NULL | — | Descrição da peça. |
+| VL_VENDA | valor_venda | DECIMAL(10,2) | — | Sim | Não | — | ≥ 0 | Preço de venda. Dado confidencial do negócio, com proteção prevista por criptografia em repouso  |
+| MD_PRAZO_TROCA_DIAS | prazo_troca_dias | INTEGER | — | Sim | Não | — | > 0 | Prazo de troca ou limpeza, em dias; orienta o cronograma preventivo. |
+| QT_ESTOQUE | estoque | INTEGER | — | Sim | Não | 0 | ≥ 0 | Quantidade em estoque; atualizada somente por transação  |
+
+Índices: PK ID_PECA; índice único em NM_PECA.
+
+## CRONOGRAMA_PREVENTIVO
+Controle de troca preventiva de uma peça em um gerador; sustenta a regra de inspeção preventiva, pela qual cada gerador deve ter ao menos um cronograma, garantida pela aplicação no cadastro do gerador .
+
+CRONOGRAMA_PREVENTIVO = @ID_CRONOGRAMA + ID_GERADOR + ID_PECA + (DT_ULTIMA_TROCA)
+
+Leitura: @ID_CRONOGRAMA é o identificador único; chaves estrangeiras: ID_GERADOR referencia GERADOR; ID_PECA referencia PECA; entre parênteses, opcionais: DT_ULTIMA_TROCA; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_CRONOGRAMA | id_cronograma | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do cronograma. |
+| ID_GERADOR | — | INTEGER | FK → GERADOR | Sim | Não | — | — | Gerador acompanhado. |
+| ID_PECA | — | INTEGER | FK → PECA | Sim | Não | — | — | Peça cujo prazo define o cronograma. |
+| DT_ULTIMA_TROCA | data_ultima_troca | DATE | — | Não | Não | NULL | — | Data da última troca da peça neste gerador. |
+
+Índices: PK ID_CRONOGRAMA; índice único composto (ID_GERADOR, ID_PECA): um cronograma por peça em cada gerador; índice em ID_PECA.
+
+## PAGAMENTO
+Parcela de pagamento de uma manutenção ou mensalidade de contrato.
+
+PAGAMENTO = @ID_PAGAMENTO + [ID_MANUTENCAO | ID_CONTRATO] + NR_PARCELA + DT_VENCIMENTO + VL_PREVISTO + (DT_PAGAMENTO) + (TP_FORMA_PAGAMENTO) + TP_STATUS + (VL_PAGO)
+
+Leitura: @ID_PAGAMENTO é o identificador único; chaves estrangeiras: ID_MANUTENCAO referencia MANUTENCAO; ID_CONTRATO referencia CONTRATO; entre colchetes, exatamente uma das duas origens: ID_MANUTENCAO ou ID_CONTRATO; entre parênteses, opcionais: DT_PAGAMENTO, TP_FORMA_PAGAMENTO, VL_PAGO; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_PAGAMENTO | id_pagamento | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do pagamento. |
+| ID_MANUTENCAO | — | INTEGER | FK → MANUTENCAO | Não | Não | NULL | — | Manutenção que gerou a cobrança; ver ID_CONTRATO (a parcela tem exatamente uma origem). |
+| ID_CONTRATO | — | INTEGER | FK → CONTRATO | Não | Não | NULL | — | Contrato que gerou a mensalidade; exatamente um entre ID_MANUTENCAO e ID_CONTRATO é preenchido. |
+| NR_PARCELA | numero_parcela | INTEGER | — | Sim | Sim, por origem | 1 | ≥ 1 | Número da parcela dentro da manutenção ou do contrato; não se repete na mesma origem. |
+| DT_VENCIMENTO | data_vencimento | DATE | — | Sim | Não | — | — | Vencimento. |
+| VL_PREVISTO | valor_previsto | DECIMAL(10,2) | — | Sim | Não | — | > 0 | Valor devido na parcela, gravado ao gerá-la: em parcela de contrato, VL_MENSAL × meses da periodicidade; em parcela de manutenção, a fração do valor calculado da manutenção (a soma de VL_PREVISTO das parcelas não canceladas é igual ao valor calculado; ver seção 10). Permite comparar o devido com VL_PAGO e dá valor às parcelas pendentes. Dado confidencial do negócio, com proteção prevista por criptografia em repouso.  |
+| DT_PAGAMENTO | data_pagamento | DATE | — | Não | Não | NULL | preenchida se e somente se TP_STATUS = 'pago' | Data do pagamento efetivo. |
+| TP_FORMA_PAGAMENTO | forma | ENUM | — | Não | Não | NULL | [dinheiro \| pix \| boleto \| cartao \| transferencia] | Forma de pagamento; preenchida somente quando TP_STATUS = 'pago'. |
+| TP_STATUS | status | ENUM | — | Sim | Não | 'pendente' | [pendente \| pago \| atrasado \| cancelado] | Situação da parcela; define quais campos de pagamento são exigidos. Parcela cancelada por recálculo permanece no histórico; não é apagada. Transições permitidas e correção de parcela paga. |
+| VL_PAGO | valor_pago | DECIMAL(10,2) | — | Não | Não | NULL | ≥ 0 | Valor efetivamente pago; pode diferir de VL_PREVISTO (juros ou desconto). Dado confidencial do negócio, com proteção prevista por criptografia em repouso. |
+
+Quitação e exclusão: a parcela é quitada de uma só vez (sem pagamento parcial nem saldo restante) e PAGAMENTO nunca é excluído: erros são tratados por cancelamento e nova parcela ou, em parcela já paga, por correção do administrador registrada em LOG_ACESSO (seção 10).
+
+Índices: PK ID_PAGAMENTO; índice único composto (ID_MANUTENCAO, NR_PARCELA) e índice único composto (ID_CONTRATO, NR_PARCELA): como o MySQL aceita vários NULL em índice único, a linha cuja origem é nula não colide, e cada origem tem suas parcelas numeradas sem repetição; índice em DT_VENCIMENTO (contas a receber).
+
+## FORNECEDOR
+Empresa que fornece peças.
+
+FORNECEDOR = @ID_FORNECEDOR + NM_FORNECEDOR + NR_CNPJ + DS_TELEFONE + DS_EMAIL
+
+Leitura: @ID_FORNECEDOR é o identificador único; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_FORNECEDOR | id_fornecedor | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do fornecedor. |
+| NM_FORNECEDOR | nome | VARCHAR(120) | — | Sim | Não | — | — | Razão social ou nome. |
+| NR_CNPJ | cnpj | CHAR(14) | — | Sim | Sim | — | somente dígitos, 14 | CNPJ do fornecedor, gravado sem pontuação. |
+| DS_TELEFONE | telefone | VARCHAR(20) | — | Sim | Não | — | — | Telefone de contato. |
+| DS_EMAIL | email | VARCHAR(120) | — | Sim | Não | — | contém @ | E-mail de contato. |
+
+Índices: PK ID_FORNECEDOR; índice único em NR_CNPJ.
+
+## COMPRA
+Compra de peças junto a um fornecedor.
+
+COMPRA = @ID_COMPRA + ID_FORNECEDOR + DT_COMPRA + TP_STATUS + (NR_NOTA_FISCAL)
+
+Leitura: @ID_COMPRA é o identificador único; chaves estrangeiras: ID_FORNECEDOR referencia FORNECEDOR; entre parênteses, opcionais: NR_NOTA_FISCAL; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_COMPRA | id_compra | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único da compra. |
+| ID_FORNECEDOR | — | INTEGER | FK → FORNECEDOR | Sim | Não | — | — | Fornecedor da compra. |
+| DT_COMPRA | data_compra | DATE | — | Sim | Não | — | — | Data da compra. |
+| TP_STATUS | status | ENUM | — | Sim | Não | 'pedida' | [pedida \| recebida \| cancelada] | Situação da compra. Transições permitidas: pedida → recebida e pedida → cancelada; recebida e cancelada são finais. |
+| NR_NOTA_FISCAL | numero_nota_fiscal | VARCHAR(20) | — | Não | Não | NULL | — | Nota fiscal do fornecedor. |
+
+Itens da compra: os itens (COMPRA_PECA) só podem ser alterados enquanto TP_STATUS = 'pedida'; compra recebida ou cancelada tem os itens bloqueados (seção 10).
+
+Índices: PK ID_COMPRA; índices em ID_FORNECEDOR e DT_COMPRA.
+
+## MANUTENCAO_SERVICO
+MANUTENCAO_SERVICO = @ID_MANUTENCAO + @ID_SERVICO + VL_UNITARIO_APLICADO + QT_SERVICO
+
+Leitura: os campos marcados com @ (ID_MANUTENCAO, ID_SERVICO) formam juntos a chave primária composta e são, cada um, chave estrangeira; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_MANUTENCAO | — | INTEGER | PK, FK → MANUTENCAO | Sim | — | — | — | Manutenção envolvida. |
+| ID_SERVICO | — | INTEGER | PK, FK → SERVICO | Sim | — | — | — | Serviço realizado; permite mais de um por manutenção. |
+| VL_UNITARIO_APLICADO | valor_unitario_aplicado | DECIMAL(10,2) | — | Sim | Não | — | ≥ 0 | Valor unitário do serviço nesta manutenção (não é o total da linha); o total da linha é VL_UNITARIO_APLICADO × QT_SERVICO, e o valor da manutenção soma esses totais. Dado confidencial do negócio, com proteção prevista por criptografia em repouso . |
+| QT_SERVICO | quantidade | INTEGER | — | Sim | Não | 1 | > 0 | Quantidade executada; multiplica o valor unitário aplicado. |
+
+Bloqueio: serviços só podem ser incluídos, alterados ou removidos enquanto a manutenção está aberta; fora disso, somente por autorização do administrador, registrada em LOG_ACESSO.
+
+Índices: Chave primária composta (ID_MANUTENCAO, ID_SERVICO); índice de chave estrangeira em ID_SERVICO.
+
+## MANUTENCAO_PECA
+MANUTENCAO_PECA = @ID_MANUTENCAO + @ID_PECA + VL_UNITARIO_APLICADO + QT_PECA
+
+Leitura: os campos marcados com @ (ID_MANUTENCAO, ID_PECA) formam juntos a chave primária composta e são, cada um, chave estrangeira; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_MANUTENCAO | — | INTEGER | PK, FK → MANUTENCAO | Sim | — | — | — | Manutenção envolvida. |
+| ID_PECA | — | INTEGER | PK, FK → PECA | Sim | — | — | — | Peça utilizada. |
+| VL_UNITARIO_APLICADO | valor_unitario_aplicado | DECIMAL(10,2) | — | Sim | Não | — | ≥ 0 | Valor unitário da peça nesta manutenção. Dado confidencial do negócio, com proteção prevista por criptografia em repouso. |
+| QT_PECA | quantidade | INTEGER | — | Sim | Não | 1 | > 0 | Quantidade usada. |
+
+Bloqueio: peças só podem ser incluídos, alterados ou removidos enquanto a manutenção está aberta; fora disso, somente por autorização do administrador, registrada em LOG_ACESSO.
+
+Índices: Chave primária composta (ID_MANUTENCAO, ID_PECA); índice de chave estrangeira em ID_PECA.
+
+## MANUTENCAO_TECNICO
 MANUTENCAO_TECNICO = @ID_MANUTENCAO + @ID_TECNICO
 
-Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO e TECNICO; os dois campos, marcados com @, formam juntos a chave primária composta desta tabela e são, cada um, chave estrangeira para sua entidade de origem.
+Leitura: os campos marcados com @ (ID_MANUTENCAO, ID_TECNICO) formam juntos a chave primária composta e são, cada um, chave estrangeira; os demais campos são obrigatórios e conectados por +.
 
-| Atributo | Tipo físico | Obrigatório |Significado e relevância|
-|----------|-----------|------------------------------|-----------|
-ID_MANUTENCAO| integer| Sim (FK, compõe PK)| Referência à manutenção envolvida.|
-ID_TECNICO |integer |Sim (FK, compõe PK) |Referência ao técnico envolvido; permite mais de um técnico por manutenção.|
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_MANUTENCAO | — | INTEGER | PK, FK → MANUTENCAO | Sim | — | — | — | Manutenção envolvida. |
+| ID_TECNICO | — | INTEGER | PK, FK → TECNICO | Sim | — | — | — | Técnico envolvido; permite mais de um por manutenção. |
+Índices: Chave primária composta (ID_MANUTENCAO, ID_TECNICO); índice de chave estrangeira em ID_TECNICO.
 
-Índices: chave primária composta (ID_MANUTENCAO, ID_TECNICO); índice de chave estrangeira em cada coluna.
+## MANUTENCAO_CRONOGRAMA
+MANUTENCAO_CRONOGRAMA = @ID_MANUTENCAO + @ID_CRONOGRAMA
 
-## MANUTENÇÃO_SERVIÇO
-MANUTENCAO_SERVICO = @ID_MANUTENCAO + @ID_SERVICO
+Leitura: os campos marcados com @ (ID_MANUTENCAO, ID_CRONOGRAMA) formam juntos a chave primária composta e são, cada um, chave estrangeira; os demais campos são obrigatórios e conectados por +.
 
-Leitura: entidade associativa que resolve o relacionamento N:N entre MANUTENCAO e SERVICO; os dois campos, marcados com @, formam juntos a chave primária composta desta tabela e são, cada um, chave estrangeira para sua entidade de origem.
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_MANUTENCAO | — | INTEGER | PK, FK → MANUTENCAO | Sim | — | — | — | Manutenção que atualizou o cronograma. |
+| ID_CRONOGRAMA | — | INTEGER | PK, FK → CRONOGRAMA_PREVENTIVO | Sim | — | — | — | Cronograma atualizado. |
 
-| Atributo | Tipo físico | Obrigatório |Significado e relevância|
-|----------|-----------|------------------------------|-----------|
-ID_MANUTENCAO | integer| Sim (FK, compõe PK) |Referência à manutenção envolvida.|
-ID_SERVICO| integer| Sim (FK, compõe PK) |Referência ao serviço envolvido; permite mais de um serviço por manutenção.|
+Índices: Chave primária composta (ID_MANUTENCAO, ID_CRONOGRAMA); índice de chave estrangeira em ID_CRONOGRAMA.
 
-Índices: chave primária composta (ID_MANUTENCAO, ID_SERVICO); índice de chave estrangeira em cada coluna.
+## COMPRA_PECA
+COMPRA_PECA = @ID_COMPRA + @ID_PECA + QT_PECA + VL_CUSTO
 
+Leitura: os campos marcados com @ (ID_COMPRA, ID_PECA) formam juntos a chave primária composta e são, cada um, chave estrangeira; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_COMPRA | — | INTEGER | PK, FK → COMPRA | Sim | — | — | — | Compra. |
+| ID_PECA | — | INTEGER | PK, FK → PECA | Sim | — | — | — | Peça comprada. |
+| QT_PECA | quantidade | INTEGER | — | Sim | Não | — | > 0 | Quantidade comprada. |
+| VL_CUSTO | valor_custo | DECIMAL(10,2) | — | Sim | Não | — | ≥ 0 | Custo unitário pago ao fornecedor. Dado confidencial do negócio, com proteção prevista por criptografia em repouso. |
+
+Bloqueio: os itens só podem ser incluídos, alterados ou removidos enquanto a compra está 'pedida'.
+
+Índices: Chave primária composta (ID_COMPRA, ID_PECA); índice de chave estrangeira em ID_PECA.
+
+## USUARIO
+Conta de acesso ao sistema; define o perfil de acesso, é a origem dos registros de LOG_ACESSO e, no perfil técnico, identifica qual técnico usa a conta.
+
+USUARIO = @ID_USUARIO + (ID_TECNICO) + DS_LOGIN + TP_PERFIL + TP_STATUS
+
+Leitura: @ID_USUARIO é o identificador único; chaves estrangeiras: ID_TECNICO referencia TECNICO; entre parênteses, opcionais: ID_TECNICO (obrigatório quando TP_PERFIL = tecnico e nulo nos demais perfis); os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_USUARIO | id_usuario | INTEGER AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do usuário. |
+| ID_TECNICO | — | INTEGER | FK → TECNICO | Não | Sim | NULL | obrigatório se TP_PERFIL = 'tecnico'; nulo nos demais perfis | Técnico que usa a conta; permite aplicar as permissões "próprio cadastro" e "manutenções em que está alocado". Um técnico tem no máximo uma conta. |
+| DS_LOGIN | login | VARCHAR(60) | — | Sim | Sim | — | — | Nome de acesso; não pode se repetir. |
+| TP_PERFIL | perfil | ENUM | — | Sim | Não | — | [administrador \| atendimento \| tecnico \| financeiro] | Perfil que define as operações permitidas. |
+| TP_STATUS | status | ENUM | — | Sim | Não | 'ativo' | [ativo \| inativo] | Situação da conta. O usuário não é excluído: é desativado ('inativo'), o que impede o acesso e preserva o histórico de LOG_ACESSO. |
+
+Índices: PK ID_USUARIO; índice único em DS_LOGIN; índice único em ID_TECNICO (um técnico por conta; vários NULL permitidos).
+
+## LOG_ACESSO
+LOG_ACESSO = @ID_LOG + (ID_USUARIO) + (DS_LOGIN_INFORMADO) + DH_ACESSO + TP_ACAO + (NM_TABELA) + (NR_REGISTRO) + (DS_IP_ORIGEM) + TP_RESULTADO + (DS_FINALIDADE)
+
+Leitura: @ID_LOG é o identificador único; chaves estrangeiras: ID_USUARIO referencia USUARIO; entre parênteses, opcionais: ID_USUARIO (nulo somente em login negado sem usuário identificado), DS_LOGIN_INFORMADO (preenchido somente quando ID_USUARIO é nulo), DS_IP_ORIGEM (nulo quando o IP não puder ser identificado), NM_TABELA, NR_REGISTRO, DS_FINALIDADE; os demais campos são obrigatórios e conectados por +.
+
+| Atributo | Atributo no DER | Tipo físico | Chave | Obrigatório | Único | Padrão | Valores permitidos | Significado e relevância |
+|---|---|---|---|---|---|---|---|---|
+| ID_LOG | id_log | BIGINT AUTO_INCREMENT | PK | Sim | Sim | — | — | Identificador único do registro. |
+| ID_USUARIO | — | INTEGER | FK → USUARIO | Não | Não | NULL | nulo somente se TP_ACAO = 'login' e TP_RESULTADO = 'negado' (e então DS_LOGIN_INFORMADO é preenchido) | Usuário que realizou o acesso (relacionamento realiza); nulo quando a tentativa não identifica um usuário cadastrado. |
+| DS_LOGIN_INFORMADO | login_informado | VARCHAR(60) | — | Não | Não | NULL | preenchido se e somente se ID_USUARIO é nulo; até 60 caracteres | Login digitado na tentativa, usado para registrar logins negados de usuário inexistente. Nunca recebe senha nem token; a aplicação limita o tamanho e não grava o campo de senha. |
+| DH_ACESSO | data_hora_acesso | DATETIME | — | Sim | Não | CURRENT_TIMESTAMP | — | Data e hora do acesso. |
+| TP_ACAO | acao | ENUM | — | Sim | Não | — | [login \| logout \| select \| insert \| update \| delete] | Operação realizada. |
+| NM_TABELA | nome_tabela | VARCHAR(64) | — | Não | Não | NULL | — | Tabela consultada ou alterada. |
+| NR_REGISTRO | numero_registro | INTEGER | — | Não | Não | NULL | — | Registro afetado (sem FK, pois a tabela de origem varia). |
+| DS_IP_ORIGEM | ip_origem | VARCHAR(45) | — | Não | Não | NULL | — | Endereço IP de origem (IPv4 ou IPv6). Nulo quando o sistema não consegue identificá-lo (acesso interno, rotina agendada); nenhum endereço é inventado. |
+| TP_RESULTADO | resultado | ENUM | — | Sim | Não | 'sucesso' | [sucesso \| negado] | Resultado da tentativa. |
+| DS_FINALIDADE | finalidade_acesso | VARCHAR(150) | — | Não | Não | NULL | — | Finalidade do tratamento, quando há acesso a dado pessoal. Também guarda a justificativa de uma alteração excepcional de itens da manutenção, de uma correção de parcela paga e de cada execução da rotina de retenção. |
+
+Índices: PK ID_LOG; índices em ID_USUARIO e em DH_ACESSO. Nenhum perfil tem UPDATE nem DELETE: o log só recebe INSERT. Apenas a rotina de retenção (seção 10) elimina registros vencidos ou anonimiza o IP.
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
 A modelagem conceitual foi elaborada a partir dos processos de negócio, requisitos funcionais e regras de negócios levantados para a empresa. O modelo busca representar as principais informações relacionadas aos clientes, seu geradores, manutenções realizadas, os técnicos envolvidos e os serviços prestados.
