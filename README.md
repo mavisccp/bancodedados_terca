@@ -234,14 +234,14 @@ CLIENTE = @ID_CLIENTE + NM_CLIENTE + NR_CPF_CNPJ + DS_TELEFONE + DS_ENDERECO + D
 Leitura: @ID_CLIENTE é o identificador único; os demais campos são obrigatórios e conectados por +.
 | Atributo | Atributo no DER |Tipo físico |Chave| Obrigatório | Único  | Padrão  |Valores permitidos |Significado e relevância    |
 |----------|----------- |---- |-----------|----|-----------|----|-----------|----|
-|ID_CLIENTE   |  integer          |  Sim (PK)           | Identificador único do cliente no sistema; gerado automaticamente. |
-|NM_CLIENTE  | varchar(120)          |  Sim            |Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: “Comércio Fictício LTDA”. |
-|ID_CPF_CNPJ  |  varchar(18)         |  Sim (único)  |Documento de identificação do cliente (CPF ou CNPJ); dado sensível armazenado de forma criptografada. |
-|DS_TELEFONE |  varchar(20)         |   Sim           |Telefone de contato do cliente. |
-|DS_ENDERECO  | varchar(200)          |  Sim            | Endereço completo do cliente (rua, número, bairro); dado sensível armazenado de forma criptografada. |
-| DS_EMAIL  | varchar(120)          |   Sim           |  E-mail de contato do cliente.|
-| NM_CIDADE | varchar(80)          |   Sim           |  Cidade onde o cliente está localizado.|
-| CD_ESTADO |char(2)            |   Sim           | Sigla do estado (ex.: SP); domínio fixo das 27 UFs brasileiras.|
+|ID_CLIENTE   | id_cliente   | INTEGER AUTO_INCREMENT |PK| Sim  | Sim  |  —  | — |  Identificador único do cliente no sistema; gerado automaticamente. |   
+|NM_CLIENTE  | 	nome     | VARCHAR(120)   | — | Sim | Não  | —  |  —  | Nome completo (pessoa física) ou razão social (pessoa jurídica). |   
+|NR_CPF_CNPJ | cpf_cnpj      | VARCHAR(14)  |—| Sim | Sim | —  | somente dígitos: 11 (CPF) ou 14 (CNPJ)   | Documento de identificação do cliente, gravado sem pontuação; não pode se repetir. Dado pessoal (quando pessoa física), com proteção prevista por criptografia em repouso (seção 12). |   
+|DS_TELEFONE |  telefone  |  VARCHAR(20)    |— | Sim |Não  | —  |  —  | Telefone de contato. |   
+|DS_ENDERECO  | endereco   | VARCHAR(200)    | — | Sim | Não  | —  |  —  | Endereço completo (rua, número, bairro). Dado pessoal, com proteção prevista por criptografia em repouso (seção 12). |    
+| DS_EMAIL  | email   |  VARCHAR(120)    |  — | Sim | Não  | —  | contém @ |E-mail de contato.  | 
+| NM_CIDADE |cidade    |  VARCHAR(80)   | — | Sim | Não  | —  | —   | Cidade do cliente. |   
+| CD_ESTADO |estado | CHAR(2)  |— | Sim | Não  | —  | uma das 27 UFs  |Sigla do estado (ex.: SP). |   
 
 Índices: PK ID_CLIENTE (clusterizado); índice único em ID_CPF_CNPJ (garante a unicidade exigida e agiliza a busca por documento).
 
