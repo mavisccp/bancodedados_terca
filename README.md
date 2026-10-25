@@ -197,27 +197,27 @@ Este modelo representa a empresa S. A DE LIMA, especializada em manutenção pre
 | Contrato           |  Gerador    |  1:N — um contrato cobre pelo menos um gerador, e pode cobrir vários; um gerador é coberto por zero ou um contrato.               |
 |  Contrato          |  Manutenção      | 1:N — um contrato pode enquadrar zero ou várias manutenções; cada manutenção é enquadrada em zero ou um contrato.                |
 | Contrato           |  Pagamento       | 1:N — um contrato pode gerar zero ou várias mensalidades; cada pagamento é gerado por zero ou um contrato.    |
-| Gerador           | Manutenção      | 1:N — um gerador pode ter zero ou várias manutenções; cada manutenção é feita em exatamente um gerador.   |
-|  Gerador          |  Orçamento     |  1:N — um gerador pode ter zero ou vários orçamentos; cada orçamento é solicitado para exatamente um gerador.    |
-|  Gerador          |  Cronograma preventivo    |  1:N — um gerador pode ter zero ou vários cronogramas; cada cronograma pertence a exatamente um gerador.               |
+| Gerador      | Manutenção      | 1:N — um gerador pode ter zero ou várias manutenções; cada manutenção é feita em exatamente um gerador.   |
+|  Gerador      |  Orçamento     |  1:N — um gerador pode ter zero ou vários orçamentos; cada orçamento é solicitado para exatamente um gerador.    |
+|  Gerador      |  Cronograma preventivo    |  1:N — um gerador pode ter zero ou vários cronogramas; cada cronograma pertence a exatamente um gerador.               |
 | Peça   | Cronograma preventivo    |  1:N — uma peça pode definir o prazo de zero ou vários cronogramas; cada cronograma tem o prazo definido por exatamente uma peça.               |
 | Orçamento   |  Manutenção     | 1:1 — um orçamento pode originar zero ou uma manutenção; uma manutenção pode ser originada por zero ou um orçamento.                |
-| Manutenção           |  Cronograma preventivo     |  N:N — uma manutenção pode atualizar zero ou vários cronogramas; um cronograma pode ser atualizado por zero ou várias manutenções.               |
-| Manutenção           |  Peça    |  N:N — uma manutenção pode usar zero ou várias peças; uma peça pode ser usada em zero ou várias manutenções. Atributos da relação: valor_unitario_aplicado e quantidade.               |
-| Manutenção           |   Técnico    | N:N — uma manutenção precisa de pelo menos um técnico, e pode ter vários; um técnico pode participar de zero ou várias manutenções.                |
-| Manutenção           | Serviço   | N:N — uma manutenção usa pelo menos um serviço, e pode usar vários; um serviço pode ser usado em zero ou várias manutenções. Atributos da relação: valor_aplicado e quantidade.                |
+| Manutenção      |  Cronograma preventivo     |  N:N — uma manutenção pode atualizar zero ou vários cronogramas; um cronograma pode ser atualizado por zero ou várias manutenções.               |
+| Manutenção    |  Peça    |  N:N — uma manutenção pode usar zero ou várias peças; uma peça pode ser usada em zero ou várias manutenções. Atributos da relação: valor_unitario_aplicado e quantidade.   |
+| Manutenção    |   Técnico    | N:N — uma manutenção precisa de pelo menos um técnico, e pode ter vários; um técnico pode participar de zero ou várias manutenções.                |
+| Manutenção     | Serviço   | N:N — uma manutenção usa pelo menos um serviço, e pode usar vários; um serviço pode ser usado em zero ou várias manutenções. Atributos da relação: valor_aplicado e quantidade |
 | Manutenção     | Pagamento       |  1:N — uma manutenção pode gerar zero ou vários pagamentos; cada pagamento é gerado por zero ou uma manutenção.               |
-| Técnico           |  Escala                     |  1:N — um técnico pode cumprir zero ou várias escalas; cada escala é cumprida por exatamente um técnico.               |
-| Fornecedor           |  Compra       |  1:N — um fornecedor pode fornecer zero ou várias compras; cada compra é feita de exatamente um fornecedor.               |
-| Compra           |    Peça    |  N:N — uma compra contém pelo menos uma peça, e pode conter várias; uma peça pode estar em zero ou várias compras. Atributos da relação: quantidade e valor_custo.               |
-| Usuário           | Técnico      | 1:1 — um usuário com perfil técnico é vinculado a exatamente um técnico; um técnico pode ter zero ou um usuário.                |
-| Usuário           | Log de acesso       |  1:N — um usuário pode ter zero ou vários logs; cada log pertence a zero ou um usuário, pois tentativas de login negadas não identificam o usuário.               |
+| Técnico    |  Escala                     |  1:N — um técnico pode cumprir zero ou várias escalas; cada escala é cumprida por exatamente um técnico.               |
+| Fornecedor       |  Compra       |  1:N — um fornecedor pode fornecer zero ou várias compras; cada compra é feita de exatamente um fornecedor.               |
+| Compra      |    Peça    |  N:N — uma compra contém pelo menos uma peça, e pode conter várias; uma peça pode estar em zero ou várias compras. Atributos da relação: quantidade e valor_custo.               |
+| Usuário     | Técnico      | 1:1 — um usuário com perfil técnico é vinculado a exatamente um técnico; um técnico pode ter zero ou um usuário.                |
+| Usuário     | Log de acesso       |  1:N — um usuário pode ter zero ou vários logs; cada log pertence a zero ou um usuário, pois tentativas de login negadas não identificam o usuário.               |
 
 ## 5.2 Fluxo de dados (visão de DFD)
 Cliente é cadastrado em CLIENTE e, quando fixo, firma um CONTRATO → seus geradores são registrados em GERADOR, ligados ao cliente e, se houver, ao contrato que os cobre → cada gerador recebe um CRONOGRAMA_PREVENTIVO por peça, com o prazo definido em PECA → quando um gerador precisa de atendimento, solicita-se um ORCAMENTO (valor total estimado, sem itens) → aprovado o orçamento, ele origina uma MANUTENCAO, ligada ao gerador (e ao contrato, quando houver) → a manutenção é associada a um ou mais técnicos (MANUTENCAO_TECNICO), a um ou mais serviços do catálogo (MANUTENCAO_SERVICO) e às peças usadas (MANUTENCAO_PECA), e atualiza o cronograma preventivo (MANUTENCAO_CRONOGRAMA) → o valor da manutenção é calculado pela soma dos serviços e peças aplicados (valor unitário × quantidade), não é gravado em MANUTENCAO e pode diferir do valor orçado → quando a cobrança da manutenção é parcelada, esse valor calculado é dividido entre as parcelas de PAGAMENTO (VL_PREVISTO), de modo que a soma das parcelas bata com o total → a cobrança gera um PAGAMENTO apenas quando o valor calculado da manutenção é maior que zero: na preventiva, todas as parcelas são quitadas antes da execução; na corretiva, a execução pode ocorrer antes do pagamento somente se a manutenção estiver ligada (ID_ORCAMENTO) a um orçamento aprovado, isto é, confirmado pelo cliente; sem esse orçamento, vale a mesma regra da preventiva → os contratos geram cobranças periódicas em PAGAMENTO, calculadas a partir do valor mensal de referência e da periodicidade, com o valor devido de cada parcela gravado em VL_PREVISTO → do lado das compras, o FORNECEDOR fornece COMPRAS, que contêm as peças (COMPRA_PECA) e repõem o estoque em PECA → cada técnico cumpre suas ESCALAS de plantão → cada USUARIO, com seu perfil (e, no perfil técnico, ligado ao seu cadastro em TECNICO), realiza acessos ao sistema → todo acesso é registrado em LOG_ACESSO, inclusive tentativas de login negadas, nas quais o usuário pode não ser identificado.
 
 ## Dicionário de dados por entidade
-| | | |
+|   |    |    |
 |---|---|---|
 | • CLIENTE | • ESCALA | • MANUTENCAO_PECA |
 | • GERADOR | • PECA | • MANUTENCAO_TECNICO |
@@ -227,14 +227,13 @@ Cliente é cadastrado em CLIENTE e, quando fixo, firma um CONTRATO → seus gera
 | • SERVICO | • COMPRA | • LOG_ACESSO |
 | • TECNICO | • MANUTENCAO_SERVICO | 
 
-
 ## CLIENTE 
-CLIENTE = @ID_CLIENTE + NM_CLIENTE + ID_CPF_CNPJ + DS_TELEFONE + DS_ENDERECO + DS_EMAIL + NM_CIDADE+ CD_ESTADO
+Pessoa física ou jurídica que contrata os serviços e possui geradores cadastrados.
+CLIENTE = @ID_CLIENTE + NM_CLIENTE + NR_CPF_CNPJ + DS_TELEFONE + DS_ENDERECO + DS_EMAIL + NM_CIDADE + CD_ESTADO
 
-Leitura: @ID_CLIENTE é o identificador único; os sete campos seguintes são obrigatórios e conectados por +, formando o cadastro completo exigido no primeiro atendimento do cliente.
-
-| Atributo | Tipo físico | Obrigatório |Significado e relevância|
-|----------|-----------|------------------------------|-----------|
+Leitura: @ID_CLIENTE é o identificador único; os demais campos são obrigatórios e conectados por +.
+| Atributo | Atributo no DER |Tipo físico |Chave| Obrigatório | Único  | Padrão  |Valores permitidos |Significado e relevância    |
+|----------|----------- |---- |-----------|----|-----------|----|-----------|----|
 |ID_CLIENTE   |  integer          |  Sim (PK)           | Identificador único do cliente no sistema; gerado automaticamente. |
 |NM_CLIENTE  | varchar(120)          |  Sim            |Nome completo (pessoa física) ou razão social (pessoa jurídica) do cliente. Ex.: “Comércio Fictício LTDA”. |
 |ID_CPF_CNPJ  |  varchar(18)         |  Sim (único)  |Documento de identificação do cliente (CPF ou CNPJ); dado sensível armazenado de forma criptografada. |
