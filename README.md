@@ -172,12 +172,14 @@ Cliente é cadastrado no sistema → o cliente tem um ou mais geradores vinculad
 |FK    | Chave estrangeira  |  Um campo que “empresta” o ID de outra tabela, para ligar as duas. É assim que um gerador fica sabendo a qual cliente ele pertence.|
 
 ## Notação formal (símbolos usados neste dicionário):
-|Símbolo    |Significado  |
-|----------|-----------|
-| =         | é composto de.          |
-| +         | e (conecta elementos obrigatórios).|
-| @         | identificador (chave primária).           |
-| ( )       |opcional.               |
+|Símbolo    |Significado  |Exemplo neste dicionário |
+|----------|-----------|-----------|
+| =         | é composto de.          | CLIENTE = @ID_CLIENTE + NM_CLIENTE + …     |
+| +         | e (conecta elementos obrigatórios).| NM_CLIENTE + NR_CPF_CNPJ |
+| @         | identificador (chave primária).           |	@ID_CLIENTE  |
+| { }      |  repetição (iteração); mín{ }máx indica o mínimo e o máximo de ocorrências, e n no máximo significa sem limite fixo (1{ }n = uma ou mais). Convenção de documentação, não é sintaxe SQL           | 1{ID_TECNICO}n	 |
+| [ ] |   seleção: um dos valores da lista, separados por  | [ ativo  em_manutencao  inativo ]	 |
+|  * *    |     comentário       | 	* via MANUTENCAO_TECNICO *	 |
 
 ## Dicionário de dados por entidade
 ## CLIENTE 
