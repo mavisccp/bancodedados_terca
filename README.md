@@ -593,32 +593,66 @@ Situação da implementação: a criptografia em repouso, os privilégios por pe
 
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
-A modelagem conceitual foi elaborada a partir dos processos de negócio, requisitos funcionais e regras de negócios levantados para a empresa. O modelo busca representar as principais informações relacionadas aos clientes, seu geradores, manutenções realizadas, os técnicos envolvidos e os serviços prestados.
 
-### 6.1 Entidades reconhecidas
+A modelagem conceitual foi elaborada a partir dos processos de negócio, requisitos funcionais e regras de negócio levantados na empresa S. A DE LIMA. O modelo representa os clientes e seus contratos, os geradores, os orçamentos e as manutenções (com técnicos, serviços e peças), o cronograma de manutenção preventiva, o controle financeiro (pagamentos), o abastecimento de peças (fornecedores e compras), a escala dos técnicos e o controle de acesso ao sistema.
 
-Foram identificadas cinco entidades principais.
+## 6.1 Entidades reconhecidas
 
-### Cliente
+Foram identificadas quinze entidades, organizadas em cinco grupos.
 
-Representa as pessoas físicas ou jurídicas que contratam os serviços da empresa. A entidade armazena  informações necessárias para a identificação e contato com o cliente.
+Relacionamento com o cliente
 
-### Gerador
+### Cliente:
+pessoa física ou jurídica que contrata os serviços da empresa.
+Contrato: acordo firmado com um cliente fixo, com cobrança periódica e vigência definida.
+Gerador: equipamento de geração de energia de propriedade do cliente e supervisionado pela empresa.
 
-Representa os equipamentos de geração de energia pertencentes aos clientes. A entidade permite controlar informações como número de série, marca, modelo, status e potência.
+Atendimento
 
-### Manutenção
+### Orçamento:
+proposta de valor total estimado para um gerador; quando aprovada, origina uma manutenção.
 
-Representa o atendimento realizado pela empresa em um determinado gerador. Cada registro de manutenção permite armazenar informações sobre a data, tipo de manutenção, status e valor do atendimento.
+### Manutenção: 
+atendimento preventivo ou corretivo realizado em um gerador.
 
-### Técnico
+### Serviço: 
+catálogo de serviços que podem ser prestados em uma manutenção.
 
-Representa os profissionais responsáveis pela execução das manutenções. São armazenadas informações para identificação e contato dos técnicos.
+### Técnico: 
+profissional que executa as manutenções.
 
-### Serviço
+### Escala:
+período e turno de plantão cumprido por um técnico.
 
-Representa os serviços oferecidos pela empresa e que podem ser utilizados durante uma manutenção, contendo informações como nome, descrição e valor-base.
 
+Peças e manutenção preventiva
+
+###Peça:
+item de reposição (bateria, óleo, filtro de ar, tanque etc.) mantido em estoque.
+
+###Cronograma_Preventivo:
+controle da troca preventiva de uma peça em um gerador específico.
+
+
+Financeiro e suprimentos
+
+###Pagamento: 
+parcela de cobrança, originada de uma manutenção ou da mensalidade de um contrato.
+
+### Fornecedor: 
+empresa que fornece peças.
+
+### Compra: 
+aquisição de peças junto a um fornecedor.
+
+
+Segurança
+
+### Usuário: 
+conta de acesso ao sistema, com perfil de permissões.
+
+### Log_acesso:
+registro de cada acesso e operação realizada no sistema.
 ### 6.2 Atributos e classificações
 
 Os atributos foram definidos de acordo com as informações necessárias para identificar e controlar cada entidade.
