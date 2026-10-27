@@ -727,6 +727,17 @@ Manutenção
 
 A entidade registra o atendimento realizado em um gerador e permite diferenciar manutenções preventivas e corretivas. O valor da manutenção não é armazenado: ele é calculado pela soma dos serviços e peças aplicados.
 
+Serviço
+
+| Atributo | Classificação |
+|---|---|
+| `id_servico` | Identificador |
+| `nome_servico` | Descritivo / único |
+| `descricao` | Descritivo |
+| `valor_base` | Quantitativo |
+
+Os atributos permitem identificar o serviço, explicar o que será realizado e estabelecer seu valor de referência.
+
 
 ### 6.3 Relacionamentos pertinentes
 
