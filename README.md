@@ -738,6 +738,18 @@ Serviço
 
 Os atributos permitem identificar o serviço, explicar o que será realizado e estabelecer seu valor de referência.
 
+Técnico
+
+| Atributo | Classificação |
+|---|---|
+| `id_tecnico` | Identificador |
+| `nome` | Descritivo |
+| `cpf` | Identificação / único |
+| `telefone` | Contato |
+| `email` | Contato |
+
+O cpf é único para cada técnico, conforme a regra estabelecida para o sistema.
+
 
 ### 6.3 Relacionamentos pertinentes
 
