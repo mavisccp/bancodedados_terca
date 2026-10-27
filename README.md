@@ -600,14 +600,14 @@ A modelagem conceitual foi elaborada a partir dos processos de negócio, requisi
 
 Foram identificadas quinze entidades, organizadas em cinco grupos.
 
-Relacionamento com o cliente
+## Relacionamento com o cliente
 
 ### Cliente:
 pessoa física ou jurídica que contrata os serviços da empresa.
 Contrato: acordo firmado com um cliente fixo, com cobrança periódica e vigência definida.
 Gerador: equipamento de geração de energia de propriedade do cliente e supervisionado pela empresa.
 
-Atendimento
+##Atendimento
 
 ### Orçamento:
 proposta de valor total estimado para um gerador; quando aprovada, origina uma manutenção.
@@ -625,7 +625,7 @@ profissional que executa as manutenções.
 período e turno de plantão cumprido por um técnico.
 
 
-Peças e manutenção preventiva
+##Peças e manutenção preventiva
 
 ###Peça:
 item de reposição (bateria, óleo, filtro de ar, tanque etc.) mantido em estoque.
@@ -634,7 +634,7 @@ item de reposição (bateria, óleo, filtro de ar, tanque etc.) mantido em estoq
 controle da troca preventiva de uma peça em um gerador específico.
 
 
-Financeiro e suprimentos
+##Financeiro e suprimentos
 
 ###Pagamento: 
 parcela de cobrança, originada de uma manutenção ou da mensalidade de um contrato.
@@ -646,13 +646,14 @@ empresa que fornece peças.
 aquisição de peças junto a um fornecedor.
 
 
-Segurança
+##Segurança
 
 ### Usuário: 
 conta de acesso ao sistema, com perfil de permissões.
 
 ### Log_acesso:
 registro de cada acesso e operação realizada no sistema.
+
 ### 6.2 Atributos e classificações
 
 Os atributos foram definidos de acordo com as informações necessárias para identificar e controlar cada entidade.
