@@ -774,6 +774,15 @@ Peça
 
 O prazo_troca_dias indica a cada quantos dias a peça deve ser trocada ou limpa e orienta o cronograma preventivo.
 
+Cronograma_Preventivo
+
+| Atributo | Classificação |
+|---|---|
+| `id_cronograma` | Identificador |
+| `data_ultima_troca` | Temporal |
+
+Cada gerador tem no máximo um cronograma por peça. A data_ultima_troca é opcional, pois a peça pode ainda não ter sido trocada.
+
 
 
 ### 6.3 Relacionamentos pertinentes
