@@ -660,16 +660,18 @@ Os atributos foram definidos de acordo com as informações necessárias para id
 
 Cliente
 
-| Atributo     | Classificação         |
-| ------------ | --------------------- |
-| `id_cliente` | Identificador         |
-| `NM_cliente`       | Descritivo            |
-| `cpf_cnpj`   | Identificação / único |
-| `telefone`   | Contato               |
-| `endereco`   | Localização           |
-| `email`      | Contato               |
-| `cidade`     | Localização           |
-| `estado`     | Localização           |
+| Atributo | Classificação |
+|---|---|
+| `id_cliente` | Identificador |
+| `nome` | Descritivo |
+| `cpf_cnpj` | Identificação / único |
+| `telefone` | Contato |
+| `endereco` | Localização |
+| `email` | Contato |
+| `cidade` | Localização |
+| `estado` | Localização |
+
+O id_cliente identifica exclusivamente cada cliente. O cpf_cnpj deve ser único e obrigatório. Essas informações já estão definidas no dicionário de dados do projeto.
 
 O id_cliente identifica exclusivamente cada cliente. O cpf_cnpj deve ser único e obrigatório. Essas informações já estão definidas no dicionário de dados do projeto.
 
