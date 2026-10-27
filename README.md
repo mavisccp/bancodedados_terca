@@ -832,6 +832,32 @@ Usuário
 
 O perfil pode ser administrador, atendimento, técnico ou financeiro. O usuário não é excluído, e sim desativado, para preservar o histórico.
 
+Log_acesso
+
+| Atributo | Classificação |
+|---|---|
+| `id_log` | Identificador |
+| `data_hora_acesso` | Temporal |
+| `acao` | Classificação |
+| `nome_tabela` | Descritivo |
+| `numero_registro` | Referência |
+| `resultado` | Classificação |
+| `finalidade_acesso` | Descritivo |
+| `login_informado` | Descritivo |
+| `ip_origem` | Localização |
+
+O log só recebe inserções. O login_informado é usado quando a tentativa de acesso não identifica um usuário cadastrado, e a finalidade_acesso registra o motivo do acesso a dado pessoal.
+
+Atributos dos relacionamentos
+
+| Relacionamento | Atributos |
+|---|---|
+| Manutenção utiliza Serviço | `valor_aplicado`, `quantidade` |
+| Manutenção usa Peça | `valor_unitario_aplicado`, `quantidade` |
+| Compra contém Peça | `quantidade`, `valor_custo` |
+
+Esses atributos pertencem à ligação entre as entidades, e não a uma delas isoladamente.
+
 
 ### 6.3 Relacionamentos pertinentes
 
