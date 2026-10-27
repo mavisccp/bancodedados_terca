@@ -761,6 +761,20 @@ Escala
 
 O turno pode ser manhã, tarde, noite ou integral, e a data_fim não pode ser anterior à data_inicio.
 
+Peça
+
+| Atributo | Classificação |
+|---|---|
+| `id_peca` | Identificador |
+| `nome_peca` | Descritivo / único |
+| `descricao_peca` | Descritivo |
+| `valor_venda` | Quantitativo |
+| `prazo_troca_dias` | Quantitativo |
+| `estoque` | Quantitativo |
+
+O prazo_troca_dias indica a cada quantos dias a peça deve ser trocada ou limpa e orienta o cronograma preventivo.
+
+
 
 ### 6.3 Relacionamentos pertinentes
 
