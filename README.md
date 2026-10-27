@@ -821,6 +821,16 @@ Compra
 
 O status da compra pode ser pedida, recebida ou cancelada, e a nota fiscal é opcional.
 
+Usuário
+
+| Atributo | Classificação |
+|---|---|
+| `id_usuario` | Identificador |
+| `login` | Identificação / único |
+| `perfil` | Classificação |
+| `status` | Classificação |
+
+O perfil pode ser administrador, atendimento, técnico ou financeiro. O usuário não é excluído, e sim desativado, para preservar o histórico.
 
 
 ### 6.3 Relacionamentos pertinentes
