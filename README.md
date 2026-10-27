@@ -783,6 +783,21 @@ Cronograma_Preventivo
 
 Cada gerador tem no máximo um cronograma por peça. A data_ultima_troca é opcional, pois a peça pode ainda não ter sido trocada.
 
+Pagamento
+
+| Atributo | Classificação |
+|---|---|
+| `id_pagamento` | Identificador |
+| `numero_parcela` | Identificação |
+| `data_vencimento` | Temporal |
+| `valor_previsto` | Quantitativo |
+| `data_pagamento` | Temporal |
+| `forma` | Classificação |
+| `status` | Classificação |
+| `valor_pago` | Quantitativo |
+
+O valor_previsto é o valor devido na parcela e o valor_pago é o efetivamente quitado, podendo diferir por juros ou desconto. A data_pagamento, a forma e o valor_pago só são preenchidos quando a parcela é paga.
+
 
 
 ### 6.3 Relacionamentos pertinentes
