@@ -673,21 +673,19 @@ Cliente
 
 O id_cliente identifica exclusivamente cada cliente. O cpf_cnpj deve ser único e obrigatório. Essas informações já estão definidas no dicionário de dados do projeto.
 
-O id_cliente identifica exclusivamente cada cliente. O cpf_cnpj deve ser único e obrigatório. Essas informações já estão definidas no dicionário de dados do projeto.
 
-Gerador
+Contrato
 
-| Atributo       | Classificação         |
-| -------------- | --------------------- |
-| `id_gerador`   | Identificador         |
-| `id_cliente`   | Referência            |
-| `numero_serie` | Identificação / único |
-| `marca`        | Descritivo            |
-| `modelo`       | Descritivo            |
-| `status`       | Classificação         |
-| `potencia`     | Quantitativo          |
+| Atributo | Classificação |
+|---|---|
+| `id_contrato` | Identificador |
+| `data_inicio` | Temporal |
+| `data_fim` | Temporal |
+| `valor_mensal` | Quantitativo |
+| `tipo_periodicidade` | Classificação |
+| `status` | Classificação |
 
-O numero_serie é um identificador único do equipamento, enquanto id_cliente representa sua ligação com o proprietário.
+A data_fim é opcional, pois um contrato ativo pode ter prazo indeterminado. O tipo_periodicidade define quantos meses cada cobrança abrange (mensal, bimestral, trimestral, semestral ou anual).
 
 Manutenção
 
