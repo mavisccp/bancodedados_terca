@@ -713,16 +713,19 @@ Orçamento
 
 O valor_orcado é uma estimativa do valor total, sem detalhar serviços e peças. A data_aprovacao só é preenchida quando o orçamento é aprovado.
 
-Serviço
+Manutenção
 
-| Atributo       | Classificação |
-| -------------- | ------------- |
-| `id_servico`   | Identificador |
-| `nome_servico` | Descritivo    |
-| `descricao`    | Descritivo    |
-| `valor_base`   | Quantitativo  |
+| Atributo | Classificação |
+|---|---|
+| `id_manutencao` | Identificador |
+| `data_manutencao` | Temporal |
+| `tipo_manutencao` | Classificação |
+| `status` | Classificação |
+| `numero_nota_fiscal` | Identificação |
+| `descricao_problema` | Descritivo |
+| `data_conclusao` | Temporal |
 
-Os atributos permitem identificar o serviço, explicar o que será realizado e estabelecer seu valor de referência.
+A entidade registra o atendimento realizado em um gerador e permite diferenciar manutenções preventivas e corretivas. O valor da manutenção não é armazenado: ele é calculado pela soma dos serviços e peças aplicados.
 
 
 ### 6.3 Relacionamentos pertinentes
