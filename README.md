@@ -701,18 +701,17 @@ Gerador
 
 O numero_serie é um identificador único do equipamento. A potencia é medida em kVA e o horimetro registra as horas de operação acumuladas.
 
+Orçamento
 
-Técnico
+| Atributo | Classificação |
+|---|---|
+| `id_orcamento` | Identificador |
+| `data_orcamento` | Temporal |
+| `valor_orcado` | Quantitativo |
+| `status` | Classificação |
+| `data_aprovacao` | Temporal |
 
-| Atributo     | Classificação         |
-| ------------ | --------------------- |
-| `id_tecnico` | Identificador         |
-| `nome`       | Descritivo            |
-| `cpf`        | Identificação / único |
-| `telefone`   | Contato               |
-| `email`      | Contato               |
-
-O cpf é único para cada técnico, conforme a regra estabelecida para o sistema.
+O valor_orcado é uma estimativa do valor total, sem detalhar serviços e peças. A data_aprovacao só é preenchida quando o orçamento é aprovado.
 
 Serviço
 
