@@ -607,7 +607,7 @@ pessoa física ou jurídica que contrata os serviços da empresa.
 Contrato: acordo firmado com um cliente fixo, com cobrança periódica e vigência definida.
 Gerador: equipamento de geração de energia de propriedade do cliente e supervisionado pela empresa.
 
-##Atendimento
+## Atendimento
 
 ### Orçamento:
 proposta de valor total estimado para um gerador; quando aprovada, origina uma manutenção.
@@ -625,18 +625,18 @@ profissional que executa as manutenções.
 período e turno de plantão cumprido por um técnico.
 
 
-##Peças e manutenção preventiva
+## Peças e manutenção preventiva
 
-###Peça:
+### Peça:
 item de reposição (bateria, óleo, filtro de ar, tanque etc.) mantido em estoque.
 
-###Cronograma_Preventivo:
+### Cronograma_Preventivo:
 controle da troca preventiva de uma peça em um gerador específico.
 
 
-##Financeiro e suprimentos
+## Financeiro e suprimentos
 
-###Pagamento: 
+### Pagamento: 
 parcela de cobrança, originada de uma manutenção ou da mensalidade de um contrato.
 
 ### Fornecedor: 
@@ -646,7 +646,7 @@ empresa que fornece peças.
 aquisição de peças junto a um fornecedor.
 
 
-##Segurança
+## Segurança
 
 ### Usuário: 
 conta de acesso ao sistema, com perfil de permissões.
