@@ -810,6 +810,17 @@ Fornecedor
 
 O cnpj é único para cada fornecedor e é gravado somente com números.
 
+Compra
+
+| Atributo | Classificação |
+|---|---|
+| `id_compra` | Identificador |
+| `data_compra` | Temporal |
+| `status` | Classificação |
+| `numero_nota_fiscal` | Identificação |
+
+O status da compra pode ser pedida, recebida ou cancelada, e a nota fiscal é opcional.
+
 
 
 ### 6.3 Relacionamentos pertinentes
