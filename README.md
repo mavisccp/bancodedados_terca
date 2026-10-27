@@ -587,6 +587,10 @@ Tratamento de dados pessoais conforme a Lei nº 13.709/2018. O controlador é a 
 | USUARIO   | DS_LOGIN, ID_TECNICO   | 	Dado pessoal (identifica a pessoa que acessa e, no perfil técnico, a liga ao cadastro do técnico)  | Execução de contrato (art. 7º, V); segurança (art. 46)    |
 | LOG_ACESSO | 	ID_USUARIO, DS_LOGIN_INFORMADO, DS_IP_ORIGEM, DH_ACESSO  | Dado pessoal (identifica quem acessou e de onde)  | Obrigação legal e segurança (art. 7º, II; arts. 37 e 46)   |
 
+Finalidade: cadastro e identificação de clientes, técnicos e fornecedores, execução de contratos e manutenções, cobrança e emissão fiscal.
+
+Situação da implementação: a criptografia em repouso, os privilégios por perfil e o registro em LOG_ACESSO são requisitos de segurança deste projeto. A criptografia de tablespace do InnoDB aplica-se à tabela inteira (não a colunas isoladas) e depende de um keyring habilitado no servidor; 
+
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
 A modelagem conceitual foi elaborada a partir dos processos de negócio, requisitos funcionais e regras de negócios levantados para a empresa. O modelo busca representar as principais informações relacionadas aos clientes, seu geradores, manutenções realizadas, os técnicos envolvidos e os serviços prestados.
