@@ -577,6 +577,17 @@ Leitura: @ID_LOG é o identificador único; chaves estrangeiras: ID_USUARIO refe
 
 Índices: PK ID_LOG; índices em ID_USUARIO e em DH_ACESSO. Nenhum perfil tem UPDATE nem DELETE: o log só recebe INSERT. Apenas a rotina de retenção elimina registros vencidos ou anonimiza o IP.
 
+## LGPD
+Tratamento de dados pessoais conforme a Lei nº 13.709/2018. O controlador é a S. A DE LIMA. O modelo não armazena dados pessoais sensíveis (art. 5º, II), mas CPF, CNPJ de pessoa física, endereço, telefone e e-mail são dados pessoais.
+| Tabela  | Tabela    | Classificação  | Base legal   |
+|---|---|---|---|
+| CLIENTE  | 	NM_CLIENTE, NR_CPF_CNPJ, DS_TELEFONE, DS_ENDERECO, DS_EMAIL, NM_CIDADE, CD_ESTADO  |Dado pessoal (pessoa física); NR_CPF_CNPJ e DS_ENDERECO com proteção prevista por criptografia em repouso   | Execução de contrato (art. 7º, V); obrigação legal para emissão fiscal (art. 7º, II)    |
+|TECNICO  | NM_TECNICO, NR_CPF, DS_TELEFONE, DS_EMAIL   | Dado pessoal; NR_CPF com proteção prevista por criptografia em repouso  | Execução de contrato (art. 7º, V); obrigação legal (art. 7º, II)   |
+| FORNECEDOR | NM_FORNECEDOR, NR_CNPJ, DS_TELEFONE, DS_EMAIL  | 	Dado pessoal somente se pessoa física ou MEI   | Execução de contrato (art. 7º, V)   |
+| USUARIO   | DS_LOGIN, ID_TECNICO   | 	Dado pessoal (identifica a pessoa que acessa e, no perfil técnico, a liga ao cadastro do técnico)  | Execução de contrato (art. 7º, V); segurança (art. 46)    |
+| LOG_ACESSO | 	ID_USUARIO, DS_LOGIN_INFORMADO, DS_IP_ORIGEM, DH_ACESSO  | Dado pessoal (identifica quem acessou e de onde)  | Obrigação legal e segurança (art. 7º, II; arts. 37 e 46)   |
+
+
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
 A modelagem conceitual foi elaborada a partir dos processos de negócio, requisitos funcionais e regras de negócios levantados para a empresa. O modelo busca representar as principais informações relacionadas aos clientes, seu geradores, manutenções realizadas, os técnicos envolvidos e os serviços prestados.
 
