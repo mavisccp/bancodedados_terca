@@ -750,6 +750,17 @@ Técnico
 
 O cpf é único para cada técnico, conforme a regra estabelecida para o sistema.
 
+Escala
+
+| Atributo | Classificação |
+|---|---|
+| `id_escala` | Identificador |
+| `data_inicio` | Temporal |
+| `data_fim` | Temporal |
+| `turno` | Classificação |
+
+O turno pode ser manhã, tarde, noite ou integral, e a data_fim não pode ser anterior à data_inicio.
+
 
 ### 6.3 Relacionamentos pertinentes
 
