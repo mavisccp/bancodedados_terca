@@ -798,6 +798,18 @@ Pagamento
 
 O valor_previsto é o valor devido na parcela e o valor_pago é o efetivamente quitado, podendo diferir por juros ou desconto. A data_pagamento, a forma e o valor_pago só são preenchidos quando a parcela é paga.
 
+Fornecedor
+
+| Atributo | Classificação |
+|---|---|
+| `id_fornecedor` | Identificador |
+| `nome` | Descritivo |
+| `cnpj` | Identificação / único |
+| `telefone` | Contato |
+| `email` | Contato |
+
+O cnpj é único para cada fornecedor e é gravado somente com números.
+
 
 
 ### 6.3 Relacionamentos pertinentes
