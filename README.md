@@ -687,19 +687,20 @@ Contrato
 
 A data_fim é opcional, pois um contrato ativo pode ter prazo indeterminado. O tipo_periodicidade define quantos meses cada cobrança abrange (mensal, bimestral, trimestral, semestral ou anual).
 
-Manutenção
+Gerador
 
-| Atributo            | Classificação |
-| ------------------- | ------------- |
-| `id_manutencao`     | Identificador |
-| `id_gerador`        | Referência    |
-| `data_manutencao`   | Temporal      |
-| `tipo_manutencao`   | Classificação |
-| `servico_realizado` | Descritivo    |
-| `status`            | Classificação |
-| `valor`             | Quantitativo  |
+| Atributo | Classificação |
+|---|---|
+| `id_gerador` | Identificador |
+| `numero_serie` | Identificação / único |
+| `marca` | Descritivo |
+| `modelo` | Descritivo |
+| `status` | Classificação |
+| `potencia` | Quantitativo |
+| `horimetro` | Quantitativo |
 
-A entidade registra o atendimento realizado em um gerador e permite diferenciar manutenções preventivas e corretivas.
+O numero_serie é um identificador único do equipamento. A potencia é medida em kVA e o horimetro registra as horas de operação acumuladas.
+
 
 Técnico
 
