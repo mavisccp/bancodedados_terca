@@ -861,7 +861,7 @@ Esses atributos pertencem à ligação entre as entidades, e não a uma delas is
 
 ### 6.3 Relacionamentos pertinentes
 
-Foram identificados quatro relacionamentos principais entre as entidades.
+Foram identificados vinte relacionamentos entre as entidades.
 
 # Cliente — possui — Gerador
 
@@ -873,6 +873,56 @@ CLIENTE (0,n) ─── possui ─── (1,1) GERADOR
 
 Essa relação representa a regra de negócio de que todo gerador cadastrado deve estar vinculado a um cliente.
 
+# Cliente — firma — Contrato
+
+Cardinalidade: 1:N
+
+Um cliente pode firmar zero ou vários contratos, enquanto cada contrato é firmado por um único cliente.
+
+CLIENTE (0,n) ─── firma ─── (1,1) CONTRATO
+
+Essa relação permite manter o histórico contratual de cada cliente.
+
+# Contrato — cobre — Gerador
+
+Cardinalidade: 1:N
+
+Um contrato cobre pelo menos um gerador e pode cobrir vários, enquanto um gerador é coberto por zero ou um contrato.
+
+CONTRATO (1,n) ─── cobre ─── (0,1) GERADOR
+
+O contrato que cobre o gerador deve pertencer ao mesmo cliente do gerador.
+
+# Contrato — enquadra — Manutenção
+
+Cardinalidade: 1:N
+
+Um contrato pode enquadrar zero ou várias manutenções, enquanto cada manutenção se enquadra em zero ou um contrato.
+
+CONTRATO (0,n) ─── enquadra ─── (0,1) MANUTENÇÃO
+
+Nem toda manutenção ocorre dentro de um contrato, como as corretivas avulsas.
+
+# Contrato — gera_mensalidade — Pagamento
+
+Cardinalidade: 1:N
+
+Um contrato pode gerar zero ou várias mensalidades, enquanto cada pagamento é gerado por zero ou um contrato.
+
+CONTRATO (0,n) ─── gera_mensalidade ─── (0,1) PAGAMENTO
+
+O lado (0,1) existe porque a parcela pode, em vez disso, ter origem em uma manutenção.
+
+# Gerador — solicita — Orçamento
+
+Cardinalidade: 1:N
+
+Um gerador pode ter zero ou vários orçamentos, enquanto cada orçamento é solicitado para um único gerador.
+
+GERADOR (0,n) ─── solicita ─── (1,1) ORÇAMENTO
+
+Essa relação permite guardar o histórico de propostas feitas para cada equipamento.
+
 # Gerador — recebe — Manutenção
 
 Cardinalidade: 1:N
@@ -882,6 +932,56 @@ Um gerador pode receber zero ou várias manutenções durante sua utilização. 
 GERADOR (0,n) ─── recebe ─── (1,1) MANUTENÇÃO
 
 Essa relação permite manter o histórico de atendimentos realizados em cada equipamento.
+
+# Gerador — tem — Cronograma_Preventivo
+
+Cardinalidade: 1:N
+
+Um gerador pode ter zero ou vários cronogramas, um para cada peça acompanhada, enquanto cada cronograma pertence a um único gerador.
+
+GERADOR (0,n) ─── tem ─── (1,1) CRONOGRAMA_PREVENTIVO
+
+Essa relação representa a regra de que os geradores precisam ter um cronograma de inspeção preventiva.
+
+# Peça — define prazo — Cronograma_Preventivo
+
+Cardinalidade: 1:N
+
+Uma peça pode definir o prazo de zero ou vários cronogramas, enquanto cada cronograma tem o prazo definido por uma única peça.
+
+PEÇA (0,n) ─── define prazo ─── (1,1) CRONOGRAMA_PREVENTIVO
+
+O prazo de troca da peça orienta quando a próxima troca preventiva deve ocorrer.
+
+# Orçamento — origina — Manutenção
+
+Cardinalidade: 1:1
+
+Um orçamento pode originar zero ou uma manutenção, e uma manutenção pode ter sido originada por zero ou um orçamento.
+
+ORÇAMENTO (0,1) ─── origina ─── (0,1) MANUTENÇÃO
+
+Um orçamento recusado não gera manutenção, e uma emergência pode ser atendida sem orçamento prévio.
+
+# Manutenção — atualiza — Cronograma_Preventivo
+
+Cardinalidade: N:N
+
+Uma manutenção pode atualizar zero ou vários cronogramas, e um cronograma pode ser atualizado por zero ou várias manutenções.
+
+MANUTENÇÃO (0,n) ─── atualiza ─── (0,n) CRONOGRAMA_PREVENTIVO
+
+Ao trocar uma peça, a manutenção atualiza a data da última troca no cronograma correspondente.
+
+# Manutenção — usa — Peça
+
+Cardinalidade: N:N
+
+Uma manutenção pode usar zero ou várias peças, e uma peça pode ser usada em zero ou várias manutenções.
+
+MANUTENÇÃO (0,n) ─── usa ─── (0,n) PEÇA
+
+Atributos da relação: valor_unitario_aplicado e quantidade.
 
 # Manutenção — realizada por — Técnico
 
@@ -901,8 +1001,67 @@ Uma manutenção pode utilizar um ou vários serviços, enquanto um serviço pod
 
 MANUTENÇÃO (1,n) ─── utiliza ─── (0,n) SERVIÇO
 
-Essa relação foi definida porque uma manutenção pode envolver mais de um serviço e o valor final pode ser composto pelos serviços realizados.
+Essa relação foi definida porque uma manutenção pode envolver mais de um serviço e o valor final pode ser composto pelos serviços realizados. Atributos da relação: valor_aplicado e quantidade.
 
+# Manutenção — gera — Pagamento
+
+Cardinalidade: 1:N
+
+Uma manutenção pode gerar zero ou várias parcelas de pagamento, enquanto cada pagamento é gerado por zero ou uma manutenção.
+
+MANUTENÇÃO (0,n) ─── gera ─── (0,1) PAGAMENTO
+
+Cada parcela tem exatamente uma origem: uma manutenção ou um contrato.
+
+# Técnico — cumpre — Escala
+
+Cardinalidade: 1:N
+
+Um técnico pode cumprir zero ou várias escalas, enquanto cada escala é cumprida por um único técnico.
+
+TÉCNICO (0,n) ─── cumpre ─── (1,1) ESCALA
+
+Essa relação apoia o plantão de 24 horas da empresa.
+
+# Fornecedor — fornece — Compra
+
+Cardinalidade: 1:N
+
+Um fornecedor pode fornecer zero ou várias compras, enquanto cada compra é feita de um único fornecedor.
+
+FORNECEDOR (0,n) ─── fornece ─── (1,1) COMPRA
+
+Essa relação permite rastrear de quem cada peça foi comprada.
+
+# Compra — contém — Peça
+
+Cardinalidade: N:N
+
+Uma compra contém uma ou várias peças, e uma peça pode estar em zero ou várias compras.
+
+COMPRA (1,n) ─── contém ─── (0,n) PEÇA
+
+Atributos da relação: quantidade e valor_custo. As compras recebidas repõem o estoque das peças.
+
+# Usuário — realiza — Log_acesso
+
+Cardinalidade: 1:N
+
+Um usuário pode realizar zero ou vários acessos, enquanto cada log pertence a zero ou um usuário.
+
+USUÁRIO (0,n) ─── realiza ─── (0,1) LOG_ACESSO
+
+O lado (0,1) existe porque tentativas de login negadas podem não identificar um usuário cadastrado.
+
+# Usuário — vincula-se a — Técnico
+
+Cardinalidade: 1:1
+
+Um usuário com perfil técnico é vinculado a exatamente um técnico, e um técnico pode ter zero ou uma conta de usuário.
+
+USUÁRIO (0,1) ─── vincula-se a ─── (0,1) TÉCNICO
+
+Essa relação permite aplicar a permissão de acesso apenas às manutenções em que o técnico está alocado.
 ### 6.4 Restrições e políticas organizacionais
 
 O modelo conceitual considera as principais regras de negócio identificadas durante o levantamento da empresa.
