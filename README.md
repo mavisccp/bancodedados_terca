@@ -37,6 +37,14 @@ Cadastro de clientes:
 - Resultado: cliente disponível para vincular geradores e consultar o histórico.
 
 
+Contrato de manutenção (cliente fixos):
+- Objetivo: formalizar o atendimento recorrente dos clientes fixos, com cobrança periódica.
+- Quando ocorre: quando um cliente fixo passa a ter um acordo de manutenção.
+- Dados registrados: cliente, data de início, data de fim (opcional), valor mensal, periodicidade (mensal a anual) e status (ativo, encerrado ou cancelado).
+- Regras: o contrato pertence a um cliente e cobre pelo menos um gerador desse mesmo cliente; sem data de fim, o prazo é indeterminado; contrato encerrado exige data de fim.
+- Resultado: contrato ativo, que gera as cobranças periódicas (ver 2.3) e enquadra as manutenções dos geradores cobertos.
+
+
 Cadastro de geradores: 
 - Objetivo: controlar os geradores supervisionados pela empresa, mantendo a assertividade nas manutenções.
 - Quando ocorre: quando o cliente possui um gerador ainda não registrado.
