@@ -33,24 +33,24 @@ Cadastro de clientes:
 - Objetivo: preservar as informações dos clientes da empresa e permitir cadastrar, consultar e buscar o histórico de cada um.
 - Quando ocorre: no primeiro atendimento de um cliente novo.
 - Dados registrados: nome (ou razão social), CPF/CNPJ, telefone, endereço, e-mail, cidade e estado.
-- Regras: todos os campos são obrigatórios; o CPF/CNPJ não pode se repetir; CPF/CNPJ e endereço são armazenados de forma criptografada.
-- Resultado: cliente disponível para vincular geradores e consultar o histórico.
+- Regras: todos os campos são obrigatórios; o CPF/CNPJ não pode se repetir; por serem dados pessoais, CPF/CNPJ e endereço são protegidos por criptografia em repouso no banco de dados.
+- Resultado: cliente disponível para vincular geradores e contratos e consultar o histórico.
 
 
-Contrato de manutenção (cliente fixos):
+Contrato de manutenção (clientes fixos):
 - Objetivo: formalizar o atendimento recorrente dos clientes fixos, com cobrança periódica.
 - Quando ocorre: quando um cliente fixo passa a ter um acordo de manutenção.
 - Dados registrados: cliente, data de início, data de fim (opcional), valor mensal, periodicidade (mensal a anual) e status (ativo, encerrado ou cancelado).
-- Regras: o contrato pertence a um cliente e cobre pelo menos um gerador desse mesmo cliente; sem data de fim, o prazo é indeterminado; contrato encerrado exige data de fim.
-- Resultado: contrato ativo, que gera as cobranças periódicas (ver 2.3) e enquadra as manutenções dos geradores cobertos.
+- Regras: o contrato pertence a um cliente e cobre pelo menos um gerador desse mesmo cliente; sem data de fim, o prazo é indeterminado; contrato encerrado exige data de fim; as trocas preventivas previstas no contrato são pagas pela mensalidade e não geram cobrança à parte; itens fora do previsto no contrato são cobrados normalmente.
+- Resultado: contrato ativo, que gera as cobranças periódicas (ver Faturamento e pagamento) e enquadra as manutenções dos geradores cobertos.
 
 
-Cadastro de geradores: 
+Cadastro de geradores:
 - Objetivo: controlar os geradores supervisionados pela empresa, mantendo a assertividade nas manutenções.
 - Quando ocorre: quando o cliente possui um gerador ainda não registrado.
-- Dados registrados: número de série, marca, modelo, status (ativo, em manutenção ou inativo) e potência em kVA.
-- Regras: todo gerador pertence a um cliente; o número de série é único (aceita letras e números); um cliente pode ter mais de um gerador, conforme o porte e a necessidade.
-- Resultado: equipamento identificado e pronto para receber manutenções. Cada gerador tem um cronograma de inspeção preventiva, orientado pelos prazos de troca ou limpeza de peças como bateria, óleo, filtro de ar e tanque.
+- Dados registrados: número de série, marca, modelo, status (ativo, em manutenção ou inativo), potência em kVA, horímetro (horas de operação acumuladas) e, quando houver, o contrato que cobre o gerador.
+- Regras: todo gerador pertence a um cliente; o número de série é único (aceita letras e números); um cliente pode ter mais de um gerador, conforme o porte e a necessidade; o contrato que cobre o gerador deve pertencer ao mesmo cliente do gerador; todo gerador deve ter um cronograma de inspeção preventiva.
+- Resultado: equipamento identificado, com cronograma de inspeção preventiva criado e pronto para receber manutenções.
 
 
 Cronograma de manutenção preventiva:
@@ -63,7 +63,7 @@ Cronograma de manutenção preventiva:
 
 Solicitação de atendimento e orçamento:
 - Objetivo: registrar o pedido do cliente e estimar o valor antes da execução.
-- Quando ocorre: a cada pedido de atendimento. Em emergência, o atendimento pode seguir sem orçamento prévio, pelo plantão de 24 h.
+- Quando ocorre: a cada pedido de atendimento fora de contrato. Na emergência (corretiva com o gerador inoperante), o orçamento também é emitido e precisa ser aprovado pelo cliente antes da execução; o que a emergência dispensa é o pagamento antes da execução. Manutenção preventiva prevista em contrato não passa por orçamento.
 - Dados registrados: gerador, data, valor orçado (estimativa total, sem itens), status (pendente, aprovado ou recusado) e data de aprovação.
 - Regras: orçamento aprovado pode originar uma manutenção; recusado não origina; o valor final da manutenção pode diferir do orçado.
 - Resultado: orçamento aprovado e ligado à manutenção, ou encerrado sem atendimento.
@@ -71,44 +71,47 @@ Solicitação de atendimento e orçamento:
 
 Manutenção:
 - Objetivo: registrar cada atendimento, preventivo ou corretivo.
-- Quando ocorre: após a aprovação do orçamento ou direto, em emergência e na preventiva programada.
-- Dados registrados: gerador, contrato e orçamento (se houver), data, tipo, status (aberta, em andamento ou concluída), nota fiscal, problema relatado e data de conclusão.
-- Regras: vinculada a exatamente um gerador; exige ao menos um técnico e ao menos um serviço; peças são opcionais; status segue aberta → em andamento → concluída; itens só mudam enquanto aberta; o valor não é gravado, é calculado pela soma de (valor unitário × quantidade) dos serviços e peças aplicados.
+- Quando ocorre: em três situações: (1) após a aprovação de um orçamento, incluindo a emergência, que é executada antes do pagamento; (2) na manutenção preventiva prevista em contrato, sem orçamento, pois já está paga pela mensalidade; (3) na manutenção preventiva programada pelo cronograma, quando a peça precisa de troca ou limpeza.
+- Dados registrados: gerador, contrato e orçamento (se houver), data, tipo, status (aberta, em andamento ou concluída), nota fiscal, problema relatado, data de conclusão e, para cada serviço e peça aplicados, o valor unitário aplicado e a quantidade.
+- Regras: vinculada a exatamente um gerador; exige ao menos um técnico e ao menos um serviço; peças são opcionais; status segue aberta → em andamento → concluída; itens só mudam enquanto aberta; o valor não é gravado, é calculado pela soma de (valor unitário × quantidade) dos serviços e peças aplicados; a manutenção coberta por contrato é registrada com os itens a valor aplicado zero, portanto o valor calculado é zero e não gera cobrança.
 - Resultado: histórico completo do gerador e do cliente.
 
 
 Serviço (catálogo):
 - Objetivo: definir o tipo de serviço que será feito, incluindo os valores base.
+- Quando ocorre: quando a empresa passa a oferecer um novo tipo de serviço.
 - Dados registrados: nome, descrição e valor base.
-- Regras: não há limite de serviços cadastrados por cliente; um serviço pode ser usado em várias manutenções; o valor base é armazenado de forma criptografada; os serviços seguem as normas NR-10, NR-12, NR-20 e NR-6.
+- Regras: o nome do serviço é único; um serviço pode ser usado em várias manutenções; o valor aplicado em cada manutenção pode diferir do valor base, inclusive ser zero quando o item é coberto por contrato; os serviços seguem as normas NR-10, NR-12, NR-20 e NR-6.
 - Resultado: catálogo que alimenta o cálculo do valor de cada manutenção.
 
 
 Técnicos e escala de plantão:
 - Objetivo: manter os técnicos cadastrados, alocá-los às manutenções e organizar o plantão de 24 h.
+- Quando ocorre: na contratação de um técnico e a cada período de plantão a ser definido.
 - Dados registrados: do técnico, nome, CPF, telefone e e-mail; da escala, período (início e fim) e turno (manhã, tarde, noite ou integral).
 - Regras: CPF único, 11 dígitos numéricos; a data final da escala não pode ser anterior à inicial; um técnico pode ter várias escalas e participar de várias manutenções.
 - Resultado: técnicos disponíveis para alocação e plantão coberto sem limite de horário.
 
 
 Controle de acesso e auditoria:
-- Objetivo: controlar quem acessa o sistema e proteger dados pessoaia (LGPD).
+- Objetivo: controlar quem acessa o sistema e proteger dados pessoais (LGPD).
+- Quando ocorre: na criação de cada conta de usuário e a cada acesso ou operação realizada no sistema.
 - Dados registrados: usuário (login, perfil e status) e log de acesso (data/hora, ação, tabela, resultado e finalidade).
 - Regras: perfis administrador, atendimento, técnico e financeiro; usuário técnico se liga a um técnico; usuário é desativado, nunca excluído; o log só recebe inserções, inclusive de logins negados.
 - Resultado: acessos rastreáveis e permissões por perfil.
 
 
-Faturamento e pagamento :
+Faturamento e pagamento:
 - Objetivo: controlar as cobranças de manutenções e de contratos.
 - Quando ocorre: ao fechar o valor da manutenção e a cada período de cobrança do contrato.
 - Dados registrados: origem (manutenção ou contrato), número da parcela, vencimento, valor previsto, data e forma de pagamento, status (pendente, pago, atrasado ou cancelado) e valor pago.
-- Regras: cada parcela tem exatamente uma origem; só há cobrança se o valor calculado for maior que zero; na preventiva, as parcelas são quitadas antes da execução; na corretiva, a execução pode vir antes do pagamento só se houver orçamento aprovado; a soma das parcelas é igual ao valor calculado; pagamento nunca é excluído, só cancelado ou corrigido pelo administrador com registro no log.
+- Regras: cada parcela tem exatamente uma origem; só há cobrança de manutenção se o valor calculado for maior que zero (manutenção coberta por contrato tem valor zero, paga pela mensalidade); fora de contrato, na preventiva as parcelas são quitadas antes da execução, e na corretiva a execução pode vir antes do pagamento só se houver orçamento aprovado; a soma das parcelas é igual ao valor calculado; pagamento nunca é excluído, só cancelado ou corrigido pelo administrador com registro no log.
 - Resultado: contas a receber controladas.
 
 
-Fornecedore, compra de peças e estoque:
+Fornecedores, compra de peças e estoque:
 - Objetivo: manter o estoque das peças usadas nas manutenções e nos cronogramas.
-- Quando ocorre: quando uma peça atinge estoque baixo ou é necessária para uma manutenção.
+- Quando ocorre: quando é necessário repor peças no estoque, seja para atender uma manutenção ou para manter em dia os cronogramas preventivos.
 - Dados registrados: do fornecedor, nome, CNPJ, telefone e e-mail; da compra, fornecedor, data, status (pedida, recebida ou cancelada) e nota fiscal; dos itens, peça, quantidade e custo unitário.
 - Regras: CNPJ único; compra com ao menos uma peça; itens só mudam enquanto a compra está pedida; compra recebida repõe o estoque, que nunca fica negativo; o uso de peças em manutenção baixa o estoque.
 - Resultado: estoque atualizado e rastreabilidade de quem forneceu cada peça.
