@@ -106,6 +106,14 @@ Faturamento e pagamento :
 - Resultado: contas a receber controladas.
 
 
+Fornecedore, compra de peças e estoque:
+- Objetivo: manter o estoque das peças usadas nas manutenções e nos cronogramas.
+- Quando ocorre: quando uma peça atinge estoque baixo ou é necessária para uma manutenção.
+- Dados registrados: do fornecedor, nome, CNPJ, telefone e e-mail; da compra, fornecedor, data, status (pedida, recebida ou cancelada) e nota fiscal; dos itens, peça, quantidade e custo unitário.
+- Regras: CNPJ único; compra com ao menos uma peça; itens só mudam enquanto a compra está pedida; compra recebida repõe o estoque, que nunca fica negativo; o uso de peças em manutenção baixa o estoque.
+- Resultado: estoque atualizado e rastreabilidade de quem forneceu cada peça.
+
+
 <img width="2760" height="5480" alt="fluxograma" src="fluxograma 1.png" />
 
 
