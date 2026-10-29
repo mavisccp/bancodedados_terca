@@ -69,6 +69,14 @@ Manutenção:
 - Resultado: histórico completo do gerador e do cliente.
 
 
+Solicitação de atendimento e orçamento:
+- Objetivo: registrar o pedido do cliente e estimar o valor antes da execução.
+- Quando ocorre: a cada pedido de atendimento. Em emergência, o atendimento pode seguir sem orçamento prévio, pelo plantão de 24 h.
+- Dados registrados: gerador, data, valor orçado (estimativa total, sem itens), status (pendente, aprovado ou recusado) e data de aprovação.
+- Regras: orçamento aprovado pode originar uma manutenção; recusado não origina; o valor final da manutenção pode diferir do orçado.
+- Resultado: orçamento aprovado e ligado à manutenção, ou encerrado sem atendimento.
+
+
 Serviço:
 - Objetivo: definir o tipo de serviço que será feito, incluindo os valores base.
 - Dados registrados: nome, descrição e valor base.
