@@ -53,6 +53,14 @@ Cadastro de geradores:
 - Resultado: equipamento identificado e pronto para receber manutenções. Cada gerador tem um cronograma de inspeção preventiva, orientado pelos prazos de troca ou limpeza de peças como bateria, óleo, filtro de ar e tanque.
 
 
+Cronograma de manutenção preventiva:
+- Objetivo: acompanhar os prazos de troca ou limpeza das peças de cada gerador (bateria, óleo, filtro de ar e tanque).
+- Quando ocorre: no cadastro do gerador e a cada troca realizada em uma manutenção.
+- Dados registrados: gerador, peça e data da última troca (opcional).
+- Regras: um cronograma por peça em cada gerador; o prazo vem da peça (prazo de troca em dias); a manutenção que troca a peça atualiza a data da última troca.
+- Resultado: lista de peças vencidas ou a vencer, que orienta as manutenções preventivas.
+
+
 Manutenção:
 - Objetivo: registrar cada atendimento, preventivo ou corretivo.
 - Quando ocorre: após a aprovação do orçamento ou direto, em emergência e na preventiva programada.
