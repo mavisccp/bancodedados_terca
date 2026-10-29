@@ -92,6 +92,13 @@ Técnicos e escala de plantão:
 - Regras: CPF único, 11 dígitos numéricos; a data final da escala não pode ser anterior à inicial; um técnico pode ter várias escalas e participar de várias manutenções.
 - Resultado: técnicos disponíveis para alocação e plantão coberto sem limite de horário.
 
+Cadastro de peças:
+- Objetivo: manter o catálogo das peças usadas nas manutenções e nos cronogramas preventivos (bateria, óleo, filtro de ar e tanque).
+- Quando ocorre: quando a empresa passa a usar uma peça nova.
+- Dados registrados: nome, prazo de troca (em dias), custo de referência e quantidade em estoque.
+- Regras: o nome da peça é único; o prazo de troca alimenta o cronograma preventivo; a quantidade em estoque nunca fica negativa.
+- Resultado: catálogo que alimenta cronogramas, manutenções e compras.
+
 
 Controle de acesso e auditoria:
 - Objetivo: controlar quem acessa o sistema e proteger dados pessoais (LGPD).
