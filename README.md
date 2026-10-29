@@ -97,6 +97,15 @@ Controle de acesso e auditoria:
 - Regras: perfis administrador, atendimento, técnico e financeiro; usuário técnico se liga a um técnico; usuário é desativado, nunca excluído; o log só recebe inserções, inclusive de logins negados.
 - Resultado: acessos rastreáveis e permissões por perfil.
 
+
+Faturamento e pagamento :
+- Objetivo: controlar as cobranças de manutenções e de contratos.
+- Quando ocorre: ao fechar o valor da manutenção e a cada período de cobrança do contrato.
+- Dados registrados: origem (manutenção ou contrato), número da parcela, vencimento, valor previsto, data e forma de pagamento, status (pendente, pago, atrasado ou cancelado) e valor pago.
+- Regras: cada parcela tem exatamente uma origem; só há cobrança se o valor calculado for maior que zero; na preventiva, as parcelas são quitadas antes da execução; na corretiva, a execução pode vir antes do pagamento só se houver orçamento aprovado; a soma das parcelas é igual ao valor calculado; pagamento nunca é excluído, só cancelado ou corrigido pelo administrador com registro no log.
+- Resultado: contas a receber controladas.
+
+
 <img width="2760" height="5480" alt="fluxograma" src="fluxograma 1.png" />
 
 
