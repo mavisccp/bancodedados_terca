@@ -46,14 +46,14 @@ Cadastro de geradores:
 
 
 Manutenção:
-- Objetivo: guardar as informações de cada atendimento, organizando todos os processos feitos em um cliente/gerador.
-- Quando ocorre: a cada solicitação de atendimento, preventivo ou corretivo.
-- Dados registrados: código da manutenção, data, tipo (preventiva ou corretiva), serviço realizado, status (aberta, em andamento ou concluída) e valor.
-- Regras: o código é único e exclusivo, digitado somente com números; a manutenção é vinculada a exatamente um gerador; exige ao menos um técnico e ao menos um serviço, podendo ter vários de cada; o valor é a soma dos serviços e é armazenado de forma criptografada.
-- Resultado: histórico completo do gerador e do cliente, que pode ser consultado a qualquer momento.
+- Objetivo: registrar cada atendimento, preventivo ou corretivo.
+- Quando ocorre: após a aprovação do orçamento ou direto, em emergência e na preventiva programada.
+- Dados registrados: gerador, contrato e orçamento (se houver), data, tipo, status (aberta, em andamento ou concluída), nota fiscal, problema relatado e data de conclusão.
+- Regras: vinculada a exatamente um gerador; exige ao menos um técnico e ao menos um serviço; peças são opcionais; status segue aberta → em andamento → concluída; itens só mudam enquanto aberta; o valor não é gravado, é calculado pela soma de (valor unitário × quantidade) dos serviços e peças aplicados.
+- Resultado: histórico completo do gerador e do cliente.
 
 
-Serviço: 
+Serviço:
 - Objetivo: definir o tipo de serviço que será feito, incluindo os valores base.
 - Dados registrados: nome, descrição e valor base.
 - Regras: não há limite de serviços cadastrados por cliente; um serviço pode ser usado em várias manutenções; o valor base é armazenado de forma criptografada; os serviços seguem as normas NR-10, NR-12, NR-20 e NR-6.
@@ -65,6 +65,13 @@ Técnico:
 - Dados registrados: nome, CPF, telefone e e-mail.
 - Regras: CPF único, digitado somente com números e com exatamente 11 dígitos; o CPF é armazenado de forma criptografada.
 - Resultado: técnicos disponíveis para alocação nas manutenções.
+
+
+Controle de acesso e auditoria:
+- Objetivo: controlar quem acessa o sistema e proteger dados pessoaia (LGPD).
+- Dados registrados: usuário (login, perfil e status) e log de acesso (data/hora, ação, tabela, resultado e finalidade).
+- Regras: perfis administrador, atendimento, técnico e financeiro; usuário técnico se liga a um técnico; usuário é desativado, nunca excluído; o log só recebe inserções, inclusive de logins negados.
+- Resultado: acessos rastreáveis e permissões por perfil.
 
 <img width="2760" height="5480" alt="fluxograma" src="fluxograma 1.png" />
 
