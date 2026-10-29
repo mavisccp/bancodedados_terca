@@ -61,14 +61,6 @@ Cronograma de manutenção preventiva:
 - Resultado: lista de peças vencidas ou a vencer, que orienta as manutenções preventivas.
 
 
-Manutenção:
-- Objetivo: registrar cada atendimento, preventivo ou corretivo.
-- Quando ocorre: após a aprovação do orçamento ou direto, em emergência e na preventiva programada.
-- Dados registrados: gerador, contrato e orçamento (se houver), data, tipo, status (aberta, em andamento ou concluída), nota fiscal, problema relatado e data de conclusão.
-- Regras: vinculada a exatamente um gerador; exige ao menos um técnico e ao menos um serviço; peças são opcionais; status segue aberta → em andamento → concluída; itens só mudam enquanto aberta; o valor não é gravado, é calculado pela soma de (valor unitário × quantidade) dos serviços e peças aplicados.
-- Resultado: histórico completo do gerador e do cliente.
-
-
 Solicitação de atendimento e orçamento:
 - Objetivo: registrar o pedido do cliente e estimar o valor antes da execução.
 - Quando ocorre: a cada pedido de atendimento. Em emergência, o atendimento pode seguir sem orçamento prévio, pelo plantão de 24 h.
@@ -77,18 +69,26 @@ Solicitação de atendimento e orçamento:
 - Resultado: orçamento aprovado e ligado à manutenção, ou encerrado sem atendimento.
 
 
-Serviço:
+Manutenção:
+- Objetivo: registrar cada atendimento, preventivo ou corretivo.
+- Quando ocorre: após a aprovação do orçamento ou direto, em emergência e na preventiva programada.
+- Dados registrados: gerador, contrato e orçamento (se houver), data, tipo, status (aberta, em andamento ou concluída), nota fiscal, problema relatado e data de conclusão.
+- Regras: vinculada a exatamente um gerador; exige ao menos um técnico e ao menos um serviço; peças são opcionais; status segue aberta → em andamento → concluída; itens só mudam enquanto aberta; o valor não é gravado, é calculado pela soma de (valor unitário × quantidade) dos serviços e peças aplicados.
+- Resultado: histórico completo do gerador e do cliente.
+
+
+Serviço (catálogo):
 - Objetivo: definir o tipo de serviço que será feito, incluindo os valores base.
 - Dados registrados: nome, descrição e valor base.
 - Regras: não há limite de serviços cadastrados por cliente; um serviço pode ser usado em várias manutenções; o valor base é armazenado de forma criptografada; os serviços seguem as normas NR-10, NR-12, NR-20 e NR-6.
 - Resultado: catálogo que alimenta o cálculo do valor de cada manutenção.
 
 
-Técnico:
-- Objetivo: manter um banco de dados com as informações dos técnicos da empresa.
-- Dados registrados: nome, CPF, telefone e e-mail.
-- Regras: CPF único, digitado somente com números e com exatamente 11 dígitos; o CPF é armazenado de forma criptografada.
-- Resultado: técnicos disponíveis para alocação nas manutenções.
+Técnicos e escala de plantão:
+- Objetivo: manter os técnicos cadastrados, alocá-los às manutenções e organizar o plantão de 24 h.
+- Dados registrados: do técnico, nome, CPF, telefone e e-mail; da escala, período (início e fim) e turno (manhã, tarde, noite ou integral).
+- Regras: CPF único, 11 dígitos numéricos; a data final da escala não pode ser anterior à inicial; um técnico pode ter várias escalas e participar de várias manutenções.
+- Resultado: técnicos disponíveis para alocação e plantão coberto sem limite de horário.
 
 
 Controle de acesso e auditoria:
