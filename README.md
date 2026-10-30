@@ -103,8 +103,8 @@ Cadastro de peças:
 Controle de acesso e auditoria:
 - Objetivo: controlar quem acessa o sistema e proteger dados pessoais (LGPD).
 - Quando ocorre: na criação de cada conta de usuário e a cada acesso ou operação realizada no sistema.
-- Dados registrados: usuário (login, perfil e status) e log de acesso (data/hora, ação, tabela, resultado e finalidade).
-- Regras: perfis administrador, atendimento, técnico e financeiro; usuário técnico se liga a um técnico; usuário é desativado, nunca excluído; o log só recebe inserções, inclusive de logins negados.
+- Dados registrados: usuário (login e perfil) e log de acesso (data/hora, ação, tabela, registro afetado, resultado e finalidade).
+- Regras: perfis administrador, atendimento, técnico e financeiro; usuário nunca é excluído; o log só recebe inserções, inclusive de tentativas negadas de usuários existentes.
 - Resultado: acessos rastreáveis e permissões por perfil.
 
 
