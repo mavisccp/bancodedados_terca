@@ -124,7 +124,7 @@ Fornecedores, compra de peças e estoque:
 - Resultado: estoque atualizado e rastreabilidade de quem forneceu cada peça.
 
 
-<img width="2760" height="5480" alt="fluxograma" src="fluxograma 1.png" />
+<img width="2760" height="5480" alt="fluxograma" src="fluxograma.png" />
 
 
 
