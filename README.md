@@ -140,12 +140,7 @@ Fornecedor:
 
 
 
-Fornecedores, compra de peças e estoque:
-- Objetivo: manter o estoque das peças usadas nas manutenções e nos cronogramas.
-- Quando ocorre: quando é necessário repor peças no estoque, seja para atender uma manutenção ou para manter em dia os cronogramas preventivos.
-- Dados registrados: do fornecedor, nome, CNPJ, telefone e e-mail; da compra, fornecedor, data, status (pedida, recebida ou cancelada) e nota fiscal; dos itens, peça, quantidade e custo unitário.
-- Regras: CNPJ único; compra com ao menos uma peça; itens só mudam enquanto a compra está pedida; compra recebida repõe o estoque, que nunca fica negativo; o uso de peças em manutenção baixa o estoque.
-- Resultado: estoque atualizado e rastreabilidade de quem forneceu cada peça.
+
 
 
 <img width="2760" height="5480" alt="fluxograma" src="fluxograma.png" />
