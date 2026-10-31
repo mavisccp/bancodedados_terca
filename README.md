@@ -39,7 +39,7 @@ Cadastro de clientes:
 
 Contrato de manutenção (clientes fixos):
 - Objetivo: formalizar o atendimento recorrente dos clientes fixos, com cobrança periódica.
-- Quando ocorre: quando um cliente fixo passa a ter um acordo de manutenção.
+- Quando ocorre: id contrato, quando um cliente fixo passa a ter um acordo de manutenção.
 - Dados registrados: cliente, data de início, data de fim (opcional), valor mensal, periodicidade (mensal a anual) e status (ativo, encerrado ou cancelado).
 - Regras: o contrato pertence a um cliente e cobre pelo menos um gerador desse mesmo cliente; sem data de fim, o prazo é indeterminado; contrato encerrado exige data de fim; as trocas preventivas previstas no contrato são pagas pela mensalidade e não geram cobrança à parte; itens fora do previsto no contrato são cobrados normalmente.
 - Resultado: contrato ativo, que gera as cobranças periódicas (ver Faturamento e pagamento) e enquadra as manutenções dos geradores cobertos.
@@ -95,7 +95,7 @@ Técnicos e escala de plantão:
 Cadastro de peças:
 - Objetivo: manter o catálogo das peças usadas nas manutenções e nos cronogramas preventivos (bateria, óleo, filtro de ar e tanque).
 - Quando ocorre: quando a empresa passa a usar uma peça nova.
-- Dados registrados: nome, prazo de troca (em dias), custo de referência e quantidade em estoque.
+- Dados registrados: id peça, nome, descrição, valor, prazo de troca, e estoque.
 - Regras: o nome da peça é único; o prazo de troca alimenta o cronograma preventivo; a quantidade em estoque nunca fica negativa.
 - Resultado: catálogo que alimenta cronogramas, manutenções e compras.
 
@@ -114,6 +114,15 @@ Faturamento e pagamento:
 - Dados registrados: origem (manutenção ou contrato), número da parcela, vencimento, valor previsto, data e forma de pagamento, status (pendente, pago, atrasado ou cancelado) e valor pago.
 - Regras: cada parcela tem exatamente uma origem; só há cobrança de manutenção se o valor calculado for maior que zero (manutenção coberta por contrato tem valor zero, paga pela mensalidade); fora de contrato, na preventiva as parcelas são quitadas antes da execução, e na corretiva a execução pode vir antes do pagamento só se houver orçamento aprovado; a soma das parcelas é igual ao valor calculado; pagamento nunca é excluído, só cancelado ou corrigido pelo administrador com registro no log.
 - Resultado: contas a receber controladas.
+
+Compras de insumos para a organização:
+- Objetivo: Manter o fluxo de informações a respeito de tudo o que é comprado para o uso da empresa.
+- Quando ocorre: quando é necessário realizar a compra de materiais para a empresa, tanto para uso interno quanto externo. 
+- Dados registrados: Data da compra, Descrição do que foi comprado, Uso interno ou externo 
+- Regras: CNPJ único; compra com ao menos uma peça; itens só mudam enquanto a compra está pedida; compra recebida repõe o estoque, que nunca fica negativo; o uso de peças em manutenção baixa o estoque.
+- Resultado: estoque atualizado e rastreabilidade de quem forneceu cada peça.
+
+
 
 
 Fornecedores, compra de peças e estoque:
