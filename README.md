@@ -37,11 +37,11 @@ Cadastro de clientes:
 - Resultado: cliente disponível para vincular geradores e contratos e consultar o histórico.
 
 
-Contrato de manutenção (clientes fixos):
+Contrato de manutenção:
 - Objetivo: formalizar o atendimento recorrente dos clientes fixos, com cobrança periódica.
 - Quando ocorre: id contrato, quando um cliente fixo passa a ter um acordo de manutenção.
 - Dados registrados: cliente, data de início, data de fim (opcional), valor mensal, periodicidade (mensal a anual) e status (ativo, encerrado ou cancelado).
-- Regras: o contrato pertence a um cliente e cobre pelo menos um gerador desse mesmo cliente; sem data de fim, o prazo é indeterminado; contrato encerrado exige data de fim; as trocas preventivas previstas no contrato são pagas pela mensalidade e não geram cobrança à parte; itens fora do previsto no contrato são cobrados normalmente.
+- Regras: o contrato pertence a um cliente e cobre pelo menos um gerador desse mesmo cliente; sem data de fim, o prazo é indeterminado; contrato encerrado exige data de fim; as trocas preventivas previstas no contrato são pagas pela mensalidade e não geram cobrança à parte; itens fora do previsto no contrato são cobrados normalmente. quando o contrato é alterado, há a adição de um aditivo de contrato.
 - Resultado: contrato ativo, que gera as cobranças periódicas (ver Faturamento e pagamento) e enquadra as manutenções dos geradores cobertos.
 
 
@@ -136,7 +136,14 @@ Fornecedor:
 - Quando ocorre: Quando houver a compra de algum insumo diretamente a orgaização.
 - Dados registrados: nome, CNPJ, telefone e e-mail;
 - Regras: CNPJ e telefone unicos. 
-- Resultado: Controle e registros de fornecedores sempre atualizados. 
+- Resultado: Controle e registros de fornecedores sempre atualizados.
+
+Contas a pagar:
+- Objetivo: Manter registrado o histórico de contas pendentes e pagas da empresa.
+- Quando ocorre: Quando houver contas em aberto ou pagas pela empresa.
+- Dados registrados: CNPJ, descricao conta, valor total, valor pago, data vencimento, boleto, conta paga (sim ou não), data pagamento (quando houver)
+- Regras: Cada boleto possui uma numeração unica, a conta só poderá ser dado como paga quando o valor pago estiver igual ao valor total. 
+- Resultado: Controlar os custos e pagamentos da empresa.
 
 
 
