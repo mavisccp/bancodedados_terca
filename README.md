@@ -64,7 +64,7 @@ Cronograma de manutenção preventiva:
 Solicitação de atendimento e orçamento:
 - Objetivo: registrar o pedido do cliente e estimar o valor antes da execução.
 - Quando ocorre: a cada pedido de atendimento fora de contrato. Na emergência (corretiva com o gerador inoperante), o orçamento também é emitido e precisa ser aprovado pelo cliente antes da execução; o que a emergência dispensa é o pagamento antes da execução. Manutenção preventiva prevista em contrato não passa por orçamento.
-- Dados registrados: gerador, data, valor orçado (estimativa total, sem itens), status (pendente, aprovado ou recusado) e data de aprovação.
+- Dados registrados: id orçamento, gerador, data, valor orçado (estimativa total, sem itens), status (pendente, aprovado ou recusado) e data de aprovação.
 - Regras: orçamento aprovado pode originar uma manutenção; recusado não origina; o valor final da manutenção pode diferir do orçado.
 - Resultado: orçamento aprovado e ligado à manutenção, ou encerrado sem atendimento.
 
@@ -72,7 +72,7 @@ Solicitação de atendimento e orçamento:
 Manutenção:
 - Objetivo: registrar cada atendimento, preventivo ou corretivo.
 - Quando ocorre: em três situações: (1) após a aprovação de um orçamento, incluindo a emergência, que é executada antes do pagamento; (2) na manutenção preventiva prevista em contrato, sem orçamento, pois já está paga pela mensalidade; (3) na manutenção preventiva programada pelo cronograma, quando a peça precisa de troca ou limpeza.
-- Dados registrados: gerador, contrato e orçamento (se houver), data, tipo, status (aberta, em andamento ou concluída), nota fiscal, problema relatado, data de conclusão e, para cada serviço e peça aplicados, o valor unitário aplicado e a quantidade.
+- Dados registrados: id manutenção, gerador, contrato e orçamento (se houver), data, tipo, status (aberta, em andamento ou concluída), nota fiscal, problema relatado, data de conclusão e, para cada serviço e peça aplicados, o valor unitário aplicado e a quantidade.
 - Regras: vinculada a exatamente um gerador; exige ao menos um técnico e ao menos um serviço; peças são opcionais; status segue aberta → em andamento → concluída; itens só mudam enquanto aberta; o valor não é gravado, é calculado pela soma de (valor unitário × quantidade) dos serviços e peças aplicados; a manutenção coberta por contrato é registrada com os itens a valor aplicado zero, portanto o valor calculado é zero e não gera cobrança.
 - Resultado: histórico completo do gerador e do cliente.
 
@@ -85,12 +85,21 @@ Serviço (catálogo):
 - Resultado: catálogo que alimenta o cálculo do valor de cada manutenção.
 
 
-Técnicos e escala de plantão:
-- Objetivo: manter os técnicos cadastrados, alocá-los às manutenções e organizar o plantão de 24 h.
-- Quando ocorre: na contratação de um técnico e a cada período de plantão a ser definido.
-- Dados registrados: do técnico, nome, CPF, telefone e e-mail; da escala, período (início e fim) e turno (manhã, tarde, noite ou integral).
-- Regras: CPF único, 11 dígitos numéricos; a data final da escala não pode ser anterior à inicial; um técnico pode ter várias escalas e participar de várias manutenções.
-- Resultado: técnicos disponíveis para alocação e plantão coberto sem limite de horário.
+Técnicos:
+- Objetivo: Manter os tecnicos cadastrados.
+- Quando ocorre: na contratação de um técnico.
+- Dados registrados: nome, CPF, telefone e e-mail; da escala, período (início e fim) e turno (manhã, tarde, noite ou integral).
+- Regras: CPF único, 11 dígitos numéricos; 
+- Resultado: técnicos disponiveis serão apresentados, assim como seus dados cadastrais. 
+
+Escala:
+
+- Objetivo: Manter a escala correta de trabalho de cada tecnico.
+- Quando ocorre: após a contratação de cada tecnico, a sua escala de trabalho é montada.
+- Dados registrados: id escala, período (início e fim) e turno (manhã, tarde, noite ou integral) e folga. 
+- Regras: a data final da escala não pode ser anterior à inicial; um técnico pode ter várias escalas e participar de várias manutenções.
+- Resultado: técnicos disponíveis para alocação e plantão coberto com limite de horário.
+
 
 Cadastro de peças:
 - Objetivo: manter o catálogo das peças usadas nas manutenções e nos cronogramas preventivos (bateria, óleo, filtro de ar e tanque).
@@ -108,20 +117,26 @@ Controle de acesso e auditoria:
 - Resultado: acessos rastreáveis e permissões por perfil.
 
 
-Faturamento e pagamento:
+Pagamento:
 - Objetivo: controlar as cobranças de manutenções e de contratos.
 - Quando ocorre: ao fechar o valor da manutenção e a cada período de cobrança do contrato.
-- Dados registrados: origem (manutenção ou contrato), número da parcela, vencimento, valor previsto, data e forma de pagamento, status (pendente, pago, atrasado ou cancelado) e valor pago.
-- Regras: cada parcela tem exatamente uma origem; só há cobrança de manutenção se o valor calculado for maior que zero (manutenção coberta por contrato tem valor zero, paga pela mensalidade); fora de contrato, na preventiva as parcelas são quitadas antes da execução, e na corretiva a execução pode vir antes do pagamento só se houver orçamento aprovado; a soma das parcelas é igual ao valor calculado; pagamento nunca é excluído, só cancelado ou corrigido pelo administrador com registro no log.
+- Dados registrados: número da parcela, vencimento, valor total, data e forma de pagamento, status (pendente, pago, atrasado ou cancelado) e valor pago.
+- Regras: cada parcela tem exatamente uma origem; só há cobrança de manutenção se o valor calculado for maior que zero (manutenção coberta por contrato tem valor zero, paga pela mensalidade); fora de contrato, na preventiva as parcelas são quitadas antes da execução, e na corretiva a execução pode vir antes do pagamento só se houver orçamento aprovado; caso haja pendencia de valor, será somado, caso haja, com outros pagamentos pendentes do mesmo cliente dentro de outros serviços. a soma das parcelas é igual ao valor calculado; pagamento nunca é excluído, só cancelado ou corrigido pelo administrador com registro no log.
 - Resultado: contas a receber controladas.
 
-Compras de insumos para a organização:
-- Objetivo: Manter o fluxo de informações a respeito de tudo o que é comprado para o uso da empresa.
+Compra
+- Objetivo: Manter o fluxo de informações a respeito de tudo o que é comprado para o uso da empresa, de forma interna ou externa.
 - Quando ocorre: quando é necessário realizar a compra de materiais para a empresa, tanto para uso interno quanto externo. 
-- Dados registrados: Data da compra, Descrição do que foi comprado, Uso interno ou externo 
-- Regras: CNPJ único; compra com ao menos uma peça; itens só mudam enquanto a compra está pedida; compra recebida repõe o estoque, que nunca fica negativo; o uso de peças em manutenção baixa o estoque.
-- Resultado: estoque atualizado e rastreabilidade de quem forneceu cada peça.
+- Dados registrados: id compra, data da compra, status (não recebido ou recebido) numero da nota fiscal.
+- Regras: Ccompra com ao menos um material; status só muda enquanto a compra está pedida; compra recebida repõe o estoque, que nunca fica negativo; o uso de itens baixa o estoque.
+- Resultado: estoque atualizado e rastreabilidade de quem forneceu cada item.
 
+Fornecedor:
+- Objetivo: Manter registrado os dados de cada fornecedor da empresa.
+- Quando ocorre: Quando houver a compra de algum insumo diretamente a orgaização.
+- Dados registrados: nome, CNPJ, telefone e e-mail;
+- Regras: CNPJ e telefone unicos. 
+- Resultado: Controle e registros de fornecedores sempre atualizados. 
 
 
 
